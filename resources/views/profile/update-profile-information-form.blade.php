@@ -4,12 +4,66 @@
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Update your account\'s profile information.') }}
     </x-slot>
 
     <x-slot name="form">
-        <!-- Profile Photo -->
-        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+        <!-- Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="name" value="{{ __('Name') }}" />
+            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
+            <x-jet-input-error for="name" class="mt-2" />
+        </div>
+
+        <!-- Email -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="email" value="{{ __('Email') }}" />
+            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            <x-jet-input-error for="email" class="mt-2" />
+        </div>
+
+        <!-- Tālruņa numurs -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="phone" value="{{ __('Tālruņa numurs') }}" />
+            <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" />
+            <!-- <x-jet-input-error for="name" class="mt-2" /> -->
+        </div>
+
+        <!-- Adrese -->
+            <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="address" value="{{ __('Adrese') }}" />
+            <x-jet-input id="address" type="text" class="mt-1 block w-full" wire:model.defer="address.phone" />
+            <!-- <x-jet-input-error for="name" class="mt-2" /> -->
+        </div>
+    </x-slot>
+
+    <x-slot name="actions">
+        <x-jet-action-message class="mr-3" on="saved">
+            {{ __('Saved.') }}
+        </x-jet-action-message>
+
+        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
+            {{ __('Save') }}
+        </x-jet-button>
+    </x-slot>
+    
+</x-jet-form-section>
+
+<x-jet-section-border />
+
+<x-jet-form-section submit="updateProfileInformation">
+    <x-slot name="title">
+        {{ __('Profila bilde') }}
+    </x-slot>
+
+    <x-slot name="description">
+        {{ __('Atjaunojiet savu profila bildi.') }}
+    </x-slot>
+
+<!-- attēls netiek saglabāts -->
+    <x-slot name="form">
+     <!-- Profile Photo -->
+     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden"
@@ -24,7 +78,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-jet-label for="photo" value="{{ __('Photo') }}" />
+                <!-- <x-jet-label for="photo" value="{{ __('Photo') }}" /> -->
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -39,7 +93,7 @@
                 </div>
 
                 <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
+                    {{ __('Izvēlēties jaunu bildi') }}
                 </x-jet-secondary-button>
 
                 @if ($this->user->profile_photo_path)
@@ -52,19 +106,6 @@
             </div>
         @endif
 
-        <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
-        </div>
-
-        <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
-            <x-jet-input-error for="email" class="mt-2" />
-        </div>
     </x-slot>
 
     <x-slot name="actions">
@@ -76,4 +117,5 @@
             {{ __('Save') }}
         </x-jet-button>
     </x-slot>
+    
 </x-jet-form-section>

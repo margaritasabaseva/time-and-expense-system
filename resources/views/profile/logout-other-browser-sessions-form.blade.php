@@ -1,4 +1,4 @@
-<x-jet-action-section>
+<!-- <x-jet-action-section>
     <x-slot name="title">
         {{ __('Browser Sessions') }}
     </x-slot>
@@ -14,7 +14,7 @@
 
         @if (count($this->sessions) > 0)
             <div class="mt-5 space-y-6">
-                <!-- Other Browser Sessions -->
+                Other Browser Sessions
                 @foreach ($this->sessions as $session)
                     <div class="flex items-center">
                         <div>
@@ -91,4 +91,4 @@
             </x-slot>
         </x-jet-dialog-modal>
     </x-slot>
-</x-jet-action-section>
+</x-jet-action-section> -->

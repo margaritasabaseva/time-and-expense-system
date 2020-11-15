@@ -1,5 +1,5 @@
 <x-jet-action-section>
-    <x-slot name="title">
+     <x-slot name="title">
         {{ __('Delete Account') }}
     </x-slot>
 
@@ -18,7 +18,7 @@
             </x-jet-danger-button>
         </div>
 
-        <!-- Delete User Confirmation Modal -->
+        <Delete User Confirmation Modal 
         <x-jet-dialog-modal wire:model="confirmingUserDeletion">
             <x-slot name="title">
                 {{ __('Delete Account') }}

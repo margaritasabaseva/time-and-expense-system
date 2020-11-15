@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+# testing navigation bar urls/routes
+Route::middleware(['auth:sanctum', 'verified'])->get('/time-report', function () {
+    return view('personal-time-report');
+})->name('personal-time-report');
