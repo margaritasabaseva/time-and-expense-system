@@ -37,7 +37,7 @@
         </div>
     </x-slot>
 
-    <x-slot name="actions">
+    <!-- <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
@@ -45,7 +45,7 @@
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
         </x-jet-button>
-    </x-slot>
+    </x-slot> -->
     
 </x-jet-form-section>
 
@@ -53,11 +53,11 @@
 
 <x-jet-form-section submit="updateProfileInformation">
     <x-slot name="title">
-        {{ __('Profila bilde') }}
+        {{ __('Profila attēlu') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Atjaunojiet savu profila bildi.') }}
+        {{ __('Atjaunojiet savu profila attēlu.') }}
     </x-slot>
 
 <!-- attēls netiek saglabāts -->
@@ -93,12 +93,12 @@
                 </div>
 
                 <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Izvēlēties jaunu bildi') }}
+                    {{ __('Izvēlēties jaunu attēlu') }}
                 </x-jet-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                        {{ __('Dzēst attēlu') }}
                     </x-jet-secondary-button>
                 @endif
 
@@ -108,7 +108,7 @@
 
     </x-slot>
 
-    <x-slot name="actions">
+    <!-- <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
@@ -116,6 +116,6 @@
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
         </x-jet-button>
-    </x-slot>
+    </x-slot> -->
     
 </x-jet-form-section>
