@@ -26,3 +26,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/time-report', function () {
     return view('personal-time-report');
 })->name('personal-time-report');
+
+# testing navigation bar urls/routes
+Route::middleware(['auth:sanctum', 'verified'])->get('/auth/register', function () {
+    return view('auth/register');
+})->name('register');

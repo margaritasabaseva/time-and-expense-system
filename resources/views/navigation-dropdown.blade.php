@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <x-jet-application-mark class="flex h-9 w-auto" />
                     </a>
                 </div>
 
@@ -21,9 +21,14 @@
                         {{ __('Darba stundas') }}
                     </x-jet-nav-link>
                 </div>
-                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
                         {{ __('Izdevumi') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                        {{ __('Reģistrēt lietotāju') }}
                     </x-jet-nav-link>
                 </div>
             </div>

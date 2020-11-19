@@ -37,7 +37,7 @@
         </div>
     </x-slot>
 
-    <!-- <x-slot name="actions">
+    <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
@@ -45,7 +45,7 @@
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
         </x-jet-button>
-    </x-slot> -->
+    </x-slot>
     
 </x-jet-form-section>
 
@@ -108,7 +108,7 @@
 
     </x-slot>
 
-    <!-- <x-slot name="actions">
+    <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
@@ -116,6 +116,6 @@
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Save') }}
         </x-jet-button>
-    </x-slot> -->
+    </x-slot>
     
 </x-jet-form-section>
