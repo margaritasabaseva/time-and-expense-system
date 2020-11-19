@@ -17,17 +17,26 @@ Route::get('/', function () {
     return view('/auth/login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
+    return view('projects');
+})->name('projects');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function () {
+    return view('working-hours');
+})->name('working-hours');
 
-# testing navigation bar urls/routes
+Route::middleware(['auth:sanctum', 'verified'])->get('/expense-report', function () {
+    return view('personal-expense-report');
+})->name('personal-expense-report');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/time-report', function () {
-    return view('personal-time-report');
-})->name('personal-time-report');
+    return view('time-report');
+})->name('time-report');
 
-# testing navigation bar urls/routes
 Route::middleware(['auth:sanctum', 'verified'])->get('/auth/register', function () {
     return view('auth/register');
 })->name('register');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/all-users', function () {
+    return view('all-users');
+})->name('all-users');
