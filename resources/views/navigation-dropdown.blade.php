@@ -5,25 +5,40 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('working-hours') }}">
                         <x-jet-application-mark class="flex h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
+                <!-- {Standarta lietotāju lapas -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('personal-time-report') }}" :active="request()->routeIs('personal-time-report')">
+                    <x-jet-nav-link href="{{ route('working-hours') }}" :active="request()->routeIs('working-hours')">
                         {{ __('Darba stundas') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    <x-jet-nav-link href="{{ route('personal-expense-report') }}" :active="request()->routeIs('personal-expense-report')">
                         {{ __('Izdevumi') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <!-- Projektu vadītāju lapas -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
+                        {{ __('Projektu izmaksas') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('time-report') }}" :active="request()->routeIs('time-report')">
+                        {{ __('Darbinieku stundu pārskats') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <!-- Administratora lapas -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('all-users') }}" :active="request()->routeIs('all-users')">
+                        {{ __('Visi lietotāji') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -133,8 +148,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('working-hours') }}" :active="request()->routeIs('working-hours')">
+                {{ __('Darba stundas') }}
             </x-jet-responsive-nav-link>
         </div>
 
