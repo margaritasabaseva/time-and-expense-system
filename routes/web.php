@@ -33,10 +33,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/time-report', function ()
     return view('time-report');
 })->name('time-report');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/auth/register', function () {
-    return view('auth/register');
-})->name('register');
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/all-users', function () {
     return view('all-users');
 })->name('all-users');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/auth/register', function () {
+    return view('auth/register');
+})->name('register');
