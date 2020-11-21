@@ -59,10 +59,10 @@
             <x-jet-action-message class="ml-3" on="loggedOut">
                 {{ __('Done.') }}
             </x-jet-action-message>
-        </div>
+        </div>  -->
 
         <!-- Logout Other Devices Confirmation Modal -->
-        <x-jet-dialog-modal wire:model="confirmingLogout">
+       <!-- <x-jet-dialog-modal wire:model="confirmingLogout">
             <x-slot name="title">
                 {{ __('Logout Other Browser Sessions') }}
             </x-slot>
