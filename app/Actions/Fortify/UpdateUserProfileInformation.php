@@ -21,10 +21,31 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'image', 'max:1024'],
-            'phone' => ['required', 'string', 'max:20'],
+            'jobTitle' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
+            'photo' => ['nullable', 'image', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
+        
+        // Nestrādā īsti pareizi, jo tad pieprasa ievadi arī profile photo
+        // foreach ($input as $key => $value) {
+        //     // dd($input);
+        //     if (isset($value)) {
+        //         $user->$key = $value;
+        //     }
+        // }
+
+        if (isset($input['jobTitle'])){
+            $user->jobTitle = $input['jobTitle'];
+        }
+        
+        if (isset($input['phone'])){
+            $user->phone = $input['phone'];
+        }
+
+        if (isset($input['address'])){
+            $user->address = $input['address'];
+        }
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
