@@ -23,10 +23,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    // not sure is group is needed here
     protected $fillable = [
         'name',
         'email',
         'password',
+        'group',
     ];
 
     /**
@@ -58,4 +61,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function groups()
+    {
+        return $this
+            ->belongsToMany('App\Group')
+            ->withTimestamps();
+    }
+
+    // determine if User is admin or Manager by checking DB field group
+    // public function isAdmin() {
+    //     return ($this->role == 3);
+    // }
+
+    // public function isManager() {
+    //     return ($this->role == 2);
+    // }
 }
