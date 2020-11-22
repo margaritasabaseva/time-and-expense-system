@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddJobTitleAndPhoneAndAddressAndRoleToUsers extends Migration
+class AddJobTitleAndPhoneAndAddressAndGroupToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class AddJobTitleAndPhoneAndAddressAndRoleToUsers extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('role')->nullable();
+            $table->integer('group')->unsigned()->default(1);
         });
     }
 
@@ -29,7 +29,7 @@ class AddJobTitleAndPhoneAndAddressAndRoleToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['jobTitle', 'phone', 'address', 'role']);
+            $table->dropColumn(['jobTitle', 'phone', 'address', 'group']);
         });
     }
 }
