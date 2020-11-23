@@ -16,8 +16,8 @@ class GroupUserTableSeeder extends Seeder
     {
         // attach vai sync method
         $user = User::find(1);
-        $user->groups()->attach(1);
-        $user->groups()->attach(3);
+        $user->roles()->attach(1);
+        $user->roles()->attach(3);
     //     Group::create(array('id' => 1,
     //         'group_id' => '1',
     //         'user_id' => '3'));
