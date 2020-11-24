@@ -17,17 +17,20 @@ class RoleTableSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                'name' => 'Pamatlietotājs',
-                'description' => 'Darbinieks ar pamatlietotāja tiesībām – iespējams ievadīt savas darba stundas un veiktās izmaksas.'
+                'id' => '3',
+                'name' => 'ROLE_ADMIN',
+                'description' => 'Darbinieks ar administratora tiesībām – iespējams reģistrēt jaunus lietotājus, kā arī apskatīt, bloķēt/atbloķēt un dzēst esošos.'
             ],
             [
-                'name' => 'Projektu vadītājs/ Grāmatvedis',
+                'id' => '2',
+                'name' => 'ROLE_MANAGER',
                 'description' => 'Darbinieks ar projektu vadītāja/ grāmatveža tiesībām - iespējams apskatīt citu darbinieku ievadītās stundas un rediģēt projektu informāciju.'
             ],
             [
-                'name' => 'Administrators',
-                'description' => 'Darbinieks ar administratora tiesībām – iespējams reģistrēt jaunus lietotājus, kā arī apskatīt, bloķēt/atbloķēt un dzēst esošos.'
-            ]
-        ]);
+                'id' => '1',
+                'name' => 'ROLE_EMPLOYEE',
+                'description' => 'Darbinieks ar pamatlietotāja tiesībām – iespējams ievadīt savas darba stundas un veiktās izmaksas.'
+            ],
+        ]);    
     }
 }
