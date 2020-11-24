@@ -21,21 +21,21 @@ Route::get('/', function () {
 //     return view('employee/working-hours');
 // })->name('working-hours');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/employee/expense-report', function () {
-    return view('employee/personal-expense-report');
-})->name('personal-expense-report');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/employee/expense-report', function () {
+//     return view('employee/personal-expense-report');
+// })->name('personal-expense-report');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/manager/time-report', function () {
-    return view('manager/time-report');
-})->name('time-report');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/manager/time-report', function () {
+//     return view('manager/time-report');
+// })->name('time-report');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/manager/projects', function () {
 //     return view('manager/projects');
 // })->name('projects');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/all-users', function () {
-    return view('admin/all-users');
-})->name('all-users');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/admin/all-users', function () {
+//     return view('admin/all-users');
+// })->name('all-users');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/admin/register', function () {
 //     return view('admin/register');
