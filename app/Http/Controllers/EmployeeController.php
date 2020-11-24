@@ -10,4 +10,10 @@ class EmployeeController extends Controller
     {
         return view('employee.working_hours');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:ROLE_EMPLOYEE');
+    }
 }

@@ -10,4 +10,10 @@ class ManagerController extends Controller
     {
         return view('manager.projects');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:ROLE_MANAGER');
+    }
 }

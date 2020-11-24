@@ -10,4 +10,10 @@ class AdminController extends Controller
     {
         return view('admin.register');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:ROLE_ADMIN');
+    }
 }
