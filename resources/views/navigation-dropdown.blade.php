@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <!-- {Standarta lietotāju lapas -->
+                @if(Auth::user()->hasRole('ROLE_EMPLOYEE'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('working-hours') }}" :active="request()->routeIs('working-hours')">
                         {{ __('Darba stundas') }}
@@ -22,8 +23,10 @@
                         {{ __('Izdevumi') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
 
                 <!-- Projektu vadītāju lapas -->
+                @if(Auth::user()->hasRole('ROLE_MANAGER'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
                         {{ __('Projektu izmaksas') }}
@@ -34,8 +37,10 @@
                         {{ __('Darbinieku stundu pārskats') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
 
                 <!-- Administratora lapas -->
+                @if(Auth::user()->hasRole('ROLE_ADMIN'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('all-users') }}" :active="request()->routeIs('all-users')">
                         {{ __('Visi lietotāji') }}
@@ -46,6 +51,7 @@
                         {{ __('Reģistrēt lietotāju') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
