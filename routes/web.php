@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,32 +18,35 @@ Route::get('/', function () {
     return view('/auth/login');
 });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/employee/working-hours', function () {
-//     return view('employee/working-hours');
-// })->name('working-hours');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return view('/home');
+})->name('home');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/employee/expense-report', function () {
-//     return view('employee/personal-expense-report');
-// })->name('personal-expense-report');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/manager/time-report', function () {
-//     return view('manager/time-report');
-// })->name('time-report');
+// Employee pages
+Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function () {
+    return view('/employee/working-hours');
+})->name('working-hours');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/manager/projects', function () {
-//     return view('manager/projects');
-// })->name('projects');
+Route::middleware(['auth:sanctum', 'verified'])->get('/personal-expense-report', function () {
+    return view('/employee/personal-expense-report');
+})->name('personal-expense-report');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/admin/all-users', function () {
-//     return view('admin/all-users');
-// })->name('all-users');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/admin/register', function () {
-//     return view('admin/register');
-// })->name('register');
+// Admin exclusive pages
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('/all-users', [AdminController::class, 'indexAllUsers'])->name('all-users');
+        Route::get('/register', [AdminController::class, 'indexRegister'])->name('register');
+    });
+});
 
-Route::get('/employee', 'EmployeeController@index');
-
-Route::get('/manager', 'ManagerController@index');
-
-Route::get('/admin', 'AdminController@index');
+// Manager exclusive pages
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['manager']], function () {
+        Route::get('/projects', 'App\Http\Controllers\ManagerController@indexProjects')->name('projects');
+        Route::get('/time-report', 'App\Http\Controllers\ManagerController@indexTimeReport')->name('time-report');
+        // Route::get('/projects', [ManagerController::class, 'indexProjects'])->name('projects');
+        // Route::get('/time-report', [ManagerController::class, 'indexTimeReport'])->name('time-report');
+    });
+});
