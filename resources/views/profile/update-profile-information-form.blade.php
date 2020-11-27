@@ -58,22 +58,22 @@
 
 <x-jet-section-border />
 
-<x-jet-form-section submit="updateProfileInformation">
+<!-- <x-jet-form-section submit="updateProfileInformation">
     <x-slot name="title">
         {{ __('Profila attēls') }}
     </x-slot>
 
     <x-slot name="description">
         {{ __('Atjaunojiet savu profila attēlu.') }}
-    </x-slot>
+    </x-slot> -->
 
 <!-- attēls netiek saglabāts -->
     <x-slot name="form">
      <!-- Profile Photo -->
-     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+     <!-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos()) -->
+            <!-- <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4"> -->
                 <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
+                <!-- <input type="file" class="hidden"
                             wire:model="photo"
                             x-ref="photo"
                             x-on:change="
@@ -83,23 +83,23 @@
                                         photoPreview = e.target.result;
                                     };
                                     reader.readAsDataURL($refs.photo.files[0]);
-                            " />
+                            " /> -->
 
                 <!-- <x-jet-label for="photo" value="{{ __('Photo') }}" /> -->
 
                 <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
+                <!-- <div class="mt-2" x-show="! photoPreview">
                     <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
-                </div>
+                </div> -->
 
                 <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview">
+                <!-- <div class="mt-2" x-show="photoPreview">
                     <span class="block rounded-full w-20 h-20"
                           x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
                     </span>
-                </div>
+                </div> -->
 
-                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <!-- <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Izvēlēties jaunu attēlu') }}
                 </x-jet-secondary-button>
 
@@ -123,6 +123,6 @@
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('Saglabāt') }}
         </x-jet-button>
-    </x-slot>
+    </x-slot> -->
     
 </x-jet-form-section>
