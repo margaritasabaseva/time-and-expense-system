@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('working-hours') }}">
+                    <a href="{{ route('home') }}">
                         <x-jet-application-mark class="flex h-9 w-auto" />
                     </a>
                 </div>
