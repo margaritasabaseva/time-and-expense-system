@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ManagerController extends Controller
 {
-    public function index()
+    public function indexProjects()
     {
-        return view('manager.projects');
+        return view('manager/projects');
     }
 
-    public function __construct()
+    public function indexTimeReport()
     {
-        $this->middleware('auth');
-        $this->middleware('role:ROLE_MANAGER');
+        return view('manager/time-report');
     }
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     $this->middleware('role:ROLE_MANAGER');
+    // }
 }
