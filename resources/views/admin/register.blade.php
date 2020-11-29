@@ -9,7 +9,7 @@
 
         <div>
             <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-20">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('createUser') }}">
                     @csrf
 
                     <div>                        
