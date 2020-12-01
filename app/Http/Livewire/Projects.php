@@ -7,24 +7,33 @@ use App\Models\Project;
 
 class Projects extends Component
 {
-    // public $projects;
     public $title;
     public $description;
+    public $responsibleManager;
     public $startDate;
     public $project_id;
-    public $modalFormVisible;
-    // public $updateMode = false;
+    public $modalFormVisible = false;
+
+    public function rules()
+    {
+        return [
+            'title' => 'required',
+            'description' => 'required',
+            'responsibleManager' => 'required',
+            'startDate' => 'required',
+        ];
+    }
 
     public function createProject()
     {
+        $this->validate();
         Project::create($this->modelData());
         $this->modalFormVisible = false;
+        $this->resetVars();
     }
 
     public function createShowModal()
-    {
-        // $this->resetValidation();
-        // $this->reset();
+    {;
         $this->modalFormVisible = true;
     }
 
@@ -33,8 +42,17 @@ class Projects extends Component
         return [
             'title' => $this->title,
             'description' => $this->description,
+            'responsibleManager' => $this->responsibleManager,
             'startDate' => $this->startDate,
         ];
+    }
+
+    public function resetVars()
+    {
+        $this->title = null;
+        $this->description = null;
+        $this->responsibleManager = null;
+        $this->startDate = null;
     }
 
     public function render()
