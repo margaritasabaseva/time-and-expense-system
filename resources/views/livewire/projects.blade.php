@@ -15,14 +15,24 @@
             <div class="mt-4">
                 <x-jet-label for="title" value="{{ __('Nosaukums') }}" />
                 <x-jet-input id="title" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="title"/>
+                @error('title') <span class="text-red-500"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="description" value="{{ __('Apraksts') }}" />
                 <x-jet-input id="description" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="description"/>
+                @error('description') <span class="text-red-500"> {{ $message }} </span> @enderror
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="responsibleManager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
+                <x-jet-input id="responsibleManager" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="responsibleManager"/>
+                @error('responsibleManager') <span class="text-red-500"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="startDate" value="{{ __('Sākuma datums') }}" />
-                <x-jet-input id="startDate" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="startDate"/>
+                <x-jet-input id="startDate" class="date form-control" type="text" wire:model.debounce.800ms="startDate"/>
+                @error('startDate') <span class="text-red-500"> {{ $message }} </span> @enderror
+
+                <!-- <x-jet-input id="startDate" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="startDate"/> -->
             </div>
         </x-slot>
 
@@ -36,5 +46,11 @@
             </x-jet-secondary-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    <script type="text/javascript">
+        $('.date').datepicker({  
+        format: 'mm-dd-yyyy'
+        });  
+    </script> 
 
 </div>
