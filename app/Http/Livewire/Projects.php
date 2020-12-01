@@ -7,12 +7,39 @@ use App\Models\Project;
 
 class Projects extends Component
 {
-    public $projects, $title, $description, $startDate, $project_id;
-    public $updateMode = false;
+    // public $projects;
+    public $title;
+    public $description;
+    public $startDate;
+    public $project_id;
+    public $modalFormVisible;
+    // public $updateMode = false;
+
+    public function createProject()
+    {
+        Project::create($this->modelData());
+        $this->modalFormVisible = false;
+    }
+
+    public function createShowModal()
+    {
+        // $this->resetValidation();
+        // $this->reset();
+        $this->modalFormVisible = true;
+    }
+
+    public function modelData()
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+            'startDate' => $this->startDate,
+        ];
+    }
 
     public function render()
     {
-        $this->projects = Project::all();
+        // $this->projects = Project::all();
         return view('livewire.projects');
     }
 
@@ -22,67 +49,67 @@ class Projects extends Component
     //     $this->startDate = '';
     // }
 
-    public function storeProject()
-    {
-        $validatedData = $this->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'startDate' => 'required|date'
-        ]);
+    // public function storeProject()
+    // {
+    //     $validatedData = $this->validate([
+    //         'title' => 'required',
+    //         'description' => 'required',
+    //         'startDate' => 'required|date'
+    //     ]);
 
-        Project::create($validatedData);
+    //     Project::create($validatedData);
 
-        session()->flash('message', 'Projekts pievienots.');
+    //     session()->flash('message', 'Projekts pievienots.');
 
-        $this->resetInputFields();
+    //     $this->resetInputFields();
 
-        $this->emit('projectStore'); // Close model to using to jquery
-    }
+    //     $this->emit('projectStore'); // Close model to using to jquery
+    // }
 
-    public function editProject($id)
-    {
-        $this->updateMode = true;
-        $project = Project::where('id',$id)->first();
-        $this->project_id = $id;
-        $this->title = $project->title;
-        $this->description = $project->description;
-        $this->startDate = $project->startDate;
-    }
+    // public function editProject($id)
+    // {
+    //     $this->updateMode = true;
+    //     $project = Project::where('id',$id)->first();
+    //     $this->project_id = $id;
+    //     $this->title = $project->title;
+    //     $this->description = $project->description;
+    //     $this->startDate = $project->startDate;
+    // }
 
-    public function cancelProject()
-    {
-        $this->updateMode = false;
-        $this->resetInputFields();
-    }
+    // public function cancelProject()
+    // {
+    //     $this->updateMode = false;
+    //     $this->resetInputFields();
+    // }
 
-    public function updateProject()
-    {
-        $validatedData = $this->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'startDate' => 'required|date'
-        ]);
+    // public function updateProject()
+    // {
+    //     $validatedData = $this->validate([
+    //         'title' => 'required',
+    //         'description' => 'required',
+    //         'startDate' => 'required|date'
+    //     ]);
 
-        if ($this->project_id) {
-            $project = Project::find($this->project_id);
-            $project->update([
-                'title' => $this->title,
-                'description' => $this->description,
-                'start' => $this->description,
-                'startate' => $this->startDate,
-            ]);
-            $this->updateMode = false;
-            session()->flash('message', 'Projekta informācija atjaunota.');
-            $this->resetInputFields();
-        }
-    }
+    //     if ($this->project_id) {
+    //         $project = Project::find($this->project_id);
+    //         $project->update([
+    //             'title' => $this->title,
+    //             'description' => $this->description,
+    //             'start' => $this->description,
+    //             'startate' => $this->startDate,
+    //         ]);
+    //         $this->updateMode = false;
+    //         session()->flash('message', 'Projekta informācija atjaunota.');
+    //         $this->resetInputFields();
+    //     }
+    // }
 
-    public function deleteProject($id)
-    {
-        if($id){
-            Project::where('id',$id)->delete();
-            session()->flash('message', 'Projekts izdzēsts.');
-        }
-    }
+    // public function deleteProject($id)
+    // {
+    //     if($id){
+    //         Project::where('id',$id)->delete();
+    //         session()->flash('message', 'Projekts izdzēsts.');
+    //     }
+    // }
 
 }
