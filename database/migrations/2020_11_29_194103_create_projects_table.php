@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('title')->nullable();
             $table->string('description')->nullable();
+            $table->string('responsibleManager')->nullable();
             $table->string('startDate')->nullable();
             // $table->unsignedInteger('user_id');
             // $table->foreign('user_id')->references('id')->on('users');
