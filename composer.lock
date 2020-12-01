@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43d0f2a5ca6dd5615663048ae0829c46",
+    "content-hash": "f7967bb2aaf27ea0e4890d00b362f2b4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1799,23 +1799,23 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.3.1",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "4dfc7752254eb316911dec13c57578768bd1b743"
+                "reference": "3f967d4747a1cb8757b0476a90bd218c736bb74e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/4dfc7752254eb316911dec13c57578768bd1b743",
-                "reference": "4dfc7752254eb316911dec13c57578768bd1b743",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/3f967d4747a1cb8757b0476a90bd218c736bb74e",
+                "reference": "3f967d4747a1cb8757b0476a90bd218c736bb74e",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^7.0|^8.0",
                 "illuminate/support": "^7.0|^8.0",
                 "illuminate/validation": "^7.0|^8.0",
-                "php": "^7.2.5",
+                "php": "^7.2.5|^8.0",
                 "symfony/http-kernel": "^5.0"
             },
             "require-dev": {
@@ -1859,7 +1859,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.3.1"
+                "source": "https://github.com/livewire/livewire/tree/v2.3.3"
             },
             "funding": [
                 {
@@ -1867,7 +1867,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-27T19:08:41+00:00"
+            "time": "2020-11-30T21:19:19+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
