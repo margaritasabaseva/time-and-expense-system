@@ -5,6 +5,44 @@
         </x-jet-button>
     </div>
 
+    <!-- Data table -->
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+            <tr>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nosaukums</th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Apraksts</th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Atbildīgais projekta vadītājs</th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Sākuma datums</th>
+                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @if ($data->count())
+                @foreach ($data as $item)
+                <tr>
+                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->title }}</td>
+                    <td class="px-6 py-4 text-sm break-words col-span-1">{{ $item->description }}</td>
+                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->responsibleManager }}</td>
+                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->startDate }}</td>
+                    <td class="px-6 py-4 text-right text-sm">
+                        <x-jet-button class="ml-4" wire:click="updateShowModal({{ $item->id }})">
+                            {{ __('Rediģēt') }}
+                        </x-jet-button>
+                        <x-jet-danger-button class="ml-4" wire:click="createShowModal">
+                            {{ __('Dzēst') }}
+                        </x-jet-danger-button>
+                    </td>
+                </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens projekts netika atrasts</td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
+
+
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="modalFormVisible">
         <x-slot name="title">
