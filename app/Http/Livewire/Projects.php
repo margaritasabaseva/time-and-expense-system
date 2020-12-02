@@ -12,6 +12,7 @@ class Projects extends Component
     public $responsibleManager;
     public $startDate;
     public $project_id;
+    public $modelId;
     public $modalFormVisible = false;
 
     public function rules()
@@ -37,6 +38,10 @@ class Projects extends Component
         $this->modalFormVisible = true;
     }
 
+    public function readProject(){
+        return Project::paginate(5);
+    }
+
     public function modelData()
     {
         return [
@@ -45,6 +50,12 @@ class Projects extends Component
             'responsibleManager' => $this->responsibleManager,
             'startDate' => $this->startDate,
         ];
+    }
+
+    public function updateShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->modalFormVisible = true;
     }
 
     public function resetVars()
@@ -58,8 +69,11 @@ class Projects extends Component
     public function render()
     {
         // $this->projects = Project::all();
-        return view('livewire.projects');
+        return view('livewire.projects',[
+            'data' => $this->readProject(),
+        ]);
     }
+
 
     // private function resetInputFields(){
     //     $this->title = '';
