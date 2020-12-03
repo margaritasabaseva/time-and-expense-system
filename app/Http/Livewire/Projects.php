@@ -4,16 +4,19 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Project;
+use Livewire\WithPagination;
 
 class Projects extends Component
 {
+    use WithPagination;
     public $title;
     public $description;
     public $responsibleManager;
     public $startDate;
-    public $project_id;
+    // public $project_id;
     public $modelId;
     public $modalFormVisible = false;
+    public $confirmDeleteModalVisible = false;
 
     public function rules()
     {
@@ -25,6 +28,12 @@ class Projects extends Component
         ];
     }
 
+    public function mount()
+    {
+        // Resets pagination after reloading the page
+        $this->resetPage();
+    }
+
     public function createProject()
     {
         $this->validate();
@@ -34,7 +43,9 @@ class Projects extends Component
     }
 
     public function createShowModal()
-    {;
+    {
+        $this->resetValidation();
+        $this->resetVars();
         $this->modalFormVisible = true;
     }
 
@@ -52,14 +63,40 @@ class Projects extends Component
         ];
     }
 
+    public function updateProject()
+    {
+        $this->validate();
+        Project::find($this->modelId)->update($this->modelData());
+        $this->modalFormVisible = false;
+    }
+
     public function updateShowModal($id)
     {
+        $this->resetValidation();
         $this->modelId = $id;
         $this->modalFormVisible = true;
+        $this->loadModel();
+        // $this->resetVars();
+    }
+
+   public function deleteShowModal($id)
+   {
+        $this->modelId = $id;
+        $this->confirmDeleteModalVisible = true;
+   }
+
+    public function loadModel()
+    {
+        $data = Project::find($this->modelId);
+        $this->title = $data->title;
+        $this->description = $data->description;
+        $this->responsibleManager = $data->responsibleManager;
+        $this->startDate = $data->startDate;
     }
 
     public function resetVars()
     {
+        $this->modelId = null;
         $this->title = null;
         $this->description = null;
         $this->responsibleManager = null;
