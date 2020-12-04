@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/personal-expense-report',
 // Admin exclusive pages
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('/all-users', [AdminController::class, 'indexAllUsers'])->name('all-users');
+        Route::get('/users', [AdminController::class, 'indexUsers'])->name('users');
         Route::get('/register', [AdminController::class, 'indexRegister'])->name('register');
         // Route::post('/register', [UserController::class, 'createUser'])->name('createUser');
         Route::post('/register', 'App\Http\Controllers\UserController@createUser')->name('createUser');

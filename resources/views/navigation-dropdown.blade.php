@@ -42,7 +42,7 @@
                 <!-- Administratora lapas -->
                 @if(Auth::user()->hasRole('ROLE_ADMIN'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('all-users') }}" :active="request()->routeIs('all-users')">
+                    <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
                         {{ __('Visi lietotāji') }}
                     </x-jet-nav-link>
                 </div>

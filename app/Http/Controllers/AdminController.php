@@ -8,10 +8,10 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function indexAllUsers()
+    public function indexUsers()
     {
         $users = User::with('roles')->get();
-        return view('admin/all-users', ['users' => $users]);
+        return view('admin/users', ['users' => $users]);
     }
 
     public function indexRegister()
@@ -19,11 +19,6 @@ class AdminController extends Controller
         return view('admin/register');
     }
 
-
-//     public function adminDemo()
-//     {
-//         return view('adminView');
-//     }
 
 //     public function isAdmin(){
 //         $userRoles = Auth::user()->roles->pluck('name');
@@ -39,12 +34,6 @@ class AdminController extends Controller
     //         return true;
     //     }
     //     return false;
-    // }
-
-    // public function index()
-    // {
-    //     return view('admin.register');
-    //     return view('navigation-dropdown');
     // }
 
     // public function __construct()
