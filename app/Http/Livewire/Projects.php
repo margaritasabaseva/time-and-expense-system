@@ -14,9 +14,9 @@ class Projects extends Component
     public $responsibleManager;
     public $startDate;
     // public $project_id;
-    public $modelId;
-    public $modalFormVisible = false;
-    public $confirmDeleteModalVisible = false;
+    public $projectModelId;
+    public $projectModalFormVisible = false;
+    public $confirmDeleteProjectVisible = false;
 
     public function rules()
     {
@@ -37,23 +37,23 @@ class Projects extends Component
     public function createProject()
     {
         $this->validate();
-        Project::create($this->modelData());
-        $this->modalFormVisible = false;
+        Project::create($this->projectModelData());
+        $this->projectModalFormVisible = false;
         $this->resetVars();
     }
 
-    public function createShowModal()
+    public function createProjectModal()
     {
         $this->resetValidation();
         $this->resetVars();
-        $this->modalFormVisible = true;
+        $this->projectModalFormVisible = true;
     }
 
     public function readProject(){
         return Project::paginate(5);
     }
 
-    public function modelData()
+    public function projectModelData()
     {
         return [
             'title' => $this->title,
@@ -66,28 +66,34 @@ class Projects extends Component
     public function updateProject()
     {
         $this->validate();
-        Project::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        Project::find($this->projectModelId)->update($this->projectModelData());
+        $this->projectModalFormVisible = false;
     }
 
-    public function updateShowModal($id)
+    public function updateProjectModal($id)
     {
         $this->resetValidation();
-        $this->modelId = $id;
-        $this->modalFormVisible = true;
-        $this->loadModel();
+        $this->projectModelId = $id;
+        $this->projectModalFormVisible = true;
+        $this->loadProjectModel();
         // $this->resetVars();
     }
 
-   public function deleteShowModal($id)
+    public function deleteProject(){
+        Project::destroy($this->projectModelId);
+        $this->confirmDeleteProjectVisible = false;
+        $this->resetPage();
+    }
+
+   public function deleteProjectModal($id)
    {
         $this->modelId = $id;
-        $this->confirmDeleteModalVisible = true;
+        $this->confirmDeleteProjectVisible = true;
    }
 
-    public function loadModel()
+    public function loadProjectModel()
     {
-        $data = Project::find($this->modelId);
+        $data = Project::find($this->projectModelId);
         $this->title = $data->title;
         $this->description = $data->description;
         $this->responsibleManager = $data->responsibleManager;
@@ -96,7 +102,7 @@ class Projects extends Component
 
     public function resetVars()
     {
-        $this->modelId = null;
+        $this->projectModelId = null;
         $this->title = null;
         $this->description = null;
         $this->responsibleManager = null;
@@ -110,75 +116,4 @@ class Projects extends Component
             'data' => $this->readProject(),
         ]);
     }
-
-
-    // private function resetInputFields(){
-    //     $this->title = '';
-    //     $this->description = '';
-    //     $this->startDate = '';
-    // }
-
-    // public function storeProject()
-    // {
-    //     $validatedData = $this->validate([
-    //         'title' => 'required',
-    //         'description' => 'required',
-    //         'startDate' => 'required|date'
-    //     ]);
-
-    //     Project::create($validatedData);
-
-    //     session()->flash('message', 'Projekts pievienots.');
-
-    //     $this->resetInputFields();
-
-    //     $this->emit('projectStore'); // Close model to using to jquery
-    // }
-
-    // public function editProject($id)
-    // {
-    //     $this->updateMode = true;
-    //     $project = Project::where('id',$id)->first();
-    //     $this->project_id = $id;
-    //     $this->title = $project->title;
-    //     $this->description = $project->description;
-    //     $this->startDate = $project->startDate;
-    // }
-
-    // public function cancelProject()
-    // {
-    //     $this->updateMode = false;
-    //     $this->resetInputFields();
-    // }
-
-    // public function updateProject()
-    // {
-    //     $validatedData = $this->validate([
-    //         'title' => 'required',
-    //         'description' => 'required',
-    //         'startDate' => 'required|date'
-    //     ]);
-
-    //     if ($this->project_id) {
-    //         $project = Project::find($this->project_id);
-    //         $project->update([
-    //             'title' => $this->title,
-    //             'description' => $this->description,
-    //             'start' => $this->description,
-    //             'startate' => $this->startDate,
-    //         ]);
-    //         $this->updateMode = false;
-    //         session()->flash('message', 'Projekta informācija atjaunota.');
-    //         $this->resetInputFields();
-    //     }
-    // }
-
-    // public function deleteProject($id)
-    // {
-    //     if($id){
-    //         Project::where('id',$id)->delete();
-    //         session()->flash('message', 'Projekts izdzēsts.');
-    //     }
-    // }
-
 }
