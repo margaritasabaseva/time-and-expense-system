@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Role;
+// use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RoleUserTableSeeder extends Seeder
@@ -24,5 +24,17 @@ class RoleUserTableSeeder extends Seeder
 
         $user = User::find(3);
         $user->roles()->attach(1);
+
+        $user = User::find(4);
+        $user->roles()->attach(1);
+
+        $user = User::find(5);
+        $user->roles()->attach(1);
+
+        $user = User::find(6);
+        $user->roles()->attach(1);
+
+        $user = User::find(7);
+        $user->roles()->attach([1, 2]);
     }
 }
