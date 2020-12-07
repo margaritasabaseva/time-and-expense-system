@@ -70,6 +70,13 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function getRoleAttribute(){
+        $this->roles = $this->roles()->pluck('name')->toArray();
+
+        dd($this);
+        // return $this->roles()->pluck('name');
+    }
+
     // has a role that gets passed as a name of the role with this method, e.g., hasRole('ROLE_ADMIN')
     public function hasRole($role)
     {

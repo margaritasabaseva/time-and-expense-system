@@ -31,9 +31,7 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->jobTitle }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->phone }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->address }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">
-                                        
-                                    </td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap"> {{ $item->roles }}</td>
                                     <td class="px-6 py-4 text-right text-sm">
                                         <x-jet-button  wire:click="updateUserModal({{ $item->id }})">
                                             {{ __('Rediģēt') }}

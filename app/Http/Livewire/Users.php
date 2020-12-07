@@ -14,7 +14,7 @@ class Users extends Component
     public $jobTitle;
     public $phone;
     public $address;
-    // public $role;
+    public $roles;
     public $userModelId;
     public $userModalFormVisible = false;
     public $confirmDeleteUserVisible = false;
@@ -58,14 +58,14 @@ class Users extends Component
 
     public function userModelData()
     {
-        $users = User::with('roles')->get();
+        // $users = User::with('roles')->get();
         return [
             'name' => $this->name,
             'email' => $this->email,
             'jobTitle' => $this->jobTitle,
             'phone' => $this->phone,
             'address' => $this->address,
-            // 'role' => $this->role,
+            'roles' => $this->roles,
         ];
     }
 
@@ -105,7 +105,8 @@ class Users extends Component
         $this->jobTitle = $data->jobTitle;
         $this->phone = $data->phone;
         $this->address = $data->address;
-        // $this->role = $data->role;
+        $this->roles = $data->role;
+        dd($this);
     }
 
     public function resetVars()
@@ -116,7 +117,7 @@ class Users extends Component
         $this->jobTitle = null;
         $this->phone = null;
         $this->address = null;
-        // $this->role = null;
+        $this->roles = null;
     }
 
     public function render()
