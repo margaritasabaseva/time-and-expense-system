@@ -31,7 +31,12 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->jobTitle }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->phone }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->address }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap"> {{ $item->roles }}</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
+                                        @foreach ($item->roles as $role)
+                                            {{ $role->name }}
+                                            <br>
+                                        @endforeach 
+                                    </td>
                                     <td class="px-6 py-4 text-right text-sm">
                                         <x-jet-button  wire:click="updateUserModal({{ $item->id }})">
                                             {{ __('Rediģēt') }}
@@ -54,7 +59,6 @@
         </div>
     </div>
 
-    {{ $data->links() }}
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
