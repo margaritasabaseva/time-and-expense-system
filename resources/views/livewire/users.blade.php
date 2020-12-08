@@ -30,18 +30,18 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->email }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->jobTitle }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->phone }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->address }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $item->address }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
                                         @foreach ($item->roles as $role)
-                                            {{ $role->name }}
+                                            {{ $role->role_title }}
                                             <br>
                                         @endforeach 
                                     </td>
                                     <td class="px-6 py-4 text-right text-sm">
-                                        <x-jet-button  wire:click="updateUserModal({{ $item->id }})">
+                                        <x-jet-button class="w-28" wire:click="updateUserModal({{ $item->id }})">
                                             {{ __('Rediģēt') }}
                                         </x-jet-button>
-                                        <x-jet-danger-button  wire:click="deleteUserModal({{ $item->id }})">
+                                        <x-jet-danger-button class="w-28" wire:click="deleteUserModal({{ $item->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>
@@ -59,38 +59,50 @@
         </div>
     </div>
 
+    {{ $data->links() }}
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
-        <x-slot name="title">
-            {{ __('Pievienot jaunu lietotāju') }}
-        </x-slot>
+        @if ($userModelId)
+            <x-slot name="title">
+                {{ __('Rediģēt lietotāju') }}
+            </x-slot>
+        @else
+            <x-slot name="title">
+                {{ __('Pievienot jaunu lietotāju') }}
+            </x-slot>
+        @endif
 
         <x-slot name="content">
             <div class="mt-4">
                 <x-jet-label for="name" value="{{ __('Vārds, uzvārds') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="name"/>
-                @error('name') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('name') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('E-pasts') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="email"/>
-                @error('email') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('email') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="jobTitle" value="{{ __('Amats') }}" />
                 <x-jet-input id="jobTitle" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="jobTitle"/>
-                @error('jobTitle') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('jobTitle') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="phone" value="{{ __('Tālrunis') }}" />
                 <x-jet-input id="phone" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="phone"/>
-                @error('phone') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('phone') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="address" value="{{ __('Adrese') }}" />
                 <x-jet-input id="address" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="address"/>
-                @error('address') <span class="text-red-500"> {{ $message }} </span> @enderror
+                <!-- @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="password" value="{{ __('Parole') }}" />
+                <x-jet-input id="password" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="password"/>
+                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}" />
@@ -122,9 +134,9 @@
                     {{ __('Izveidot') }}
                 </x-jet-button>
             @endif
-            <x-jet-secondary-button wire:click="$toggle('userModalFormVisible')" wire:loading.attr="disabled">
-                {{ __('Atcelt') }}
-            </x-jet-secondary-button>
+                <x-jet-secondary-button wire:click="$toggle('userModalFormVisible')" wire:loading.attr="disabled">
+                    {{ __('Atcelt') }}
+                </x-jet-secondary-button>
         </x-slot>
     </x-jet-dialog-modal>
 
