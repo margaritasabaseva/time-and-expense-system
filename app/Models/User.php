@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -26,12 +28,14 @@ class User extends Authenticatable
      */
 
     // not sure is role is needed here
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'role',
+    // ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -39,10 +43,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        // 'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        // 'two_factor_recovery_codes',
+        // 'two_factor_secret',
     ];
 
     /**
@@ -80,11 +84,16 @@ class User extends Authenticatable
     // has a role that gets passed as a name of the role with this method, e.g., hasRole('ROLE_ADMIN')
     public function hasRole($role)
     {
-        $roles = $this->roles->where('name', $role)->count();
+        $roles = $this->roles->where('role_name', $role)->count();
 
         if ($roles == 1) {
             return true;
         }
         return false;
     }
+
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = Hash::make(Str::random(10));
+    // }
 }

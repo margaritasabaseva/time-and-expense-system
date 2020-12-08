@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Users extends Component
 {
@@ -14,6 +16,7 @@ class Users extends Component
     public $jobTitle;
     public $phone;
     public $address;
+    public $password;
     // public $roles;
     public $userModelId;
     public $userModalFormVisible = false;
@@ -26,6 +29,7 @@ class Users extends Component
             'email' => 'required',
             'jobTitle' => 'required',
             'phone' => 'required',
+            'password' => 'required',
             // 'address' => 'required',
             // 'role' => 'required',
         ];
@@ -53,7 +57,7 @@ class Users extends Component
     }
 
     public function readUser(){
-        return User::paginate(5);
+        return User::paginate(3);
     }
 
     public function userModelData()
@@ -64,6 +68,8 @@ class Users extends Component
             'jobTitle' => $this->jobTitle,
             'phone' => $this->phone,
             'address' => $this->address,
+            // 'password' => Hash::make($request->password), Hash::make(Str::random(10));
+            'password' =>Hash::make($this->password),
             // 'roles' => $this->roles,
         ];
     }
@@ -117,6 +123,7 @@ class Users extends Component
         $this->phone = null;
         $this->address = null;
         $this->roles = null;
+        $this->password = null;
     }
 
     public function render()
