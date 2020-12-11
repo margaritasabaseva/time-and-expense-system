@@ -65,47 +65,46 @@
     <x-jet-dialog-modal wire:model="userModalFormVisible">
         @if ($userModelId)
             <x-slot name="title">
-                {{ __('Rediģēt lietotāju') }}
+                <div class="font-bold">
+                    {{ __('Rediģēt lietotāju') }}
+                </div>
             </x-slot>
         @else
             <x-slot name="title">
-                {{ __('Pievienot jaunu lietotāju') }}
+                <div class="font-bold">
+                    {{ __('Pievienot jaunu lietotāju') }}
+                </div>
             </x-slot>
         @endif
 
         <x-slot name="content">
             <div class="mt-4">
-                <x-jet-label for="name" value="{{ __('Vārds, uzvārds') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="name"/>
+                <x-jet-label for="name" value="{{ __('Vārds, uzvārds') }}"/>
+                <x-jet-input id="name" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="name"/>
                 @error('name') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('E-pasts') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="email"/>
+                <x-jet-label for="email" value="{{ __('E-pasts') }}"/>
+                <x-jet-input id="email" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="email"/>
                 @error('email') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="jobTitle" value="{{ __('Amats') }}" />
-                <x-jet-input id="jobTitle" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="jobTitle"/>
+                <x-jet-label for="jobTitle" value="{{ __('Amats') }}"/>
+                <x-jet-input id="jobTitle" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="jobTitle"/>
                 @error('jobTitle') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="phone" value="{{ __('Tālrunis') }}" />
-                <x-jet-input id="phone" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="phone"/>
+                <x-jet-label for="phone" value="{{ __('Tālrunis') }}"/>
+                <x-jet-input id="phone" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="phone"/>
                 @error('phone') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="address" value="{{ __('Adrese') }}" />
-                <x-jet-input id="address" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="address"/>
+                <x-jet-label for="address" value="{{ __('Adrese') }}"/>
+                <x-jet-input id="address" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="address"/>
                 <!-- @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
             </div>
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Parole') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="password"/>
-                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
-            </div>
-            <div class="mt-4">
-                <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}" />
+                <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}"/>
                 <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
                     <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Pamatlietotājs') }}</span>
@@ -119,9 +118,15 @@
                 <label for="ROLE_ADMIN" class="flex items-center mb-3">
                     <input id="ROLE_ADMIN" type="checkbox" class="form-checkbox" name="ROLE_ADMIN">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Administrators') }}</span>
-                </label>
-                        
+                </label>      
             </div>
+            @if (!$userModelId)
+            <div class="mt-4">
+                <x-jet-label for="password" value="{{ __('Parole') }}"/>
+                <x-jet-input id="password" class="block mt-1 w-full text-sm" type="password" name="password" wire:model.debounce.800ms="password"/>
+                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+            </div>
+            @endif
         </x-slot>
 
         <x-slot name="footer">
