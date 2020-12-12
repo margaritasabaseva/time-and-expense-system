@@ -17,7 +17,7 @@ class CheckManager
      */
     public function handle(Request $request, Closure $next)
     {
-        $userRoles = Auth::user()->roles->pluck('role_name');
+        $userRoles = Auth::user()->roles->pluck('name');
 
         if (!$userRoles->contains('ROLE_MANAGER')) {
             return redirect('/home');
