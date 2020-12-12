@@ -17,6 +17,7 @@ class Projects extends Component
     public $projectModelId;
     public $projectModalFormVisible = false;
     public $confirmDeleteProjectVisible = false;
+    public $projectExpensesModalVisible = false;
 
     public function rules()
     {
@@ -85,11 +86,17 @@ class Projects extends Component
         $this->resetPage();
     }
 
-   public function deleteProjectModal($id)
-   {
+    public function deleteProjectModal($id)
+    {
         $this->modelId = $id;
         $this->confirmDeleteProjectVisible = true;
-   }
+    }
+
+    public function showProjectModal($id)
+    {
+        $this->projectModelId = $id;
+        $this->projectExpensesModalVisible = false;
+    }
 
     public function loadProjectModel()
     {
