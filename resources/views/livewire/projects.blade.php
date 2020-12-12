@@ -29,10 +29,10 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->responsibleManager }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->startDate }}</td>
                                     <td class="px-6 py-4 text-right text-sm">
-                                        <x-jet-button  wire:click="updateProjectModal({{ $item->id }})">
+                                        <x-jet-button class="w-28" wire:click="updateProjectModal({{ $item->id }})">
                                             {{ __('Rediģēt') }}
                                         </x-jet-button>
-                                        <x-jet-danger-button  wire:click="deleteProjectModal({{ $item->id }})">
+                                        <x-jet-danger-button class="w-28" wire:click="deleteProjectModal({{ $item->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>
