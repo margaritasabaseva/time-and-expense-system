@@ -24,7 +24,12 @@
                             @if ($data->count())
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td class="font-bold px-6 py-4 text-sm break-words">{{ $item->title }}</td>
+                                    <td class="font-bold px-6 py-4 text-md break-words">
+                                        <!-- <a href="{{ route('time-report') }}" :active="request()->routeIs('time-report')" class="text-black"> -->
+                                        <a href="" class="text-black" wire:click="showProjectModal({{ $item->id }})">    
+                                            {{ $item->title }}
+                                        </a>
+                                    </td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->description }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->responsibleManager }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->startDate }}</td>
@@ -62,22 +67,22 @@
             <div class="mt-4">
                 <x-jet-label for="title" value="{{ __('Nosaukums') }}" />
                 <x-jet-input id="title" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="title"/>
-                @error('title') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('title') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="description" value="{{ __('Apraksts') }}" />
                 <x-jet-input id="description" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="description"/>
-                @error('description') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="responsibleManager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
                 <x-jet-input id="responsibleManager" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="responsibleManager"/>
-                @error('responsibleManager') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('responsibleManager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="startDate" value="{{ __('Sākuma datums') }}" />
                 <x-jet-input id="startDate" class="date form-control" type="text" wire:model.debounce.800ms="startDate"/>
-                @error('startDate') <span class="text-red-500"> {{ $message }} </span> @enderror
+                @error('startDate') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
 
                 <!-- <x-jet-input id="startDate" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="startDate"/> -->
             </div>
@@ -117,6 +122,21 @@
                 <x-jet-secondary-button wire:click="$toggle('confirmDeleteProjectVisible')" wire:loading.attr="disabled">
                     {{ __('Atcelt') }}
                 </x-jet-secondary-button>
+            </x-slot>
+        </x-jet-dialog-modal>
+
+    <!-- Show Project Expenses Modal-->
+        <x-jet-dialog-modal wire:model="projectExpensesModalVisible">
+            <x-slot name="title">
+                {{ $item->title }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ __('Vai Jūs esat pārliecināts, ka vēlaties dzēst izvēlēto projektu?') }}
+            </x-slot>
+
+            <x-slot name="footer">
+
             </x-slot>
         </x-jet-dialog-modal>
 
