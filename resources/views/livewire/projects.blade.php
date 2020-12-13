@@ -25,10 +25,9 @@
                                 @foreach ($data as $item)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-md break-words">
-                                        <!-- <a href="{{ route('time-report') }}" :active="request()->routeIs('time-report')" class="text-black"> -->
-                                        <a href="" class="text-black" wire:click="showProjectModal({{ $item->id }})">    
+                                        <button class="font-bold" wire:click="showProjectExpensesModal({{ $item->id }})">  
                                             {{ $item->title }}
-                                        </a>
+                                        </button>
                                     </td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->description }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $item->responsibleManager }}</td>
@@ -128,15 +127,19 @@
     <!-- Show Project Expenses Modal-->
         <x-jet-dialog-modal wire:model="projectExpensesModalVisible">
             <x-slot name="title">
-                {{ $item->title }}
+                <div class="font-bold">
+                    {{ __('Projekta izmaksu pārskats:') }} {{ $item->title }}
+                </div>
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Vai Jūs esat pārliecināts, ka vēlaties dzēst izvēlēto projektu?') }}
+                {{ __('Projekta izmaksas') }}
             </x-slot>
 
             <x-slot name="footer">
-
+                <x-jet-secondary-button wire:click="$toggle('projectExpensesModalVisible')" wire:loading.attr="disabled">
+                    {{ __('Aizvērt') }}
+                </x-jet-secondary-button>
             </x-slot>
         </x-jet-dialog-modal>
 

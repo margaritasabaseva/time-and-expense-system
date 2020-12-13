@@ -92,10 +92,19 @@ class Projects extends Component
         $this->confirmDeleteProjectVisible = true;
     }
 
-    public function showProjectModal($id)
+    public function showProjectExpenses($id)
     {
-        $this->projectModelId = $id;
+        // $this->projectModelId = $id;
+        $this->validate();
         $this->projectExpensesModalVisible = false;
+    }
+
+    public function showProjectExpensesModal($id)
+    {
+        $this->resetValidation();
+        $this->projectModelId = $id;
+        $this->projectExpensesModalVisible = true;
+        $this->loadProjectModel();
     }
 
     public function loadProjectModel()
