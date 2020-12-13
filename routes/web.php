@@ -47,8 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['manager']], function () {
         Route::get('/projects', 'App\Http\Controllers\ManagerController@indexProjects')->name('projects');
-        Route::get('/time-report', 'App\Http\Controllers\ManagerController@indexTimeReport')->name('time-report');
+        Route::get('/time-reports', 'App\Http\Controllers\ManagerController@indexTimeReport')->name('time-reports');
         // Route::get('/projects', [ManagerController::class, 'indexProjects'])->name('projects');
-        // Route::get('/time-report', [ManagerController::class, 'indexTimeReport'])->name('time-report');
+        // Route::get('/time-reports', [ManagerController::class, 'indexTimeReport'])->name('time-reports');
     });
 });

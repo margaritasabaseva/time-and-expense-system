@@ -106,20 +106,19 @@
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}"/>
                 <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
-                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE">
+                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="ROLE_EMPLOYEE">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Pamatlietotājs') }}</span>
-                </label>
-                
+                </label>                
                 <label for="ROLE_MANAGER" class="flex items-center">
-                    <input id="ROLE_MANAGER" type="checkbox" class="form-checkbox" name="ROLE_MANAGER">
+                    <input id="ROLE_MANAGER" type="checkbox" class="form-checkbox" name="ROLE_MANAGER" value="ROLE_MANAGER">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Projektu vadītājs/ Grāmatvedis') }}</span>
                 </label>
-
                 <label for="ROLE_ADMIN" class="flex items-center mb-3">
-                    <input id="ROLE_ADMIN" type="checkbox" class="form-checkbox" name="ROLE_ADMIN">
+                    <input id="ROLE_ADMIN" type="checkbox" class="form-checkbox" name="ROLE_ADMIN" value="ROLE_ADMIN">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Administrators') }}</span>
-                </label>      
+                </label>  
             </div>
+
             @if (!$userModelId)
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Parole') }}"/>

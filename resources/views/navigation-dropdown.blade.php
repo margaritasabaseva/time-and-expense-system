@@ -33,7 +33,7 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('time-report') }}" :active="request()->routeIs('time-report')">
+                    <x-jet-nav-link href="{{ route('time-reports') }}" :active="request()->routeIs('time-reports')">
                         {{ __('Darbinieku stundu pārskats') }}
                     </x-jet-nav-link>
                 </div>
