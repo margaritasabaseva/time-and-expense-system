@@ -39,7 +39,7 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                             <tr>
                                                 <td class="font-bold text-sm break-words">
-                                                    @livewire('project-in-time-report')
+                                                    @livewire('project-in-working-hours')
                                                 </td>
                                                 <td class="text-sm break-words">
                                                     <x-jet-input id="hours" class="w-full shadow-none" type="number" style="border:none" wire:model.debounce.800ms="title"/>
@@ -89,7 +89,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="font-bold text-sm break-words">
-                                                    @livewire('project-in-time-report')
+                                                    @livewire('project-in-working-hours')
                                                 </td>
                                                 <td class="text-sm break-words">
                                                     <x-jet-input id="hours" class="w-full shadow-none" type="number" style="border:none" wire:model.debounce.800ms="title"/>
@@ -117,7 +117,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="font-bold text-sm break-words">
-                                                    @livewire('project-in-time-report')
+                                                    @livewire('project-in-working-hours')
                                                 </td>
                                                 <td class="px-3 py-4 text-sm break-words"></td>
                                                 <td class="px-3 py-4 text-sm break-words"></td>
@@ -137,7 +137,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="font-bold text-sm break-words">
-                                                    @livewire('project-in-time-report')
+                                                    @livewire('project-in-working-hours')
                                                 </td>
                                                 <td class="px-3 py-4 text-sm break-words"></td>
                                                 <td class="px-3 py-4 text-sm break-words"></td>
