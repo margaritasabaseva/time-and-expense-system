@@ -11,12 +11,12 @@ class AdminController extends Controller
     public function indexUsers()
     {
         $users = User::with('roles')->get();
-        return view('admin/users', ['users' => $users]);
+        return view('admin.users', ['users' => $users]);
     }
 
     public function indexRegister()
     {
-        return view('admin/register');
+        return view('admin.register');
     }
 
 

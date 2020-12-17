@@ -9,12 +9,12 @@ class ManagerController extends Controller
 {
     public function indexProjects()
     {
-        return view('manager/projects');
+        return view('manager.projects');
     }
 
     public function indexTimeReport()
     {
-        return view('manager/time-report');
+        return view('manager.time-reports');
     }
 
     // public function __construct()
