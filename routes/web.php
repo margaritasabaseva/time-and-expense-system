@@ -24,6 +24,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
 
 
 // Employee pages
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function () {
     return view('/employee/working-hours');
 })->name('working-hours');
