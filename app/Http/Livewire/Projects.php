@@ -109,11 +109,11 @@ class Projects extends Component
 
     public function loadProjectModel()
     {
-        $data = Project::find($this->projectModelId);
-        $this->title = $data->title;
-        $this->description = $data->description;
-        $this->responsibleManager = $data->responsibleManager;
-        $this->startDate = $data->startDate;
+        $projects = Project::find($this->projectModelId);
+        $this->title = $projects->title;
+        $this->description = $projects->description;
+        $this->responsibleManager = $projects->responsibleManager;
+        $this->startDate = $projects->startDate;
     }
 
     public function resetVars()
@@ -128,7 +128,7 @@ class Projects extends Component
     public function render()
     {
         return view('livewire.manager.projects',[
-            'data' => $this->readProject(),
+            'projects' => $this->readProject(),
         ]);
     }
 }

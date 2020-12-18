@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Role;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class Users extends Component
 {
@@ -20,18 +20,17 @@ class Users extends Component
     // public $roles;
     public $userModelId;
     public $userModalFormVisible = false;
+    public $assignRolesVisible = false;
     public $confirmDeleteUserVisible = false;
 
     public function rules()
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'jobTitle' => 'required',
-            'phone' => 'required',
-            'password' => 'required',
-            // 'address' => 'required',
-            // 'role' => 'required',
+            'phone' => 'required|numeric',
+            'password' => 'required|min:8',
         ];
     }
 
@@ -68,27 +67,26 @@ class Users extends Component
             'jobTitle' => $this->jobTitle,
             'phone' => $this->phone,
             'address' => $this->address,
-            // 'password' => Hash::make($request->password), Hash::make(Str::random(10));
             'password' =>Hash::make($this->password),
-            // 'roles' => $this->roles,
         ];
     }
 
-    public function updateUser()
+    public function assignRoles()
     {
-        $this->validate();
-        User::find($this->userModelId)->update($this->userModelData());
-        $this->userModalFormVisible = false;
+        $this->assignRolesVisible = false;
     }
 
-    public function updateUserModal($id)
+    public function assignRolesModal($id)
     {
-        $this->resetValidation();
         $this->userModelId = $id;
-        $this->userModalFormVisible = true;
-        $this->loadUserModel();
-        // $this->resetVars();
+        $this->assignRolesVisible = true;
     }
+    
+    public function loadUserRoles()
+    {
+        $roles = Role::find($this->userModelId);
+    }
+
 
     public function deleteUser(){
         User::destroy($this->userModelId);
@@ -104,14 +102,14 @@ class Users extends Component
 
     public function loadUserModel()
     {
-        $data = User::find($this->userModelId);
-        $this->name = $data->name;
-        $this->email = $data->email;
-        $this->jobTitle = $data->jobTitle;
-        $this->phone = $data->phone;
-        $this->address = $data->address;
-        // $this->roles = $data->role;
-        // dd($this);
+        $users = User::find($this->userModelId);
+        $this->id = $users->id;
+        $this->name = $users->name;
+        $this->email = $users->email;
+        $this->jobTitle = $users->jobTitle;
+        $this->phone = $users->phone;
+        $this->address = $users->address;
+        $this->loadUserRoles();
     }
 
     public function resetVars()
@@ -128,12 +126,8 @@ class Users extends Component
 
     public function render()
     {
-        // $users = User::with('roles')->get();
-        // return view('admin/users', ['users' => $users]);
-        // return view('livewire.users',[
-        //     'data' => $this->readUser(),
-        // ]);
-        // return view('livewire.users', ['users' => $users]);
-        return view('livewire.users', ['data' => $this->readUser()]);
+        return view('livewire.admin.users', [
+            'users' => $this->readUser()
+        ]);
     }
 }

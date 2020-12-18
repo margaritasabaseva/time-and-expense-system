@@ -59,16 +59,16 @@ class UserInTimeReport extends Component
 
     public function loadUserModel()
     {
-        $data = User::find($this->userModelId);
-        $this->name = $data->name;
-        $this->email = $data->email;
-        $this->jobTitle = $data->jobTitle;
+        $users = User::find($this->userModelId);
+        $this->name = $users->name;
+        $this->email = $users->email;
+        $this->jobTitle = $users->jobTitle;
     }
 
     public function render()
     {
         return view('livewire.manager.user-in-time-report', [
-            'data' => $this->readUser()
+            'users' => $this->readUser()
         ]);
     }
 }

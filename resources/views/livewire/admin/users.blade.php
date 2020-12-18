@@ -23,25 +23,25 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if ($data->count())
-                                @foreach ($data as $item)
+                            @if ($users->count())
+                                @foreach ($users as $user)
                                 <tr>
-                                    <td class="font-bold px-6 py-4 text-sm break-words">{{ $item->name }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->email }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->jobTitle }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->phone }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->address }}</td>
+                                    <td class="font-bold px-6 py-4 text-sm break-words">{{ $user->name }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->email }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->jobTitle }}</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $user->phone }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->address }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
-                                        @foreach ($item->roles as $role)
+                                        @foreach ($user->roles as $role)
                                             {{ $role->role_title }}
                                             <br>
                                         @endforeach 
                                     </td>
                                     <td class="px-6 py-4 text-right text-sm">
-                                        <x-jet-button class="w-28" wire:click="updateUserModal({{ $item->id }})">
-                                            {{ __('Rediģēt') }}
+                                        <x-jet-button class="w-28" wire:click="assignRolesModal({{ $user->id }})">
+                                            {{ __('Lomas') }}
                                         </x-jet-button>
-                                        <x-jet-danger-button class="w-28" wire:click="deleteUserModal({{ $item->id }})">
+                                        <x-jet-danger-button class="w-28" wire:click="deleteUserModal({{ $user->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>
@@ -59,10 +59,11 @@
         </div>
     </div>
 
-    {{ $data->links() }}
+    {{ $users->links() }}
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
+
         <x-slot name="title">
             <div class="font-bold">    
                 @if ($userModelId)
@@ -100,10 +101,38 @@
                 <!-- @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
             </div>
             <div class="mt-4">
-                <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}"/>
+                <x-jet-label for="password" value="{{ __('Parole') }}"/>
+                <x-jet-input id="password" class="block mt-1 w-full text-sm" type="password" name="password" wire:model.debounce.800ms="password"/>
+                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+                <x-jet-action-message class="mr-3" on="saved">
+                    {{ __('Saglabāts.') }}
+                </x-jet-action-message>
+                <x-jet-button class="ml-2" wire:click="createUser" wire:loading.attr="disabled">
+                    {{ __('Izveidot') }}
+                </x-jet-button>
+                <x-jet-secondary-button wire:click="$toggle('userModalFormVisible')" wire:loading.attr="disabled">
+                    {{ __('Atcelt') }}
+                </x-jet-secondary-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
+
+
+    <!-- Assign Roles to User Modal  -->
+    <x-jet-dialog-modal wire:model="assignRolesVisible">
+        <x-slot name="title">
+            {{ __('Rediģēt lietotāja lomas') }}
+        </x-slot>
+
+        <x-slot name="content">
+            <div class="mt-4">
                 <!-- test: ievietot value vietās ciparus -->
-                <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
-                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="1">
+                <!-- <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
+                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="ROLE_EMPLOYEE">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Pamatlietotājs') }}</span>
                 </label>                
                 <label for="ROLE_MANAGER" class="flex items-center">
@@ -113,31 +142,32 @@
                 <label for="ROLE_ADMIN" class="flex items-center mb-3">
                     <input id="ROLE_ADMIN" type="checkbox" class="form-checkbox" name="ROLE_ADMIN" value="ROLE_ADMIN">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Administrators') }}</span>
-                </label>  
-            </div>
+                </label>   -->
 
-            @if (!$userModelId)
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Parole') }}"/>
-                <x-jet-input id="password" class="block mt-1 w-full text-sm" type="password" name="password" wire:model.debounce.800ms="password"/>
-                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
-            </div>
-            @endif
+                @if ($users->count())
+                    @foreach ($users as $user)
+                        @foreach ($user->roles as $role)
+                            <div>
+                                <input type="checkbox" value="{{$role->id}}" name="role_title[]" id="role_title{{ $role->id }}">                                
+                                <label for="role_title{{ $role->id }}" class="ml-2 text-sm text-gray-600">{{$role->role_title}}</label>
+                            </div>
+                        @endforeach
+                    @endforeach
+                @endif
+            </div>   
+
+
+
         </x-slot>
 
         <x-slot name="footer">
-            @if ($userModelId)
-                <x-jet-button class="ml-2" wire:click="updateUser" wire:loading.attr="disabled">
-                    {{ __('Saglabāt') }}
-                </x-jet-button>
-            @else
-                <x-jet-button class="ml-2" wire:click="createUser" wire:loading.attr="disabled">
-                    {{ __('Izveidot') }}
-                </x-jet-button>
-            @endif
-                <x-jet-secondary-button wire:click="$toggle('userModalFormVisible')" wire:loading.attr="disabled">
-                    {{ __('Atcelt') }}
-                </x-jet-secondary-button>
+            <x-jet-button class="ml-2" wire:click="assignRoles" wire:loading.attr="disabled">
+                {{ __('Saglabāt') }}
+            </x-jet-button>
+
+            <x-jet-secondary-button wire:click="$toggle('assignRolesVisible')" wire:loading.attr="disabled">
+                {{ __('Atcelt') }}
+            </x-jet-secondary-button>
         </x-slot>
     </x-jet-dialog-modal>
 

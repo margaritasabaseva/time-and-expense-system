@@ -14,16 +14,16 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if ($data->count())
-                                @foreach ($data as $item)
+                            @if ($users->count())
+                                @foreach ($users as $user)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-sm break-words">
-                                        <button class="font-bold" wire:click="showUserTimeReportModal({{ $item->id }})">
-                                            {{ $item->name }}
+                                        <button class="font-bold" wire:click="showUserTimeReportModal({{ $user->id }})">
+                                            {{ $user->name }}
                                         </button>
                                     </td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->email }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->jobTitle }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->email }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->jobTitle }}</td>
                                     <td class="px-6 py-4 text-right text-sm"></td>
                                 </tr>
                                 @endforeach
@@ -39,13 +39,13 @@
         </div>
     </div>
 
-    {{ $data->links() }}
+    {{ $users->links() }}
 
     <!-- Show User Time Report Modal -->
     <x-jet-dialog-modal wire:model="userTimeReportModalVisible">
         <x-slot name="title">
-            
-                {{ __('Iesniegto darba stundu pārskats:') }} {{ $item->name }}
+            <div class="font-bold">
+                {{ __('Iesniegto darba stundu pārskats') }}
             </div>
         </x-slot>
 

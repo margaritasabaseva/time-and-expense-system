@@ -21,22 +21,22 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if ($data->count())
-                                @foreach ($data as $item)
+                            @if ($projects->count())
+                                @foreach ($projects as $project)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-md break-words">
-                                        <button class="font-bold" wire:click="showProjectExpensesModal({{ $item->id }})">  
-                                            {{ $item->title }}
+                                        <button class="font-bold" wire:click="showProjectExpensesModal({{ $project->id }})">  
+                                            {{ $project->title }}
                                         </button>
                                     </td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->description }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $item->responsibleManager }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $item->startDate }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $project->description }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $project->responsibleManager }}</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $project->startDate }}</td>
                                     <td class="px-6 py-4 text-right text-sm">
-                                        <x-jet-button class="w-28" wire:click="updateProjectModal({{ $item->id }})">
+                                        <x-jet-button class="w-28" wire:click="updateProjectModal({{ $project->id }})">
                                             {{ __('Rediģēt') }}
                                         </x-jet-button>
-                                        <x-jet-danger-button class="w-28" wire:click="deleteProjectModal({{ $item->id }})">
+                                        <x-jet-danger-button class="w-28" wire:click="deleteProjectModal({{ $project->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    {{ $data->links() }}
+    {{ $projects->links() }}
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="projectModalFormVisible">
@@ -134,7 +134,7 @@
         <x-jet-dialog-modal wire:model="projectExpensesModalVisible">
             <x-slot name="title">
                 <div class="font-bold">
-                    {{ __('Projekta izmaksu pārskats:') }} {{ $item->title }}
+                    {{ __('Projekta izmaksu pārskats') }}
                 </div>
             </x-slot>
 
@@ -149,7 +149,7 @@
             </x-slot>
         </x-jet-dialog-modal>
 
-        <!-- Nestrādā kā nākas – ja vienkārši izvēlas datumu un piespieš saglabāt, tas izdzēš datumu. Strādā, ja piespiež atstarpi utt pēc tam -->
+        <!-- Nestrādā kā nākas – ja vienkārši izvēlas datumu un piespiež saglabāt, tas izdzēš datumu. Strādā, ja piespiež atstarpi utt pēc tam -->
     <script type="text/javascript">
         $('.date').datepicker({  
         format: 'mm-dd-yyyy'
