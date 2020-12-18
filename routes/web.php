@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManagerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +26,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
 
 
 // Employee pages
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
-});
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
+// });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function () {
     return view('/employee/working-hours');
@@ -41,18 +43,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/personal-expense-report',
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/users', [AdminController::class, 'indexUsers'])->name('users');
-        Route::get('/register', [AdminController::class, 'indexRegister'])->name('register');
-        // Route::post('/register', [UserController::class, 'createUser'])->name('createUser');
-        Route::post('/register', 'App\Http\Controllers\UserController@createUser')->name('createUser');
     });
 });
 
 // Manager exclusive pages
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['manager']], function () {
-        Route::get('/projects', 'App\Http\Controllers\ManagerController@indexProjects')->name('projects');
-        Route::get('/time-reports', 'App\Http\Controllers\ManagerController@indexTimeReport')->name('time-reports');
-        // Route::get('/projects', [ManagerController::class, 'indexProjects'])->name('projects');
-        // Route::get('/time-reports', [ManagerController::class, 'indexTimeReport'])->name('time-reports');
+        Route::get('/projects', [ManagerController::class, 'indexProjects'])->name('projects');
+        Route::get('/time-reports', [ManagerController::class, 'indexTimeReport'])->name('time-reports');
     });
 });

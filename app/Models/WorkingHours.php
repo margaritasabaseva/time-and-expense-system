@@ -12,4 +12,5 @@ class WorkingHours extends Model
     protected $casts = [
         'working-hours' => 'array'
     ];
+
 }

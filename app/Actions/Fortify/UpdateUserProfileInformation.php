@@ -26,14 +26,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'address' => ['nullable', 'string', 'max:255'],
             'photo' => ['nullable', 'image', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
-        
-        // Nestrādā īsti pareizi, jo tad pieprasa ievadi arī profile photo
-        // foreach ($input as $key => $value) {
-        //     // dd($input);
-        //     if (isset($value)) {
-        //         $user->$key = $value;
-        //     }
-        // }
 
         if (isset($input['jobTitle'])){
             $user->jobTitle = $input['jobTitle'];
