@@ -67,7 +67,7 @@ class UserInTimeReport extends Component
 
     public function render()
     {
-        return view('livewire.user-in-time-report', [
+        return view('livewire.manager.user-in-time-report', [
             'data' => $this->readUser()
         ]);
     }

@@ -63,19 +63,15 @@
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
-        @if ($userModelId)
-            <x-slot name="title">
-                <div class="font-bold">
+        <x-slot name="title">
+            <div class="font-bold">    
+                @if ($userModelId)
                     {{ __('Rediģēt lietotāju') }}
-                </div>
-            </x-slot>
-        @else
-            <x-slot name="title">
-                <div class="font-bold">
+                @else
                     {{ __('Pievienot jaunu lietotāju') }}
-                </div>
-            </x-slot>
-        @endif
+                @endif
+            </div>
+        </x-slot>
 
         <x-slot name="content">
             <div class="mt-4">
@@ -105,8 +101,9 @@
             </div>
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Lietotāja lomas') }}"/>
+                <!-- test: ievietot value vietās ciparus -->
                 <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
-                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="ROLE_EMPLOYEE">
+                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="1">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Pamatlietotājs') }}</span>
                 </label>                
                 <label for="ROLE_MANAGER" class="flex items-center">

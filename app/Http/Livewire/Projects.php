@@ -127,8 +127,7 @@ class Projects extends Component
 
     public function render()
     {
-        // $this->projects = Project::all();
-        return view('livewire.projects',[
+        return view('livewire.manager.projects',[
             'data' => $this->readProject(),
         ]);
     }

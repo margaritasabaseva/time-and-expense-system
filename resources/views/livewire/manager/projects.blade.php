@@ -59,7 +59,13 @@
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="projectModalFormVisible">
         <x-slot name="title">
-            {{ __('Pievienot jaunu projektu') }}
+            <div class="font-bold">
+                @if ($projectModelId)
+                    {{ __('Rediģēt projektu') }}
+                @else
+                    {{ __('Pievienot jaunu projektu') }}
+                @endif
+            </div>
         </x-slot>
 
         <x-slot name="content">
