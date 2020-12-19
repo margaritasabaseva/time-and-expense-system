@@ -20,15 +20,10 @@ Route::get('/', function () {
     return view('/auth/login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+// Pages available for all employees
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return view('/home');
 })->name('home');
-
-
-// Employee pages
-// Route::group(['middleware' => ['auth']], function () {
-//     Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
-// });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function () {
     return view('/employee/working-hours');
@@ -37,6 +32,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function 
 Route::middleware(['auth:sanctum', 'verified'])->get('/personal-expense-report', function () {
     return view('/employee/personal-expense-report');
 })->name('personal-expense-report');
+
+
+// Employee pages
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
+// });
 
 
 // Admin exclusive pages
