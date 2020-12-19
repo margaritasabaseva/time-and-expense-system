@@ -10,7 +10,7 @@ class UserInTimeReport extends Component
 {
     use WithPagination;
     public $name;
-    public $jobTitle;
+    public $job_title;
     public $userModelId;
     public $userTimeReportModalVisible = false;
 
@@ -19,7 +19,7 @@ class UserInTimeReport extends Component
         return [
             'name' => 'required',
             'email' => 'required',
-            'jobTitle' => 'required',
+            'job_title' => 'required',
         ];
     }
 
@@ -30,7 +30,7 @@ class UserInTimeReport extends Component
     }
 
     public function readUser(){
-        return User::paginate(3);
+        return User::paginate(5);
     }
 
     public function userModelData()
@@ -38,7 +38,7 @@ class UserInTimeReport extends Component
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'jobTitle' => $this->jobTitle,
+            'job_title' => $this->job_title,
         ];
     }
 
@@ -62,7 +62,7 @@ class UserInTimeReport extends Component
         $users = User::find($this->userModelId);
         $this->name = $users->name;
         $this->email = $users->email;
-        $this->jobTitle = $users->jobTitle;
+        $this->job_title = $users->job_title;
     }
 
     public function render()

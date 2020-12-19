@@ -17,53 +17,46 @@ class ProjectTableSeeder extends Seeder
     {
         DB::table('projects')->insert([
             [
-                'id' => '1',
                 'title' => 'Projekts 1',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '2',
                 'title' => 'Projekts 2',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '3',
                 'title' => 'Projekts 3',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '4',
                 'title' => 'Projekts 4',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '5',
                 'title' => 'Projekts 5',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '6',
                 'title' => 'Projekts 6',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ],
             [
-                'id' => '7',
                 'title' => 'Projekts 7',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'responsibleManager' => 'Anna Kalniņa',
-                'startDate' => '02-10-2020'
+                'responsible_manager' => 'Anna Kalniņa',
+                'start_date' => '2020-02-25'
             ]
         ]);
     }

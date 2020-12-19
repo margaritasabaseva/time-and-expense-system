@@ -13,7 +13,7 @@ class Users extends Component
     use WithPagination;
     public $name;
     public $email;
-    public $jobTitle;
+    public $job_title;
     public $phone;
     public $address;
     public $password;
@@ -28,7 +28,7 @@ class Users extends Component
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'jobTitle' => 'required',
+            'job_title' => 'required',
             'phone' => 'required|numeric',
             'password' => 'required|min:8',
         ];
@@ -56,7 +56,7 @@ class Users extends Component
     }
 
     public function readUser(){
-        return User::paginate(3);
+        return User::paginate(5);
     }
 
     public function userModelData()
@@ -64,7 +64,7 @@ class Users extends Component
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'jobTitle' => $this->jobTitle,
+            'job_title' => $this->job_title,
             'phone' => $this->phone,
             'address' => $this->address,
             'password' =>Hash::make($this->password),
@@ -106,7 +106,7 @@ class Users extends Component
         $this->id = $users->id;
         $this->name = $users->name;
         $this->email = $users->email;
-        $this->jobTitle = $users->jobTitle;
+        $this->job_title = $users->job_title;
         $this->phone = $users->phone;
         $this->address = $users->address;
         $this->loadUserRoles();
@@ -117,7 +117,7 @@ class Users extends Component
         $this->userModelId = null;
         $this->name = null;
         $this->email = null;
-        $this->jobTitle = null;
+        $this->job_title = null;
         $this->phone = null;
         $this->address = null;
         $this->roles = null;

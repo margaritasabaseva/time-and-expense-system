@@ -11,9 +11,8 @@ class ProjectInWorkingHours extends Component
     use WithPagination;
     public $title;
     public $description;
-    public $responsibleManager;
-    public $startDate;
-    // public $project_id;
+    public $responsible_manager;
+    public $start_date;
     public $projectModelId;
     public $projectModalFormVisible = false;
     public $confirmDeleteProjectVisible = false;
@@ -23,8 +22,8 @@ class ProjectInWorkingHours extends Component
         return [
             'title' => 'required',
             'description' => 'required',
-            'responsibleManager' => 'required',
-            'startDate' => 'required',
+            'responsible_manager' => 'required',
+            'start_date' => 'required',
         ];
     }
 
@@ -58,8 +57,8 @@ class ProjectInWorkingHours extends Component
         return [
             'title' => $this->title,
             'description' => $this->description,
-            'responsibleManager' => $this->responsibleManager,
-            'startDate' => $this->startDate,
+            'responsible_manager' => $this->responsible_manager,
+            'start_date' => $this->start_date,
         ];
     }
 
@@ -96,8 +95,8 @@ class ProjectInWorkingHours extends Component
         $data = Project::find($this->projectModelId);
         $this->title = $data->title;
         $this->description = $data->description;
-        $this->responsibleManager = $data->responsibleManager;
-        $this->startDate = $data->startDate;
+        $this->responsible_manager = $data->responsible_manager;
+        $this->start_date = $data->start_date;
     }
 
     public function resetVars()
@@ -105,13 +104,13 @@ class ProjectInWorkingHours extends Component
         $this->projectModelId = null;
         $this->title = null;
         $this->description = null;
-        $this->responsibleManager = null;
-        $this->startDate = null;
+        $this->responsible_manager = null;
+        $this->start_date = null;
     }
 
     public function render()
     {
-        return view('livewire.project-in-working-hours',[
+        return view('livewire.employee.project-in-working-hours',[
             'data' => $this->readProject(),
         ]);
     }

@@ -10,7 +10,7 @@
                                 <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Vārds, uzvārds</th>
                                 <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-pasts</th>
                                 <th class="w-80 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Amats</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pārskata iesniegšanas datums</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pēdējā pārskata iesniegšanas datums</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -23,7 +23,7 @@
                                         </button>
                                     </td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->email }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $user->jobTitle }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->job_title }}</td>
                                     <td class="px-6 py-4 text-right text-sm"></td>
                                 </tr>
                                 @endforeach

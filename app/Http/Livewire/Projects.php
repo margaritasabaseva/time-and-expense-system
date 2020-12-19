@@ -11,8 +11,8 @@ class Projects extends Component
     use WithPagination;
     public $title;
     public $description;
-    public $responsibleManager;
-    public $startDate;
+    public $responsible_manager;
+    public $start_date;
     // public $project_id;
     public $projectModelId;
     public $projectModalFormVisible = false;
@@ -24,8 +24,8 @@ class Projects extends Component
         return [
             'title' => 'required',
             'description' => 'required',
-            'responsibleManager' => 'required',
-            'startDate' => 'required',
+            'responsible_manager' => 'required',
+            'start_date' => 'required',
         ];
     }
 
@@ -59,8 +59,8 @@ class Projects extends Component
         return [
             'title' => $this->title,
             'description' => $this->description,
-            'responsibleManager' => $this->responsibleManager,
-            'startDate' => $this->startDate,
+            'responsible_manager' => $this->responsible_manager,
+            'start_date' => $this->start_date,
         ];
     }
 
@@ -112,8 +112,8 @@ class Projects extends Component
         $projects = Project::find($this->projectModelId);
         $this->title = $projects->title;
         $this->description = $projects->description;
-        $this->responsibleManager = $projects->responsibleManager;
-        $this->startDate = $projects->startDate;
+        $this->responsible_manager = $projects->responsible_manager;
+        $this->start_date = $projects->start_date;
     }
 
     public function resetVars()
@@ -121,8 +121,8 @@ class Projects extends Component
         $this->projectModelId = null;
         $this->title = null;
         $this->description = null;
-        $this->responsibleManager = null;
-        $this->startDate = null;
+        $this->responsible_manager = null;
+        $this->start_date = null;
     }
 
     public function render()

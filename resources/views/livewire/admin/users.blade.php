@@ -28,7 +28,7 @@
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-sm break-words">{{ $user->name }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->email }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $user->jobTitle }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $user->job_title }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $user->phone }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->address }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
@@ -86,9 +86,9 @@
                 @error('email') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="jobTitle" value="{{ __('Amats') }}"/>
-                <x-jet-input id="jobTitle" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="jobTitle"/>
-                @error('jobTitle') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label for="job_title" value="{{ __('Amats') }}"/>
+                <x-jet-input id="job_title" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="job_title"/>
+                @error('job_title') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="phone" value="{{ __('Tālrunis') }}"/>

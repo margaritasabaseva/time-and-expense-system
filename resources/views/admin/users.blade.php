@@ -36,7 +36,7 @@
                             </div>
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Amats: {{ $user->jobTitle }} <br>
+                                    Amats: {{ $user->job_title }} <br>
                                     E-pasta adrese: {{ $user->email }} <br>
                                     Tālruņa numurs: {{ $user->phone }} <br>
                                     @foreach ($user->roles as $role)

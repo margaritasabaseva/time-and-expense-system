@@ -24,9 +24,9 @@
 
         <!-- Amats -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="jobTitle" value="{{ __('Amats') }}" />
-            <x-jet-input id="jobTitle" type="jobTitle" class="mt-1 block w-full" wire:model.defer="state.jobTitle" />
-            <!-- <x-jet-input-error for="jobTitle" class="mt-2" /> -->
+            <x-jet-label for="job_title" value="{{ __('Amats') }}" />
+            <x-jet-input id="job_title" type="job_title" class="mt-1 block w-full" wire:model.defer="state.job_title" />
+            <!-- <x-jet-input-error for="job_title" class="mt-2" /> -->
         </div>
 
         <!-- Tālruņa numurs -->

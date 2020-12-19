@@ -30,8 +30,8 @@
                                         </button>
                                     </td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $project->description }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $project->responsibleManager }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $project->startDate }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">{{ $project->responsible_manager }}</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $project->start_date }}</td>
                                     <td class="px-6 py-4 text-right text-sm">
                                         <x-jet-button class="w-28" wire:click="updateProjectModal({{ $project->id }})">
                                             {{ __('Rediģēt') }}
@@ -80,16 +80,16 @@
                 @error('description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="responsibleManager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
-                <x-jet-input id="responsibleManager" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="responsibleManager"/>
-                @error('responsibleManager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label for="responsible_manager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
+                <x-jet-input id="responsible_manager" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="responsible_manager"/>
+                @error('responsible_manager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="startDate" value="{{ __('Sākuma datums') }}" />
-                <x-jet-input id="startDate" class="date form-control" type="text" wire:model.debounce.800ms="startDate"/>
-                @error('startDate') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label for="start_date" value="{{ __('Sākuma datums') }}" />
+                <x-jet-input id="start_date" class="date form-control" type="text" wire:model.debounce.800ms="start_date"/>
+                @error('start_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
 
-                <!-- <x-jet-input id="startDate" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="startDate"/> -->
+                <!-- <x-jet-input id="start_date" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="start_date"/> -->
             </div>
         </x-slot>
 
@@ -152,7 +152,7 @@
         <!-- Nestrādā kā nākas – ja vienkārši izvēlas datumu un piespiež saglabāt, tas izdzēš datumu. Strādā, ja piespiež atstarpi utt pēc tam -->
     <script type="text/javascript">
         $('.date').datepicker({  
-        format: 'mm-dd-yyyy'
+        format: 'yyyy-mm-dd'
         });  
     </script> 
 
