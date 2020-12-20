@@ -67,6 +67,17 @@
                 <!-- projektu drowpdown izvēlne -->
             </div>
             <div class="mt-4">
+            <x-jet-label for="project_id" value="{{ __('Projekts') }}"/>
+                <select name="project_id" id="project_id" class="w-full form-select text-sm shadow-sm" wire:model.debounce.800ms="project_id">
+                    <option value="empty"></option>
+                    @if ($projects->count())
+                        @foreach ($projects as $project)
+                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="mt-4">
                 <x-jet-label for="vendor" value="{{ __('Pakalpojumu sniedzēja nosaukums') }}"/>
                 <x-jet-input id="vendor" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="vendor"/>
                 @error('vendor') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror

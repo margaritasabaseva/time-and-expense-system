@@ -59,6 +59,12 @@ class ProjectTableSeeder extends Seeder
                 'start_date' => '2020-02-25'
             ],
             [
+                'title' => 'Birojs',
+                'description' => 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.',
+                'responsible_manager' => 'Laine Dārziņa',
+                'start_date' => '2020-01-01'
+            ],
+            [
                 'title' => 'Apmaksāts atvaļinājums',
                 'description' => 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.',
                 'responsible_manager' => 'Zane Kārkliņa',

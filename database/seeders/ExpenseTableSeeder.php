@@ -17,7 +17,7 @@ class ExpenseTableSeeder extends Seeder
         DB::table('expenses')->insert([
             [
                 'user_id' => '1',
-                'project_id' => '1',
+                'project_id' => '8',
                 'vendor'=> 'Kesko Senukai Latvia, AS',
                 'document_number' => '#123456789',
                 'amount_euros' => '96.00',
@@ -26,7 +26,7 @@ class ExpenseTableSeeder extends Seeder
             ],
             [
                 'user_id' => '1',
-                'project_id' => '1',
+                'project_id' => '8',
                 'vendor'=> 'Latvijas pasts, VAS',
                 'document_number' => '#987654321',
                 'amount_euros' => '15.67',
@@ -35,7 +35,7 @@ class ExpenseTableSeeder extends Seeder
             ],
             [
                 'user_id' => '1',
-                'project_id' => '1',
+                'project_id' => '8',
                 'vendor'=> 'Amazon Europe Core SARL (Amazon.de)',
                 'document_number' => '#111-232323-1485000',
                 'amount_euros' => '77.04',
@@ -44,7 +44,7 @@ class ExpenseTableSeeder extends Seeder
             ],
             [
                 'user_id' => '2',
-                'project_id' => '2',
+                'project_id' => '1',
                 'vendor'=> 'Maxima Latvija, SIA',
                 'document_number' => '#1111111111',
                 'amount_euros' => '40.12',
@@ -53,7 +53,7 @@ class ExpenseTableSeeder extends Seeder
             ],
             [
                 'user_id' => '2',
-                'project_id' => '2',
+                'project_id' => '1',
                 'vendor'=> 'Maxima Latvija, SIA',
                 'document_number' => '#22222222',
                 'amount_euros' => '120.55',
