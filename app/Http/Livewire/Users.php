@@ -56,7 +56,7 @@ class Users extends Component
     }
 
     public function readUser(){
-        return User::paginate(5);
+        return User::orderBy('name', 'asc')->paginate(5);
     }
 
     public function userModelData()

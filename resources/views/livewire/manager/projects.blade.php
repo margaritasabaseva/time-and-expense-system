@@ -25,7 +25,7 @@
                                 @foreach ($projects as $project)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-md break-words">
-                                        <button class="font-bold" wire:click="showProjectExpensesModal({{ $project->id }})">  
+                                        <button class="font-bold text-left" wire:click="showProjectExpensesModal({{ $project->id }})">  
                                             {{ $project->title }}
                                         </button>
                                     </td>

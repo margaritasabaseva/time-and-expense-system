@@ -51,7 +51,7 @@ class Projects extends Component
     }
 
     public function readProject(){
-        return Project::paginate(5);
+        return Project::orderBy('title', 'asc')->paginate(5);
     }
 
     public function projectModelData()

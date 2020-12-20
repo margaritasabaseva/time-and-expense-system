@@ -32,12 +32,12 @@
                                     <table class="table-fixed min-w-full">
                                         <thead>
                                             <tr>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Datums</th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
-                                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Datums</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
+                                                <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">@livewire('project-in-working-hours')</th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
@@ -47,19 +47,19 @@
                                                     <x-jet-input id="hours" class="w-full shadow-none text-sm font-bold" name="working-hours[{{ $i }}][date]" value="{{ old('working-hours['.$i.'][date]') }}" type="text" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" style="border:none" wire:model.debounce.800ms="title"/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" style="border:none" wire:model.debounce.800ms="title"/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" style="border:none" wire:model.debounce.800ms="title"/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" style="border:none" wire:model.debounce.800ms="title"/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" style="border:none" wire:model.debounce.800ms="title"/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model.debounce.800ms="title"/>
                                                 </td>
                                             </tr>
                                             @endfor
