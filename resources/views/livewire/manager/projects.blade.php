@@ -86,10 +86,8 @@
             </div>
             <div class="mt-4">
                 <x-jet-label for="start_date" value="{{ __('Sākuma datums') }}" />
-                <x-jet-input id="start_date" class="date form-control" type="text" wire:model.debounce.800ms="start_date"/>
+                <x-jet-input id="start_date" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="start_date"/>
                 @error('start_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
-
-                <!-- <x-jet-input id="start_date" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="start_date"/> -->
             </div>
         </x-slot>
 
@@ -148,12 +146,5 @@
                 </x-jet-secondary-button>
             </x-slot>
         </x-jet-dialog-modal>
-
-        <!-- Nestrādā kā nākas – ja vienkārši izvēlas datumu un piespiež saglabāt, tas izdzēš datumu. Strādā, ja piespiež atstarpi utt pēc tam -->
-    <script type="text/javascript">
-        $('.date').datepicker({  
-        format: 'yyyy-mm-dd'
-        });  
-    </script> 
 
 </div>

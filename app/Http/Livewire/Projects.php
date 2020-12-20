@@ -22,10 +22,10 @@ class Projects extends Component
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|max:120',
             'description' => 'required',
-            'responsible_manager' => 'required',
-            'start_date' => 'required',
+            'responsible_manager' => 'required|max:120',
+            'start_date' => 'required|date_format:Y-m-d',
         ];
     }
 
@@ -94,7 +94,7 @@ class Projects extends Component
 
     public function showProjectExpenses($id)
     {
-        // $this->projectModelId = $id;
+        $this->projectModelId = $id;
         $this->validate();
         $this->projectExpensesModalVisible = false;
     }
