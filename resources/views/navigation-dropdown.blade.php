@@ -15,12 +15,12 @@
                 @if(Auth::user()->hasRole('ROLE_EMPLOYEE'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('working-hours') }}" :active="request()->routeIs('working-hours')">
-                        {{ __('Darba stundas') }}
+                        {{ __('Reģistrēt darba stundas') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('personal-expense-report') }}" :active="request()->routeIs('personal-expense-report')">
-                        {{ __('Izdevumi') }}
+                    <x-jet-nav-link href="{{ route('paid-expenses') }}" :active="request()->routeIs('paid-expenses')">
+                        {{ __('Reģistrēt izdevumus') }}
                     </x-jet-nav-link>
                 </div>
                 @endif
@@ -29,7 +29,7 @@
                 @if(Auth::user()->hasRole('ROLE_MANAGER'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
-                        {{ __('Projektu izmaksas') }}
+                        {{ __('Projekti un izmaksas') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -43,7 +43,7 @@
                 @if(Auth::user()->hasRole('ROLE_ADMIN'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
-                        {{ __('Visi lietotāji') }}
+                        {{ __('Sistēmas lietotāji') }}
                     </x-jet-nav-link>
                 </div>
                 @endif

@@ -63,14 +63,9 @@
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
-
         <x-slot name="title">
             <div class="font-bold">    
-                @if ($userModelId)
-                    {{ __('Rediģēt lietotāju') }}
-                @else
                     {{ __('Pievienot jaunu lietotāju') }}
-                @endif
             </div>
         </x-slot>
 
@@ -98,7 +93,6 @@
             <div class="mt-4">
                 <x-jet-label for="address" value="{{ __('Adrese') }}"/>
                 <x-jet-input id="address" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="address"/>
-                <!-- @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
             </div>
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Parole') }}"/>
@@ -108,9 +102,6 @@
         </x-slot>
 
         <x-slot name="footer">
-                <x-jet-action-message class="mr-3" on="saved">
-                    {{ __('Saglabāts.') }}
-                </x-jet-action-message>
                 <x-jet-button class="ml-2" wire:click="createUser" wire:loading.attr="disabled">
                     {{ __('Izveidot') }}
                 </x-jet-button>
@@ -118,7 +109,6 @@
                     {{ __('Atcelt') }}
                 </x-jet-secondary-button>
         </x-slot>
-
     </x-jet-dialog-modal>
 
 
@@ -155,9 +145,6 @@
                     @endforeach
                 @endif
             </div>   
-
-
-
         </x-slot>
 
         <x-slot name="footer">
@@ -172,23 +159,23 @@
     </x-jet-dialog-modal>
 
     <!-- Delete User Confirmation Modal  -->
-        <x-jet-dialog-modal wire:model="confirmDeleteUserVisible">
-            <x-slot name="title">
+    <x-jet-dialog-modal wire:model="confirmDeleteUserVisible">
+        <x-slot name="title">
+            {{ __('Dzēst lietotāju') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Vai Jūs esat pārliecināts, ka vēlaties dzēst izvēlēto lietotāju?') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
                 {{ __('Dzēst lietotāju') }}
-            </x-slot>
+            </x-jet-danger-button>
 
-            <x-slot name="content">
-                {{ __('Vai Jūs esat pārliecināts, ka vēlaties dzēst izvēlēto lietotāju?') }}
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-jet-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
-                    {{ __('Dzēst lietotāju') }}
-                </x-jet-danger-button>
-
-                <x-jet-secondary-button wire:click="$toggle('confirmDeleteUserVisible')" wire:loading.attr="disabled">
-                    {{ __('Atcelt') }}
-                </x-jet-secondary-button>
-            </x-slot>
-        </x-jet-dialog-modal>
+            <x-jet-secondary-button wire:click="$toggle('confirmDeleteUserVisible')" wire:loading.attr="disabled">
+                {{ __('Atcelt') }}
+            </x-jet-secondary-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

@@ -26,11 +26,11 @@ class Users extends Component
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
-            'job_title' => 'required',
-            'phone' => 'required|numeric',
-            'password' => 'required|min:8',
+            'name' => 'required|max:120',
+            'email' => 'required|email|max:120',
+            'job_title' => 'required|max:255',
+            'phone' => 'required|numeric|digits_between:1,15',
+            'password' => 'required|min:8|max:120',
         ];
     }
 
