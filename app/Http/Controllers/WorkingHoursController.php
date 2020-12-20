@@ -9,7 +9,13 @@ class WorkingHoursController extends Controller
 {
     public function indexWorkingHours()
     {
-        $workingHours = WorkingHours::all();
-        return view('employee.working-hours', ['workingHours' => $workingHours]);
+        // $workingHours = WorkingHours::all();
+        // return view('employee.working-hours', ['workingHours' => $workingHours]);
+    }
+
+    public function store(Request $request)
+    {
+        $workingHours = WorkingHours::create($request->all());
+        return redirect()->route('employee.working-hours');
     }
 }

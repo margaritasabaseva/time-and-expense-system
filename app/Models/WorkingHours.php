@@ -10,7 +10,21 @@ class WorkingHours extends Model
     use HasFactory;
 
     protected $casts = [
-        'working-hours' => 'array'
+        'working_hours' => 'array'
     ];
+
+    // Eliminate null values from the array
+    public function setWorkingHoursAttribute($hours)
+    {
+        $working_hours = [];
+
+        foreach ($hours as $array_item) {
+            if (!is_null($array_item['date'])) {
+                $working_hours[] = $array_item;
+            }
+        }
+
+        $this->attributes['working_hours'] = json_encode($working_hours);
+    }
 
 }

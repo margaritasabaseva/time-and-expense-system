@@ -17,39 +17,9 @@ class ProjectInWorkingHours extends Component
     public $projectModalFormVisible = false;
     public $confirmDeleteProjectVisible = false;
 
-    public function rules()
-    {
-        return [
-            'title' => 'required',
-            'description' => 'required',
-            'responsible_manager' => 'required',
-            'start_date' => 'required',
-        ];
-    }
-
-    public function mount()
-    {
-        // Resets pagination after reloading the page
-        $this->resetPage();
-    }
-
-    public function createProject()
-    {
-        $this->validate();
-        Project::create($this->projectModelData());
-        $this->projectModalFormVisible = false;
-        $this->resetVars();
-    }
-
-    public function createProjectModal()
-    {
-        $this->resetValidation();
-        $this->resetVars();
-        $this->projectModalFormVisible = true;
-    }
 
     public function readProject(){
-        return Project::paginate(5);
+        return Project::all();
     }
 
     public function projectModelData()
@@ -62,56 +32,19 @@ class ProjectInWorkingHours extends Component
         ];
     }
 
-    public function updateProject()
-    {
-        $this->validate();
-        Project::find($this->projectModelId)->update($this->projectModelData());
-        $this->projectModalFormVisible = false;
-    }
-
-    public function updateProjectModal($id)
-    {
-        $this->resetValidation();
-        $this->projectModelId = $id;
-        $this->projectModalFormVisible = true;
-        $this->loadProjectModel();
-        // $this->resetVars();
-    }
-
-    public function deleteProject(){
-        Project::destroy($this->projectModelId);
-        $this->confirmDeleteProjectVisible = false;
-        $this->resetPage();
-    }
-
-   public function deleteProjectModal($id)
-   {
-        $this->modelId = $id;
-        $this->confirmDeleteProjectVisible = true;
-   }
-
     public function loadProjectModel()
     {
-        $data = Project::find($this->projectModelId);
-        $this->title = $data->title;
-        $this->description = $data->description;
-        $this->responsible_manager = $data->responsible_manager;
-        $this->start_date = $data->start_date;
-    }
-
-    public function resetVars()
-    {
-        $this->projectModelId = null;
-        $this->title = null;
-        $this->description = null;
-        $this->responsible_manager = null;
-        $this->start_date = null;
+        $projects = Project::find($this->projectModelId);
+        $this->title = $projects->title;
+        $this->description = $projects->description;
+        $this->responsible_manager = $projects->responsible_manager;
+        $this->start_date = $projects->start_date;
     }
 
     public function render()
     {
         return view('livewire.employee.project-in-working-hours',[
-            'data' => $this->readProject(),
+            'projects' => $this->readProject(),
         ]);
     }
 }
