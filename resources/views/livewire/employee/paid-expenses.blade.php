@@ -1,8 +1,21 @@
 <div>
-    <div class="flex items-center justify-end py-3">
-        <x-jet-button wire:click="createExpenseModal">
-            {{ __('Jauns ieraksts') }}
-        </x-jet-button>
+
+    <div class="flex items-center justify-end pt-3">
+        <div class="flex-1 text-sm">
+            {{ __('Rādīt vienā lapā:') }}
+            <select wire:model="perPage">
+                <option class="text-sm">3</option>
+                <option class="text-sm">5</option>
+                <option class="text-sm">10</option>
+                <option class="text-sm">20</option>
+            </select>
+        </div>
+
+        <div class="flex items-center justify-end">
+            <x-jet-button wire:click="createExpenseModal">
+                {{ __('Jauns ieraksts') }}
+            </x-jet-button>
+        </div>
     </div>
 
     <!-- Data table -->
@@ -10,28 +23,55 @@
         <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="pb-10 pt-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Projekts</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pakalpojumu sniedzēja nosaukums</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pirkuma dokumenta numurs</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Summa (EUR)</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Datums (dokumentā norādītais)</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Izdevumu pamatojums/ apraksts</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('project_id')">
+                                    Projekts
+                                    @include('partials._sort-icon',['field'=>'project_id'])
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('vendor')">
+                                    Pakalpojumu sniedzēja nosaukums
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('document_number')">
+                                    Pirkuma dokumenta numurs
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('amount_euros')">
+                                    Summa (EUR)
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('expense_date')">
+                                    Datums (dokumentā norādītais)
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('description')">
+                                    Izdevumu pamatojums/ apraksts
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer"></th>
                             </tr>
                         </thead>
+
                         <tbody class="bg-white divide-y divide-gray-200">
                             @if ($expenses->count())
                                 @foreach ($expenses as $expense)
                                 <tr>
-                                    <td class="px-6 text-sm break-words">{{ $expense->project_id }}</td>
-                                    <td class="px-6 text-sm break-words">{{ $expense->vendor }}</td>
-                                    <td class="px-6 text-sm break-words">{{ $expense->document_number }}</td>
-                                    <td class="px-6 text-sm break-words">{{ $expense->amount_euros }}</td>
-                                    <td class="px-6 text-sm whitespace-no-wrap">{{ $expense->expense_date }}</td>
-                                    <td class="px-6 text-sm break-words">{{ $expense->description }}</td>
+                                    <td class="px-6 text-sm break-words">
+                                        {{ $expense->project_id }}
+                                    </td>
+                                    <td class="px-6 text-sm break-words">
+                                        {{ $expense->vendor }}
+                                    </td>
+                                    <td class="px-6 text-sm break-words">
+                                        {{ $expense->document_number }}
+                                    </td>
+                                    <td class="px-6 text-sm break-words">
+                                        {{ $expense->amount_euros }}
+                                    </td>
+                                    <td class="px-6 text-sm whitespace-no-wrap">
+                                        {{ $expense->expense_date }}
+                                    </td>
+                                    <td class="px-6 text-sm break-words">
+                                        {{ $expense->description }}
+                                    </td>
                                     <td class="px-6 text-right text-sm">
                                         <x-jet-danger-button class="w-28" wire:click="deleteExpenseModal({{ $expense->id }})">
                                             {{ __('Dzēst') }}
@@ -46,6 +86,7 @@
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class PaidExpenses extends Component
 {
     use WithPagination;
+
     public $vendor;
     public $document_number;
     public $amount_euros;
@@ -18,9 +19,15 @@ class PaidExpenses extends Component
     public $description;
     public $project_id;
     public $user_id;
+
     public $expenseModelId;
     public $expenseModalFormVisible = false;
     public $confirmDeleteExpenseVisible = false;
+
+    public $perPage = 10;
+    public $sortBy = 'project_id';
+    public $sortDirection = 'asc';
+
 
     public function rules()
     {
@@ -54,8 +61,11 @@ class PaidExpenses extends Component
         $this->expenseModalFormVisible = true;
     }
 
-    public function readExpense(){
-        return Expense::orderBy('expense_date', 'asc')->paginate(10);
+    public function readExpense()
+    {
+        return Expense::query()
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     public function expenseModelData()
@@ -107,10 +117,6 @@ class PaidExpenses extends Component
         $this->description = null;
     }
 
-
-
-
-
     public function loadProjectModel()
     {
         $projects = Project::find($this->projectModelId);
@@ -121,7 +127,16 @@ class PaidExpenses extends Component
         return Project::all();
     }
 
+    public function sortBy($field)
+    {
+        if ($this->sortDirection == 'asc') {
+            $this->sortDirection = 'desc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
 
+        return $this->sortBy = $field;
+    }
 
     public function render()
     {
