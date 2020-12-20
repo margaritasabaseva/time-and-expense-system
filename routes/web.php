@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\WorkingHoursController;
 
 
 /*
@@ -29,15 +30,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/working-hours', function 
     return view('/employee/working-hours');
 })->name('working-hours');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/personal-expense-report', function () {
-    return view('/employee/personal-expense-report');
-})->name('personal-expense-report');
-
-
-// Employee pages
 // Route::group(['middleware' => ['auth']], function () {
 //     Route::get('/working-hours', [WorkingHoursController::class, 'indexWorkingHours'])->name('working-hours');
 // });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/expenses', function () {
+    return view('/employee/paid-expenses');
+})->name('paid-expenses');
+
+
+
+// Trying to use this route to post data from working hours form, error shown: Array to string conversion
+// Route::resource('/working-hours', [WorkingHoursController::class]);
+
 
 
 // Admin exclusive pages

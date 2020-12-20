@@ -17,11 +17,11 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->integer('user_id')->unsigned();
             $table->integer('project_id')->unsigned();
-            $table->decimal('amount_euros', 15, 2);
-            $table->string('seller', 120)->nullable();
+            $table->string('vendor', 255)->nullable();
             $table->string('document_number', 120)->nullable();
-            $table->string('description', 255);
+            $table->decimal('amount_euros', 15, 2);
             $table->date('expense_date');
+            $table->longText('description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onCascade('delete');
