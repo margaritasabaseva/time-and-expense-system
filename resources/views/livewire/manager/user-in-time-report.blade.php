@@ -1,4 +1,20 @@
 <div>
+    <div class="flex items-center justify-end pt-3">
+        <div class="flex-1 text-sm">
+            {{ __('Rādīt vienā lapā:') }}
+            <select wire:model="perPage">
+                <option class="text-sm">3</option>
+                <option class="text-sm">5</option>
+                <option class="text-sm">10</option>
+                <option class="text-sm">20</option>
+            </select>
+        </div>
+
+        <div class="flex justify-end">
+            <input wire:model.debounce.300ms="search" class="form-input h-9" type="text" placeholder="Meklēt lietotājus...">
+        </div>
+    </div>
+
     <!-- Data table -->
     <div class="flex flex-col">
         <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -7,10 +23,19 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Vārds, uzvārds</th>
-                                <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-pasts</th>
-                                <th class="w-80 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Amats</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pēdējā pārskata iesniegšanas datums</th>
+                                <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('name')">
+                                    Vārds, uzvārds
+                                </th>
+                                <th class="w-60 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('email')">
+                                    E-pasts
+                                </th>
+                                <th class="w-80 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('job_title')">
+                                    Amats
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    <!-- wire:click="sortBy('submit_date')" -->
+                                    Pēdējā pārskata iesniegšanas datums
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -18,12 +43,16 @@
                                 @foreach ($users as $user)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-sm break-words">
-                                        <button class="font-bold" wire:click="showUserTimeReportModal({{ $user->id }})">
+                                        <button class="font-bold hover:text-gray-600 hover:underline" wire:click="showUserTimeReportModal({{ $user->id }})">
                                             {{ $user->name }}
                                         </button>
                                     </td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $user->email }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $user->job_title }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">
+                                        {{ $user->email }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm break-words">
+                                        {{ $user->job_title }}
+                                    </td>
                                     <td class="px-6 py-4 text-right text-sm"></td>
                                 </tr>
                                 @endforeach

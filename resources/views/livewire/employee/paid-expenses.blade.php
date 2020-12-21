@@ -27,26 +27,25 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('project_id')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('project_id')">
                                     Projekts
-                                    @include('partials._sort-icon',['field'=>'project_id'])
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('vendor')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('vendor')">
                                     Pakalpojumu sniedzēja nosaukums
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('document_number')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('document_number')">
                                     Pirkuma dokumenta numurs
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('amount_euros')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('amount_euros')">
                                     Summa (EUR)
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('expense_date')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('expense_date')">
                                     Datums (dokumentā norādītais)
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="sortBy('description')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Izdevumu pamatojums/ apraksts
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer"></th>
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer"></th>
                             </tr>
                         </thead>
 
@@ -72,8 +71,8 @@
                                     <td class="px-6 text-sm break-words">
                                         {{ $expense->description }}
                                     </td>
-                                    <td class="px-6 text-right text-sm">
-                                        <x-jet-danger-button class="w-28" wire:click="deleteExpenseModal({{ $expense->id }})">
+                                    <td class="px-3 py-1">
+                                        <x-jet-danger-button class="w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>

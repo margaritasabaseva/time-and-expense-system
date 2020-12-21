@@ -18,10 +18,16 @@ class Users extends Component
     public $address;
     public $password;
     // public $roles;
+
     public $userModelId;
     public $userModalFormVisible = false;
     public $assignRolesVisible = false;
     public $confirmDeleteUserVisible = false;
+
+    public $perPage = 5;
+    public $sortBy = 'name';
+    public $sortDirection = 'asc';
+    public $search = '';
 
     public function rules()
     {
@@ -56,7 +62,10 @@ class Users extends Component
     }
 
     public function readUser(){
-        return User::orderBy('name', 'asc')->paginate(5);
+        return User::query()
+            ->search($this->search)
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     public function userModelData()
@@ -122,6 +131,22 @@ class Users extends Component
         $this->address = null;
         $this->roles = null;
         $this->password = null;
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortDirection == 'asc') {
+            $this->sortDirection = 'desc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        return $this->sortBy = $field;
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function render()

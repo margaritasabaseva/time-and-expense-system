@@ -69,4 +69,14 @@ class User extends Authenticatable
         // return false;
     }
 
+    public function scopeSearch($query, $value)
+    {
+        return $query
+            ->where('name', 'like', '%'.$value.'%')
+            ->Orwhere('email', 'like', '%'.$value.'%')
+            ->Orwhere('job_title', 'like', '%'.$value.'%')
+            ->Orwhere('phone', 'like', '%'.$value.'%')
+            ->Orwhere('address', 'like', '%'.$value.'%');
+    }
+
 }

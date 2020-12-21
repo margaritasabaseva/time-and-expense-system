@@ -10,18 +10,16 @@ class UserInTimeReport extends Component
 {
     use WithPagination;
     public $name;
+    public $email;
     public $job_title;
+
     public $userModelId;
     public $userTimeReportModalVisible = false;
 
-    public function rules()
-    {
-        return [
-            'name' => 'required',
-            'email' => 'required',
-            'job_title' => 'required',
-        ];
-    }
+    public $perPage = 5;
+    public $sortBy = 'name';
+    public $sortDirection = 'asc';
+    public $search = '';
 
     public function mount()
     {
@@ -30,7 +28,10 @@ class UserInTimeReport extends Component
     }
 
     public function readUser(){
-        return User::paginate(5);
+        return User::query()
+            ->search($this->search)
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     public function userModelData()
@@ -63,6 +64,17 @@ class UserInTimeReport extends Component
         $this->name = $users->name;
         $this->email = $users->email;
         $this->job_title = $users->job_title;
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortDirection == 'asc') {
+            $this->sortDirection = 'desc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        return $this->sortBy = $field;
     }
 
     public function render()

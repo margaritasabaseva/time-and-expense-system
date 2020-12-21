@@ -1,8 +1,24 @@
 <div>
-    <div class="flex items-center justify-end py-3">
-        <x-jet-button wire:click="createProjectModal">
-            {{ __('Jauns projekts') }}
-        </x-jet-button>
+    <div class="flex items-center justify-end pt-3">
+        <div class="flex-1 text-sm">
+            {{ __('Rādīt vienā lapā:') }}
+            <select wire:model="perPage">
+                <option class="text-sm">3</option>
+                <option class="text-sm">5</option>
+                <option class="text-sm">10</option>
+                <option class="text-sm">20</option>
+            </select>
+        </div>
+
+        <div class="flex items-center px-1">
+            <x-jet-button wire:click="createProjectModal">
+                {{ __('Jauns projekts') }}
+            </x-jet-button>
+        </div>
+        
+        <div class="flex justify-end">
+            <input wire:model.debounce.300ms="search" class="form-input h-9" type="text" placeholder="Meklēt projektus...">
+        </div>
     </div>
 
     <!-- Data table -->
@@ -13,10 +29,18 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" style="width:15%">Nosaukums</th>
-                                <th class="w-96 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Apraksts</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" style="width:15%">Atbildīgais projekta vadītājs</th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Sākuma datums</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:15%" wire:click="sortBy('title')">
+                                    Nosaukums
+                                </th>
+                                <th class="w-96 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Apraksts
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:15%" wire:click="sortBy('responsible_manager')">
+                                    Atbildīgais projekta vadītājs
+                                </th>
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('start_date')">
+                                    Sākuma datums
+                                </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -25,13 +49,19 @@
                                 @foreach ($projects as $project)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-md break-words">
-                                        <button class="font-bold text-left" wire:click="showProjectExpensesModal({{ $project->id }})">  
+                                        <button class="font-bold text-left hover:text-gray-600 hover:underline" wire:click="showProjectExpensesModal({{ $project->id }})">  
                                             {{ $project->title }}
                                         </button>
                                     </td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $project->description }}</td>
-                                    <td class="px-6 py-4 text-sm break-words">{{ $project->responsible_manager }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $project->start_date }}</td>
+                                    <td class="px-6 py-4 text-sm break-words">
+                                        {{ $project->description }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm break-words">
+                                        {{ $project->responsible_manager }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">
+                                        {{ $project->start_date }}
+                                    </td>
                                     <td class="px-6 py-4 text-right text-sm">
                                         <x-jet-button class="w-28" wire:click="updateProjectModal({{ $project->id }})">
                                             {{ __('Rediģēt') }}
@@ -57,7 +87,7 @@
     {{ $projects->links() }}
 
     <!-- Modal Form -->
-    <x-jet-dialog-modal wire:model="projectModalFormVisible">
+    <x-jet-dialog-modal class="mt-20" wire:model="projectModalFormVisible">
         <x-slot name="title">
             <div class="font-bold">
                 @if ($projectModelId)

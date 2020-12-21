@@ -14,10 +14,16 @@ class Projects extends Component
     public $responsible_manager;
     public $start_date;
     // public $project_id;
+
     public $projectModelId;
     public $projectModalFormVisible = false;
     public $confirmDeleteProjectVisible = false;
     public $projectExpensesModalVisible = false;
+
+    public $perPage = 5;
+    public $sortBy = 'title';
+    public $sortDirection = 'asc';
+    public $search = '';
 
     public function rules()
     {
@@ -51,7 +57,10 @@ class Projects extends Component
     }
 
     public function readProject(){
-        return Project::orderBy('title', 'asc')->paginate(5);
+        return Project::query()
+            ->search($this->search)
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     public function projectModelData()
@@ -123,6 +132,22 @@ class Projects extends Component
         $this->description = null;
         $this->responsible_manager = null;
         $this->start_date = null;
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortDirection == 'asc') {
+            $this->sortDirection = 'desc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        return $this->sortBy = $field;
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function render()
