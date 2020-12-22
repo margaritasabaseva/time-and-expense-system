@@ -11,7 +11,7 @@
         </div>
 
         <div class="flex items-center px-1">
-            <x-jet-button wire:click="createProjectModal">
+            <x-jet-button wire:click="createUserModal">
                 {{ __('Jauns lietotājs') }}
             </x-jet-button>
         </div>

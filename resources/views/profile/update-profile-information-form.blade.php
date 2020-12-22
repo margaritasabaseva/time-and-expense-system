@@ -12,28 +12,28 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Vārds, uzvārds') }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <!-- <x-jet-input-error for="name" class="mt-2" /> -->
+            <x-jet-input-error for="name" class="mt-2" />
         </div>
 
         <!-- E-pasts -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('E-pasta adrese') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
-            <!-- <x-jet-input-error for="email" class="mt-2" /> -->
+            @error('name') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
         </div>
 
         <!-- Amats -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="job_title" value="{{ __('Amats') }}" />
             <x-jet-input id="job_title" type="job_title" class="mt-1 block w-full" wire:model.defer="state.job_title" />
-            <!-- <x-jet-input-error for="job_title" class="mt-2" /> -->
+            <x-jet-input-error for="job_title" class="mt-2" />
         </div>
 
         <!-- Tālruņa numurs -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="phone" value="{{ __('Tālruņa numurs') }}" />
             <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" />
-            <!-- <x-jet-input-error for="phone" class="mt-2" /> -->
+            @error('phone') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
         </div>
 
         <!-- Adrese -->

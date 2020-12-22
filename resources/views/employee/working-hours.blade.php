@@ -17,7 +17,7 @@
 
                     <div class="flex items-center justify-end py-3 mx-3">
                         <div class="flex-1 text-lg ml-1">
-                            {{ __('Ievadiet datumu, kā arī noteiktajā datumā nostrādātās stundas atbilstoši izvēlētajam projektam.') }}
+                            {{ __('Ievadiet datumu, kā arī noteiktajā datumā nostrādātās stundas atbilstoši izvēlētajiem projektiem u.c.') }}
                         </div>
                         <x-jet-button class="mr-1" type="submit">
                             {{ __('Iesniegt stundas') }}
