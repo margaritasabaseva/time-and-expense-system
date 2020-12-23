@@ -15,4 +15,12 @@ class Expense extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Get the project that owns the expense.
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

@@ -1,7 +1,7 @@
 <div>
 
     <div class="flex items-center justify-end pt-3">
-        <div class="flex-1 text-sm">
+        <!-- <div class="flex-1 text-sm">
             {{ __('Rādīt vienā lapā:') }}
             <select wire:model="perPage">
                 <option class="text-sm">3</option>
@@ -9,7 +9,7 @@
                 <option class="text-sm">10</option>
                 <option class="text-sm">20</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="flex items-center justify-end">
             <x-jet-button wire:click="createExpenseModal">
@@ -27,10 +27,10 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('project_id')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:12%;" wire:click="sortBy('project_id')">
                                     Projekts
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('vendor')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:15%;" wire:click="sortBy('vendor')">
                                     Pakalpojumu sniedzēja nosaukums
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('document_number')">
@@ -52,31 +52,38 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @if ($expenses->count())
                                 @foreach ($expenses as $expense)
-                                <tr>
-                                    <td class="px-6 text-sm break-words">
-                                        {{ $expense->project_id }}
-                                    </td>
-                                    <td class="px-6 text-sm break-words">
-                                        {{ $expense->vendor }}
-                                    </td>
-                                    <td class="px-6 text-sm break-words">
-                                        {{ $expense->document_number }}
-                                    </td>
-                                    <td class="px-6 text-sm break-words">
-                                        {{ $expense->amount_euros }}
-                                    </td>
-                                    <td class="px-6 text-sm whitespace-no-wrap">
-                                        {{ $expense->expense_date }}
-                                    </td>
-                                    <td class="px-6 text-sm break-words">
-                                        {{ $expense->description }}
-                                    </td>
-                                    <td class="px-3 py-1">
-                                        <x-jet-danger-button class="w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
-                                            {{ __('Dzēst') }}
-                                        </x-jet-danger-button>
-                                    </td>
-                                </tr>
+                                        @if ($expense->user_id == Auth::id())
+                                        <tr>
+                                            <td class="px-6 text-sm break-words">
+                                                {{ $expense->project->title }} 
+                                            </td>
+                                            <td class="px-6 text-sm break-words">
+                                                {{ $expense->vendor }}
+                                            </td>
+                                            <td class="px-6 text-sm break-words">
+                                                {{ $expense->document_number }}
+                                            </td>
+                                            <td class="px-6 text-sm break-words">
+                                                {{ $expense->amount_euros }}
+                                            </td>
+                                            <td class="px-6 text-sm whitespace-no-wrap">
+                                                {{ $expense->expense_date }}
+                                            </td>
+                                            <td class="px-6 text-sm break-words">
+                                                {{ $expense->expense_description }}
+                                            </td>
+                                            <td class="px-3 py-1">
+                                                <x-jet-danger-button class="w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
+                                                    {{ __('Dzēst') }}
+                                                </x-jet-danger-button>
+                                            </td>
+                                        </tr>
+                                        
+                                    <!-- elseif – ja lietotājam nav neviena ieraksta ar savu id 
+                                        <tr>
+                                            <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
+                                        </tr> -->
+                                    @endif
                                 @endforeach
                             @else
                                 <tr>
@@ -91,7 +98,6 @@
         </div>
     </div>
 
-    {{ $expenses->links() }}
 
     <!-- Modal Form -->
     <x-jet-dialog-modal wire:model="expenseModalFormVisible">
@@ -138,9 +144,9 @@
                 @error('expense_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="description" value="{{ __('Izmaksu pamatojums/apraksts') }}"/>
-                <x-jet-input id="description" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="description"/>
-                @error('description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label for="expense_description" value="{{ __('Izmaksu pamatojums/apraksts') }}"/>
+                <x-jet-input id="expense_description" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="expense_description"/>
+                @error('expense_description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
         </x-slot>
 

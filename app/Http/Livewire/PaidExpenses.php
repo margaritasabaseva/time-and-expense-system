@@ -16,7 +16,7 @@ class PaidExpenses extends Component
     public $document_number;
     public $amount_euros;
     public $expense_date;
-    public $description;
+    public $expense_description;
     public $project_id;
     public $user_id;
 
@@ -24,7 +24,7 @@ class PaidExpenses extends Component
     public $expenseModalFormVisible = false;
     public $confirmDeleteExpenseVisible = false;
 
-    public $perPage = 10;
+    // public $perPage = 10;
     public $sortBy = 'project_id';
     public $sortDirection = 'asc';
 
@@ -34,9 +34,9 @@ class PaidExpenses extends Component
         return [
             'vendor' => 'required|max:255',
             'document_number' => 'required|max:120',
-            'amount_euros' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'amount_euros' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'expense_date' => 'required|date',
-            'description' => 'required',
+            'expense_description' => 'required',
         ];
     }
 
@@ -63,9 +63,10 @@ class PaidExpenses extends Component
 
     public function readExpense()
     {
-        return Expense::query()
-            ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate($this->perPage);
+        return Expense::orderBy($this->sortBy, $this->sortDirection)->get();
+        // return Expense::query()
+        //     ->orderBy($this->sortBy, $this->sortDirection)
+        //     ->paginate($this->perPage);
     }
 
     public function expenseModelData()
@@ -77,7 +78,7 @@ class PaidExpenses extends Component
             'document_number' => $this->document_number,
             'amount_euros' => $this->amount_euros,
             'expense_date' => $this->expense_date,
-            'description' => $this->description,
+            'expense_description' => $this->expense_description,
         ];
     }
     
@@ -103,7 +104,8 @@ class PaidExpenses extends Component
         $this->document_number = $expenses->document_number;
         $this->amount_euros = $expenses->amount_euros;
         $this->expense_date = $expenses->expense_date;
-        $this->description = $expenses->description;
+        $this->expense_description = $expenses->expense_description;
+
     }
 
     public function resetVars()
@@ -114,7 +116,7 @@ class PaidExpenses extends Component
         $this->document_number = null;
         $this->amount_euros = null;
         $this->expense_date = null;
-        $this->description = null;
+        $this->expense_description = null;
     }
 
     public function loadProjectModel()

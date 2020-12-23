@@ -16,6 +16,15 @@ class Project extends Model
      */
     protected $guarded = [];
 
+    /**
+     * Get the expenses for the project.
+     */
+    
+     public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
     public function scopeSearch($query, $value)
     {
         return $query
@@ -24,4 +33,6 @@ class Project extends Model
             ->Orwhere('responsible_manager', 'like', '%'.$value.'%')
             ->Orwhere('start_date', 'like', '%'.$value.'%');
     }
+
+    
 }
