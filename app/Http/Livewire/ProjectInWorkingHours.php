@@ -10,7 +10,7 @@ class ProjectInWorkingHours extends Component
 {
     use WithPagination;
     public $title;
-    public $description;
+    public $project_description;
     public $responsible_manager;
     public $start_date;
     public $projectModelId;
@@ -26,7 +26,7 @@ class ProjectInWorkingHours extends Component
     {
         return [
             'title' => $this->title,
-            'description' => $this->description,
+            'project_description' => $this->project_description,
             'responsible_manager' => $this->responsible_manager,
             'start_date' => $this->start_date,
         ];
@@ -36,7 +36,7 @@ class ProjectInWorkingHours extends Component
     {
         $projects = Project::find($this->projectModelId);
         $this->title = $projects->title;
-        $this->description = $projects->description;
+        $this->project_description = $projects->project_description;
         $this->responsible_manager = $projects->responsible_manager;
         $this->start_date = $projects->start_date;
     }

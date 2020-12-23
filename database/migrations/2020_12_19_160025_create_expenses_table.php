@@ -21,7 +21,7 @@ class CreateExpensesTable extends Migration
             $table->string('document_number', 120)->nullable();
             $table->decimal('amount_euros', 15, 2);
             $table->date('expense_date');
-            $table->longText('description');
+            $table->longText('expense_description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onCascade('delete');

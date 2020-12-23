@@ -22,7 +22,7 @@ class ExpenseTableSeeder extends Seeder
                 'document_number' => '#123456789',
                 'amount_euros' => '96.00',
                 'expense_date' => '2020-11-22',
-                'description' => 'Kārtridžu uzpilde biroja printeriem, 8gb.',
+                'expense_description' => 'Kārtridžu uzpilde biroja printeriem, 8gb.',
             ],
             [
                 'user_id' => '1',
@@ -31,7 +31,7 @@ class ExpenseTableSeeder extends Seeder
                 'document_number' => '#987654321',
                 'amount_euros' => '15.67',
                 'expense_date' => '2020-11-05',
-                'description' => 'Pasta pakalpojumi, rēķinu izsūtīšana klientiem par oktobri.',
+                'expense_description' => 'Pasta pakalpojumi, rēķinu izsūtīšana klientiem par oktobri.',
             ],
             [
                 'user_id' => '1',
@@ -40,7 +40,7 @@ class ExpenseTableSeeder extends Seeder
                 'document_number' => '#111-232323-1485000',
                 'amount_euros' => '77.04',
                 'expense_date' => '2020-11-16',
-                'description' => 'Nozares grāmatas biroja bibliotēkai, 3gb.',
+                'expense_description' => 'Nozares grāmatas biroja bibliotēkai, 3gb.',
             ],
             [
                 'user_id' => '2',
@@ -49,7 +49,7 @@ class ExpenseTableSeeder extends Seeder
                 'document_number' => '#1111111111',
                 'amount_euros' => '40.12',
                 'expense_date' => '2020-11-02',
-                'description' => 'Izmaksas projekta svētku pasākumam.',
+                'expense_description' => 'Izmaksas projekta svētku pasākumam.',
             ],
             [
                 'user_id' => '2',
@@ -58,7 +58,25 @@ class ExpenseTableSeeder extends Seeder
                 'document_number' => '#22222222',
                 'amount_euros' => '120.55',
                 'expense_date' => '2020-11-02',
-                'description' => 'Dāvanu izmaksas projekta komandas biedriem.',
+                'expense_description' => 'Dāvanu izmaksas projekta komandas biedriem.',
+            ],
+            [
+                'user_id' => '1',
+                'project_id' => '2',
+                'vendor'=> 'Latvijas Mobilais Telefons, SIA',
+                'document_number' => '#23333-2',
+                'amount_euros' => '155.65',
+                'expense_date' => '2020-11-21',
+                'expense_description' => 'Telefonu pieslēgumu rēķinu izmaksas par 2020.gada oktobri.',
+            ],
+            [
+                'user_id' => '1',
+                'project_id' => '2',
+                'vendor'=> 'Bolt Services, SIA',
+                'document_number' => '#AB1239876',
+                'amount_euros' => '230.12',
+                'expense_date' => '2020-11-18',
+                'expense_description' => 'Taksometru pakalpojumu izmaksas par 2020.gada oktobri.',
             ],
         ]);
     }
