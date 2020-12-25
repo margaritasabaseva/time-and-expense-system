@@ -10,7 +10,7 @@ class Projects extends Component
 {
     use WithPagination;
     public $title;
-    public $description;
+    public $project_description;
     public $responsible_manager;
     public $start_date;
     // public $project_id;
@@ -29,7 +29,7 @@ class Projects extends Component
     {
         return [
             'title' => 'required|max:120',
-            'description' => 'required',
+            'project_description' => 'required',
             'responsible_manager' => 'required|max:120',
             'start_date' => 'required|date_format:Y-m-d',
         ];
@@ -67,7 +67,7 @@ class Projects extends Component
     {
         return [
             'title' => $this->title,
-            'description' => $this->description,
+            'project_description' => $this->project_description,
             'responsible_manager' => $this->responsible_manager,
             'start_date' => $this->start_date,
         ];
@@ -120,7 +120,7 @@ class Projects extends Component
     {
         $projects = Project::find($this->projectModelId);
         $this->title = $projects->title;
-        $this->description = $projects->description;
+        $this->project_description = $projects->project_description;
         $this->responsible_manager = $projects->responsible_manager;
         $this->start_date = $projects->start_date;
     }
@@ -129,7 +129,7 @@ class Projects extends Component
     {
         $this->projectModelId = null;
         $this->title = null;
-        $this->description = null;
+        $this->project_description = null;
         $this->responsible_manager = null;
         $this->start_date = null;
     }

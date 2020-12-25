@@ -27,9 +27,10 @@ class Project extends Model
 
     public function scopeSearch($query, $value)
     {
+        // neļauj meklēt mīkstinājuma/garumzīmes
         return $query
             ->where('title', 'like', '%'.$value.'%')
-            ->Orwhere('description', 'like', '%'.$value.'%')
+            ->Orwhere('project_description', 'like', '%'.$value.'%')
             ->Orwhere('responsible_manager', 'like', '%'.$value.'%')
             ->Orwhere('start_date', 'like', '%'.$value.'%');
     }

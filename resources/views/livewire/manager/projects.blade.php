@@ -54,7 +54,7 @@
                                         </button>
                                     </td>
                                     <td class="px-6 py-4 text-sm break-words">
-                                        {{ $project->description }}
+                                        {{ $project->project_description }}
                                     </td>
                                     <td class="px-6 py-4 text-sm break-words">
                                         {{ $project->responsible_manager }}
@@ -105,9 +105,9 @@
                 @error('title') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="description" value="{{ __('Apraksts') }}" />
-                <x-jet-input id="description" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="description"/>
-                @error('description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label for="project_description" value="{{ __('Apraksts') }}" />
+                <x-jet-input id="project_description" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="project_description"/>
+                @error('project_description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="responsible_manager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
