@@ -48,6 +48,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
     // has a role that gets passed as a name of the role with this method, e.g., hasRole('ROLE_ADMIN')
     public function hasRole($role)
     {

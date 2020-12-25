@@ -1,5 +1,39 @@
 <div>
-    <div class="flex items-center justify-end pt-3">
+    <!-- Notification alerts -->
+    <div class ="mt-3">
+        @if ($message = Session::get('successCreateProject'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if ($message = Session::get('successUpdateProject'))
+            <div class="alert alert-primary alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if ($message = Session::get('successDeleteProject'))
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+    </div>
+
+    <script>
+        $('.alert').alert()
+    </script>
+
+    <div class="flex items-center justify-end">
         <div class="flex-1 text-sm">
             {{ __('Rādīt vienā lapā:') }}
             <select wire:model="perPage">
@@ -21,7 +55,7 @@
         </div>
     </div>
 
-    <!-- Data table -->
+    <!-- Main projects data table -->
     <div class="flex flex-col">
         <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="pb-10 pt-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -86,12 +120,12 @@
 
     {{ $projects->links() }}
 
-    <!-- Modal Form -->
+    <!-- Project Modal Form -->
     <x-jet-dialog-modal class="mt-20" wire:model="projectModalFormVisible">
         <x-slot name="title">
             <div class="font-bold">
                 @if ($projectModelId)
-                    {{ __('Rediģēt projektu') }}
+                    {{ __('Rediģēt projektu') }} "{{ $this->title }}"
                 @else
                     {{ __('Pievienot jaunu projektu') }}
                 @endif
@@ -140,7 +174,9 @@
     <!-- Delete Project Confirmation Modal  -->
         <x-jet-dialog-modal wire:model="confirmDeleteProjectVisible">
             <x-slot name="title">
-                {{ __('Dzēst projektu') }}
+                <div class="font-bold">
+                    {{ __('Dzēst projektu') }} "{{ $this->title }}"
+                </div>
             </x-slot>
 
             <x-slot name="content">
@@ -159,15 +195,90 @@
         </x-jet-dialog-modal>
 
     <!-- Show Project Expenses Modal-->
-        <x-jet-dialog-modal wire:model="projectExpensesModalVisible">
+        <x-jet-dialog-modal wire:model="projectExpensesModalVisible" maxWidth="7xl">
             <x-slot name="title">
                 <div class="font-bold">
-                    {{ __('Projekta izmaksu pārskats') }}
+
+                    {{ __('Projekta') }} "{{ $this->title }}" {{ __('izmaksu pārskats') }}
                 </div>
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Projekta izmaksas') }}
+            <div class="flex flex-col">
+                <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="pt-2 align-middle sm:px-6 lg:px-8">
+                        <div class="border border-gray-200 sm:rounded-lg overflow-x-auto max-h-96">
+                            <table class="divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0" style="width:15%;">
+                                            Pakalpojumu sniedzēja nosaukums
+                                        </th>
+                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                            Pirkuma dokumenta numurs
+                                        </th>
+                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                            Summa (EUR)
+                                        </th>
+                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                            Datums (dokumentā norādītais)
+                                        </th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                            Pievienoja
+                                        </th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                            Izdevumu pamatojums/ apraksts
+                                        </th>
+                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer sticky top-0"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @if ($expenses->count())
+                                        @foreach ($expenses as $expense)
+                                            @if ($expense->project_id == $projectModelId)
+                                                <tr>
+                                                    <td class="px-6 text-sm break-words">
+                                                        {{ $expense->vendor }}
+                                                    </td>
+                                                    <td class="px-6 text-sm break-words">
+                                                        {{ $expense->document_number }}
+                                                    </td>
+                                                    <td class="px-6 text-sm break-words">
+                                                        {{ $expense->amount_euros }}
+                                                    </td>
+                                                    <td class="px-6 text-sm whitespace-no-wrap">
+                                                        {{ $expense->expense_date }}
+                                                    </td>
+                                                    <td class="px-6 text-sm break-all">
+                                                        {{ $expense->user->name }}
+                                                    </td>
+                                                    <td class="px-6 text-sm break-all">
+                                                        {{ $expense->expense_description }}
+                                                    </td>
+                                                    <td class="px-3 py-1">
+                                                        <!-- <x-jet-button class="flex w-16 h-7" wire:click="editExpenseModal({{ $expense->id }})">
+                                                            {{ __('Rediģēt') }}
+                                                        </x-jet-button> -->
+                                                        <x-jet-danger-button class="flex w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
+                                                            {{ __('Dzēst') }}
+                                                        </x-jet-danger-button>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </x-slot>
 
             <x-slot name="footer">

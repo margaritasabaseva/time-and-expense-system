@@ -23,4 +23,12 @@ class Expense extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    /**
+     * Get the user that created the expense.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

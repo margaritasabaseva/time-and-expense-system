@@ -3,8 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Project;
 use Livewire\WithPagination;
+use App\Models\Project;
+use App\Models\Expense;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class Projects extends Component
 {
@@ -47,6 +50,7 @@ class Projects extends Component
         Project::create($this->projectModelData());
         $this->projectModalFormVisible = false;
         $this->resetVars();
+        session()->flash('successCreateProject', 'Projekts veiksmīgi pievienots.');
     }
 
     public function createProjectModal()
@@ -78,6 +82,8 @@ class Projects extends Component
         $this->validate();
         Project::find($this->projectModelId)->update($this->projectModelData());
         $this->projectModalFormVisible = false;
+        session()->flash('successUpdateProject', 'Projekta informācija atjaunināta.');
+        $this->resetPage();
     }
 
     public function updateProjectModal($id)
@@ -91,29 +97,16 @@ class Projects extends Component
 
     public function deleteProject(){
         Project::destroy($this->projectModelId);
+        $this->loadProjectModel();
         $this->confirmDeleteProjectVisible = false;
         $this->resetPage();
+        session()->flash('successDeleteProject', 'Projekts izdzēsts.');
     }
 
     public function deleteProjectModal($id)
     {
         $this->modelId = $id;
         $this->confirmDeleteProjectVisible = true;
-    }
-
-    public function showProjectExpenses($id)
-    {
-        $this->projectModelId = $id;
-        $this->validate();
-        $this->projectExpensesModalVisible = false;
-    }
-
-    public function showProjectExpensesModal($id)
-    {
-        $this->resetValidation();
-        $this->projectModelId = $id;
-        $this->projectExpensesModalVisible = true;
-        $this->loadProjectModel();
     }
 
     public function loadProjectModel()
@@ -134,6 +127,84 @@ class Projects extends Component
         $this->start_date = null;
     }
 
+    public function showProjectExpenses($id)
+    {
+        $this->projectModelId = $id;
+        $this->validate();
+        $this->projectExpensesModalVisible = false;
+    }
+
+    public function showProjectExpensesModal($id)
+    {
+        $this->resetValidation();
+        $this->projectModelId = $id;
+        $this->projectExpensesModalVisible = true;
+        $this->loadProjectModel();
+    }
+
+    // ------------------------------------------------------------------------
+    // Expense modal part
+
+    // public function rules()
+    // {
+    //     return [
+    //         'vendor' => 'required|max:255',
+    //         'document_number' => 'required|max:120',
+    //         'amount_euros' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+    //         'expense_date' => 'required|date',
+    //         'expense_description' => 'required',
+    //     ];
+    // }
+
+    // public function createExpense()
+    // {
+    //     $this->validate();
+    //     Expense::create($this->expenseModelData());
+    //     $this->expenseModalFormVisible = false;
+    //     $this->resetVars();
+    // }
+
+    // public function createExpenseModal()
+    // {
+    //     $this->resetValidation();
+    //     $this->resetVars();
+    //     $this->expenseModalFormVisible = true;
+    // }
+
+    public function readExpense()
+    {
+        return Expense::all();
+    }
+
+    public function expenseModelData()
+    {
+        return [
+            'project_id' => $this->project_id,
+            'user_id' => Auth::id(),
+            'vendor' => $this->vendor,
+            'document_number' => $this->document_number,
+            'amount_euros' => $this->amount_euros,
+            'expense_date' => $this->expense_date,
+            'expense_description' => $this->expense_description,
+        ];
+    }
+
+    public function loadExpenseModel()
+    {
+        $expenses = Expense::find($this->expenseModelId);
+        $this->id = $expenses->id;
+        $this->project_id = $expenses->project_id;
+        $this->user_id = $expenses->user_id;
+        $this->vendor = $expenses->vendor;
+        $this->document_number = $expenses->document_number;
+        $this->amount_euros = $expenses->amount_euros;
+        $this->expense_date = $expenses->expense_date;
+        $this->expense_description = $expenses->expense_description;
+
+    }
+
+    // ------------------------------------------------------------------------
+
     public function sortBy($field)
     {
         if ($this->sortDirection == 'asc') {
@@ -152,8 +223,11 @@ class Projects extends Component
 
     public function render()
     {
+        $users = User::all();
         return view('livewire.manager.projects',[
             'projects' => $this->readProject(),
+            'expenses' => $this->readExpense(),
+            'users' => $users
         ]);
     }
 }
