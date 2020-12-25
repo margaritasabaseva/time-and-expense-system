@@ -119,16 +119,6 @@ class PaidExpenses extends Component
         $this->expense_description = null;
     }
 
-    public function loadProjectModel()
-    {
-        $projects = Project::find($this->projectModelId);
-        $this->title = $projects->title;
-    }
-
-    public function readProject(){
-        return Project::all();
-    }
-
     public function sortBy($field)
     {
         if ($this->sortDirection == 'asc') {
@@ -142,9 +132,10 @@ class PaidExpenses extends Component
 
     public function render()
     {
+        $projects = Project::all();
         return view('livewire.employee.paid-expenses', [
             'expenses' => $this->readExpense(),
-            'projects' => $this->readProject(),
+            'projects' => $projects
         ]);
     }
 }
