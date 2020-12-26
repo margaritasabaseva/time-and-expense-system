@@ -1,5 +1,5 @@
 <div>
-    <!-- Notification alerts -->
+    <!-- Action Notification Alerts -->
     <div class ="mt-3">
         @if ($message = Session::get('successCreateProject'))
             <div class="alert alert-success alert-dismissible" role="alert">
@@ -33,6 +33,7 @@
         $('.alert').alert()
     </script>
 
+    <!-- Page Toolbar -->
     <div class="flex items-center justify-end">
         <div class="flex-1 text-sm">
             {{ __('Rādīt vienā lapā:') }}
@@ -55,7 +56,7 @@
         </div>
     </div>
 
-    <!-- Main projects data table -->
+    <!-- Projects Data Table -->
     <div class="flex flex-col">
         <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="pb-10 pt-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -108,7 +109,9 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens projekts netika atrasts</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">
+                                        {{ __('Neviens projekts netika atrasts.') }}
+                                    </td>
                                 </tr>
                             @endif
                         </tbody>
@@ -145,7 +148,18 @@
             </div>
             <div class="mt-4">
                 <x-jet-label for="responsible_manager" value="{{ __('Atbildīgais projekta vadītājs') }}" />
-                <x-jet-input id="responsible_manager" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="responsible_manager"/>
+                <select name="responsible_manager" id="responsible_manager" class="w-full form-select text-sm shadow-sm" wire:model.debounce.800ms="responsible_manager">
+                    <option value=""></option>
+                    @if ($users->count())
+                        @foreach ($users as $user)
+                            @if ($user->hasRole('ROLE_MANAGER'))
+                            <option value="{{ $user->name }}"> {{ $user->name }}</option>
+                            @endif                        
+                        @endforeach
+                    @else
+                        {{ __('Neviens projektu vadītājs netika atrasts.') }}
+                    @endif
+                </select>
                 @error('responsible_manager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
@@ -229,7 +243,7 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
                                             Izdevumu pamatojums/ apraksts
                                         </th>
-                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer sticky top-0"></th>
+                                        <!-- <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer sticky top-0"></th> -->
                                     </tr>
                                 </thead>
 
@@ -248,7 +262,7 @@
                                                         {{ $expense->amount_euros }}
                                                     </td>
                                                     <td class="px-6 text-sm whitespace-no-wrap">
-                                                        {{ $expense->expense_date }}
+                                                        {{ $expense->expense_day }}-{{ $expense->expense_month }}-{{ $expense->expense_year }}
                                                     </td>
                                                     <td class="px-6 text-sm break-all">
                                                         {{ $expense->user->name }}
@@ -256,26 +270,26 @@
                                                     <td class="px-6 text-sm break-all">
                                                         {{ $expense->expense_description }}
                                                     </td>
-                                                    <td class="px-3 py-1">
-                                                        <!-- <x-jet-button class="flex w-16 h-7" wire:click="editExpenseModal({{ $expense->id }})">
+                                                    <!-- <td class="px-3 py-1">
+                                                        <x-jet-button class="flex w-16 h-7" wire:click="editExpenseModal({{ $expense->id }})">
                                                             {{ __('Rediģēt') }}
-                                                        </x-jet-button> -->
+                                                        </x-jet-button>
                                                         <x-jet-danger-button class="flex w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
                                                             {{ __('Dzēst') }}
                                                         </x-jet-danger-button>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                             @endif
                                         @endforeach
-                                    @else
-                                        <tr>
-                                            <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
-                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="font-bold m-3">
+                    <!-- ielikt expense-report -->
+                    Kopējās izmaksas par {{ $expense->expense_month }} {{ $expense->expense_year }}:
                 </div>
             </div>
 
