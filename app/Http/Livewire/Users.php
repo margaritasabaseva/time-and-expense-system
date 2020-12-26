@@ -52,6 +52,7 @@ class Users extends Component
         User::create($this->userModelData());
         $this->userModalFormVisible = false;
         $this->resetVars();
+        session()->flash('successCreateUser', 'Lietotājs veiksmīgi pievienots.');
     }
 
     public function createUserModal()
@@ -76,19 +77,21 @@ class Users extends Component
             'job_title' => $this->job_title,
             'phone' => $this->phone,
             'address' => $this->address,
-            'password' =>Hash::make($this->password),
+            'password' => Hash::make($this->password),
         ];
     }
 
     public function assignRoles()
     {
         $this->assignRolesVisible = false;
+        session()->flash('successAssignRoles', 'Lomas saglabātas.');
     }
 
     public function assignRolesModal($id)
     {
         $this->userModelId = $id;
         $this->assignRolesVisible = true;
+        // $this->loadUserModel();
     }
     
     public function loadUserRoles()
@@ -96,17 +99,18 @@ class Users extends Component
         $roles = Role::find($this->userModelId);
     }
 
-
     public function deleteUser(){
         User::destroy($this->userModelId);
         $this->confirmDeleteUserVisible = false;
         $this->resetPage();
+        session()->flash('successDeleteUser', 'Lietotājs izdzēsts.');
     }
 
    public function deleteUserModal($id)
    {
         $this->userModelId = $id;
         $this->confirmDeleteUserVisible = true;
+        $this->loadUserModel();
    }
 
     public function loadUserModel()
@@ -118,7 +122,6 @@ class Users extends Component
         $this->job_title = $users->job_title;
         $this->phone = $users->phone;
         $this->address = $users->address;
-        $this->loadUserRoles();
     }
 
     public function resetVars()

@@ -1,5 +1,40 @@
 <div>
-    <div class="flex items-center justify-end pt-3">
+    <!-- Action Notification Alerts -->
+    <div class ="mt-3">
+        @if ($message = Session::get('successCreateUser'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if ($message = Session::get('successAssignRoles'))
+            <div class="alert alert-primary alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if ($message = Session::get('successDeleteUser'))
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+    </div>
+
+    <script>
+        $('.alert').alert()
+    </script>
+
+    <!-- Page Toolbar -->
+    <div class="flex items-center justify-end">
         <div class="flex-1 text-sm">
             {{ __('Rādīt vienā lapā:') }}
             <select wire:model="perPage">
@@ -21,7 +56,7 @@
         </div>
     </div>
 
-    <!-- Data table -->
+    <!-- Users Data Table -->
     <div class="flex flex-col">
         <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="pb-10 pt-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -66,8 +101,8 @@
                                             <br>
                                         @endforeach 
                                     </td>
-                                    <td class="px-6 py-4 text-right text-sm">
-                                        <x-jet-button class="w-28" wire:click="assignRolesModal({{ $user->id }})">
+                                    <td class="px-6 py-4">
+                                        <x-jet-button class="w-28 text-center" wire:click="assignRolesModal({{ $user->id }})">
                                             {{ __('Lomas') }}
                                         </x-jet-button>
                                         <x-jet-danger-button class="w-28" wire:click="deleteUserModal({{ $user->id }})">
@@ -90,7 +125,7 @@
 
     {{ $users->links() }}
 
-    <!-- Modal Form -->
+    <!-- User Modal Form -->
     <x-jet-dialog-modal wire:model="userModalFormVisible">
         <x-slot name="title">
             <div class="font-bold">    
@@ -144,7 +179,9 @@
     <!-- Assign Roles to User Modal  -->
     <x-jet-dialog-modal wire:model="assignRolesVisible">
         <x-slot name="title">
-            {{ __('Rediģēt lietotāja lomas') }}
+            <div class="font-bold">    
+                {{ __('Rediģēt lietotāja lomas') }}  "{{ $this->name }}"
+            </div>
         </x-slot>
 
         <x-slot name="content">
@@ -190,7 +227,9 @@
     <!-- Delete User Confirmation Modal  -->
     <x-jet-dialog-modal wire:model="confirmDeleteUserVisible">
         <x-slot name="title">
-            {{ __('Dzēst lietotāju') }}
+            <div class="font-bold">
+                {{ __('Dzēst lietotāju') }} "{{ $this->name }}"
+            </div>
         </x-slot>
 
         <x-slot name="content">

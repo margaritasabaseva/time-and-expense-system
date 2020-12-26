@@ -16,7 +16,7 @@ class Projects extends Component
     public $project_description;
     public $responsible_manager;
     public $start_date;
-    // public $project_id;
+    public $project_id;
 
     public $projectModelId;
     public $projectModalFormVisible = false;
@@ -82,8 +82,8 @@ class Projects extends Component
         $this->validate();
         Project::find($this->projectModelId)->update($this->projectModelData());
         $this->projectModalFormVisible = false;
-        session()->flash('successUpdateProject', 'Projekta informācija atjaunināta.');
         $this->resetPage();
+        session()->flash('successUpdateProject', 'Projekta informācija atjaunināta.');
     }
 
     public function updateProjectModal($id)
@@ -92,12 +92,10 @@ class Projects extends Component
         $this->projectModelId = $id;
         $this->projectModalFormVisible = true;
         $this->loadProjectModel();
-        // $this->resetVars();
     }
 
     public function deleteProject(){
         Project::destroy($this->projectModelId);
-        $this->loadProjectModel();
         $this->confirmDeleteProjectVisible = false;
         $this->resetPage();
         session()->flash('successDeleteProject', 'Projekts izdzēsts.');
@@ -105,8 +103,10 @@ class Projects extends Component
 
     public function deleteProjectModal($id)
     {
-        $this->modelId = $id;
+        $this->projectModelId = $id;
         $this->confirmDeleteProjectVisible = true;
+        $this->loadProjectModel();
+
     }
 
     public function loadProjectModel()
@@ -136,7 +136,6 @@ class Projects extends Component
 
     public function showProjectExpensesModal($id)
     {
-        $this->resetValidation();
         $this->projectModelId = $id;
         $this->projectExpensesModalVisible = true;
         $this->loadProjectModel();
@@ -184,7 +183,9 @@ class Projects extends Component
             'vendor' => $this->vendor,
             'document_number' => $this->document_number,
             'amount_euros' => $this->amount_euros,
-            'expense_date' => $this->expense_date,
+            'expense_day' => $this->expense_day,
+            'expense_month' => $this->expense_month,
+            'expense_year' => $this->expense_year,
             'expense_description' => $this->expense_description,
         ];
     }
@@ -198,7 +199,9 @@ class Projects extends Component
         $this->vendor = $expenses->vendor;
         $this->document_number = $expenses->document_number;
         $this->amount_euros = $expenses->amount_euros;
-        $this->expense_date = $expenses->expense_date;
+        $this->expense_day = $expenses->expense_day;
+        $this->expense_month = $expenses->expense_month;
+        $this->expense_year = $expenses->expense_year;
         $this->expense_description = $expenses->expense_description;
 
     }
@@ -223,7 +226,7 @@ class Projects extends Component
 
     public function render()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
         return view('livewire.manager.projects',[
             'projects' => $this->readProject(),
             'expenses' => $this->readExpense(),

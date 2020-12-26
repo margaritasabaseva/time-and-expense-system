@@ -15,7 +15,9 @@ class PaidExpenses extends Component
     public $vendor;
     public $document_number;
     public $amount_euros;
-    public $expense_date;
+    public $expense_day;
+    public $expense_month;
+    public $expense_year;
     public $expense_description;
     public $project_id;
     public $user_id;
@@ -35,7 +37,9 @@ class PaidExpenses extends Component
             'vendor' => 'required|max:255',
             'document_number' => 'required|max:120',
             'amount_euros' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'expense_date' => 'required|date',
+            'expense_day' => 'required|numeric',
+            'expense_month' => 'required|max:20',
+            'expense_year' => 'required|numeric',
             'expense_description' => 'required',
         ];
     }
@@ -52,6 +56,7 @@ class PaidExpenses extends Component
         Expense::create($this->expenseModelData());
         $this->expenseModalFormVisible = false;
         $this->resetVars();
+        session()->flash('successCreateExpense', 'Ieraksts veiksmīgi pievienots.');
     }
 
     public function createExpenseModal()
@@ -77,7 +82,9 @@ class PaidExpenses extends Component
             'vendor' => $this->vendor,
             'document_number' => $this->document_number,
             'amount_euros' => $this->amount_euros,
-            'expense_date' => $this->expense_date,
+            'expense_day' => $this->expense_day,
+            'expense_month' => $this->expense_month,
+            'expense_year' => $this->expense_year,
             'expense_description' => $this->expense_description,
         ];
     }
@@ -86,6 +93,7 @@ class PaidExpenses extends Component
         Expense::destroy($this->expenseModelId);
         $this->confirmDeleteExpenseVisible = false;
         $this->resetPage();
+        session()->flash('successDeleteExpense', 'Ieraksts izdzēsts.');
     }
 
    public function deleteExpenseModal($id)
@@ -103,7 +111,9 @@ class PaidExpenses extends Component
         $this->vendor = $expenses->vendor;
         $this->document_number = $expenses->document_number;
         $this->amount_euros = $expenses->amount_euros;
-        $this->expense_date = $expenses->expense_date;
+        $this->expense_day = $expenses->expense_day;
+        $this->expense_month = $expenses->expense_month;
+        $this->expense_year = $expenses->expense_year;
         $this->expense_description = $expenses->expense_description;
 
     }
@@ -115,7 +125,9 @@ class PaidExpenses extends Component
         $this->vendor = null;
         $this->document_number = null;
         $this->amount_euros = null;
-        $this->expense_date = null;
+        $this->expense_day = null;
+        $this->expense_month = null;
+        $this->expense_year = null;
         $this->expense_description = null;
     }
 

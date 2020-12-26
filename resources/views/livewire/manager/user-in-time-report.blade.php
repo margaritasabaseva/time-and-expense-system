@@ -74,7 +74,7 @@
     <x-jet-dialog-modal wire:model="userTimeReportModalVisible">
         <x-slot name="title">
             <div class="font-bold">
-                {{ __('Iesniegto darba stundu pārskats') }}
+                {{ __('Darbinieka') }} "{{ $this->name }}" {{ __('darba stundu pārskats') }}
             </div>
         </x-slot>
 

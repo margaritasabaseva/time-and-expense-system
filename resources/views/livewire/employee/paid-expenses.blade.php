@@ -1,6 +1,31 @@
 <div>
 
-    <div class="flex items-center justify-end pt-3">
+    <!-- Action notification alerts -->
+    <div class ="mt-3">
+        @if ($message = Session::get('successCreateExpense'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if ($message = Session::get('successDeleteExpense'))
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+    </div>
+
+    <script>
+        $('.alert').alert()
+    </script>
+
+    <div class="flex items-center justify-end">
         <!-- <div class="flex-1 text-sm">
             {{ __('Rādīt vienā lapā:') }}
             <select wire:model="perPage">
@@ -39,7 +64,7 @@
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('amount_euros')">
                                     Summa (EUR)
                                 </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('expense_date')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Datums (dokumentā norādītais)
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -67,7 +92,7 @@
                                                 {{ $expense->amount_euros }}
                                             </td>
                                             <td class="px-6 text-sm whitespace-no-wrap">
-                                                {{ $expense->expense_date }}
+                                                {{ $expense->expense_day }}-{{ $expense->expense_month }}-{{ $expense->expense_year }}
                                             </td>
                                             <td class="px-6 text-sm break-all">
                                                 {{ $expense->expense_description }}
@@ -113,12 +138,12 @@
                 <!-- projektu drowpdown izvēlne -->
             </div>
             <div class="mt-4">
-            <x-jet-label for="project_id" value="{{ __('Projekts') }}"/>
+                <x-jet-label for="project_id" value="{{ __('Projekts') }}"/>
                 <select name="project_id" id="project_id" class="w-full form-select text-sm shadow-sm" wire:model.debounce.800ms="project_id">
-                    <option value="empty"></option>
+                    <option value=""></option>
                     @if ($projects->count())
                         @foreach ($projects as $project)
-                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                            <option value="{{ $project->id }}"> {{ $project->title }} </option>
                         @endforeach
                     @endif
                 </select>
@@ -138,10 +163,56 @@
                 <x-jet-input id="amount_euros" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="amount_euros"/>
                 @error('amount_euros') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
+
             <div class="mt-4">
-                <x-jet-label for="expense_date" value="{{ __('Datums (dokumentā norādītais)') }}"/>
-                <x-jet-input id="expense_date" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="expense_date"/>
-                @error('expense_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                <x-jet-label value="{{ __('Datums (dokumentā norādītais):') }}"/>
+                
+                <div class="inline-flex flex-row">
+                    <div class="mr-2">
+                        <x-jet-label for="expense_day" value="{{ __('Diena') }}"/>
+                        <select name="expense_day" id="expense_day" class="w-20 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_day">
+                            <option value=""></option>
+                            @for ($i = 1; $i < 32; $i++)
+                                    <option value="{{ $i }}"> {{ $i }} </option>
+                            @endfor
+                        </select>
+                        <br>@error('expense_day') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+
+                    <div class="mr-2">
+                        <x-jet-label for="expense_month" value="{{ __('Mēnesis') }}"/>
+                        <select name="expense_month" id="expense_month" class="w-40 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_month">
+                            <option value=""></option>
+                            <option value="{{ __('Janvāris') }}"> {{ __('Janvāris') }} </option>
+                            <option value="{{ __('Februāris') }}"> {{ __('Februāris') }} </option>
+                            <option value="{{ __('Marts') }}"> {{ __('Marts') }} </option>
+                            <option value="{{ __('Aprīlis') }}"> {{ __('Aprīlis') }} </option>
+                            <option value="{{ __('Maijs') }}"> {{ __('Maijs') }} </option>
+                            <option value="{{ __('Jūnijs') }}"> {{ __('Jūnijs') }} </option>
+                            <option value="{{ __('Jūlijs') }}"> {{ __('Jūlijs') }} </option>
+                            <option value="{{ __('Augusts') }}"> {{ __('Augusts') }} </option>
+                            <option value="{{ __('Septembris') }}"> {{ __('Septembris') }} </option>
+                            <option value="{{ __('Oktobris') }}"> {{ __('Oktobris') }} </option>
+                            <option value="{{ __('Novembris') }}"> {{ __('Novembris') }} </option>
+                            <option value="{{ __('Decembris') }}"> {{ __('Decembris') }} </option>
+                        </select>
+                        <br>@error('expense_month') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+
+                    <div>
+                        <x-jet-label for="expense_year" value="{{ __('Gads') }}"/>
+                        <select name="expense_year" id="expense_year" class="w-28 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_year">
+                            <option value=""></option>
+                            @for ($i = 2018; $i < 2023; $i++)
+                                    <option value="{{ $i }}"> {{ $i }} </option>
+                            @endfor
+                        </select>
+                        <br>@error('expense_year') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+                </div>
+
+                <!-- <x-jet-input id="expense_date" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="expense_date"/>
+                @error('expense_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
             </div>
             <div class="mt-4">
                 <x-jet-label for="expense_description" value="{{ __('Izmaksu pamatojums/apraksts') }}"/>
