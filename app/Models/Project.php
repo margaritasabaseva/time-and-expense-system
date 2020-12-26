@@ -9,20 +9,16 @@ class Project extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $guarded = [];
 
-    /**
-     * Get the expenses for the project.
-     */
-    
      public function expenses()
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function expenseReports()
+    {
+        return $this->hasMany(ExpenseReport::class);
     }
 
     public function scopeSearch($query, $value)
@@ -31,8 +27,7 @@ class Project extends Model
         return $query
             ->where('title', 'like', '%'.$value.'%')
             ->Orwhere('project_description', 'like', '%'.$value.'%')
-            ->Orwhere('responsible_manager', 'like', '%'.$value.'%')
-            ->Orwhere('start_date', 'like', '%'.$value.'%');
+            ->Orwhere('responsible_manager', 'like', '%'.$value.'%');
     }
 
     
