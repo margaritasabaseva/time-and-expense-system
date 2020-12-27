@@ -28,6 +28,9 @@ class Projects extends Component
     public $sortDirection = 'asc';
     public $search = '';
 
+
+    // Project Methods
+
     public function rules()
     {
         return [
@@ -40,7 +43,6 @@ class Projects extends Component
 
     public function mount()
     {
-        // Resets pagination after reloading the page
         $this->resetPage();
     }
 
@@ -127,6 +129,9 @@ class Projects extends Component
         $this->start_date = null;
     }
 
+
+    // Integrating Expense Data into Project View
+
     public function showProjectExpenses($id)
     {
         $this->projectModelId = $id;
@@ -141,34 +146,8 @@ class Projects extends Component
         $this->loadProjectModel();
     }
 
-    // ------------------------------------------------------------------------
-    // Expense modal part
 
-    // public function rules()
-    // {
-    //     return [
-    //         'vendor' => 'required|max:255',
-    //         'document_number' => 'required|max:120',
-    //         'amount_euros' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-    //         'expense_date' => 'required|date',
-    //         'expense_description' => 'required',
-    //     ];
-    // }
-
-    // public function createExpense()
-    // {
-    //     $this->validate();
-    //     Expense::create($this->expenseModelData());
-    //     $this->expenseModalFormVisible = false;
-    //     $this->resetVars();
-    // }
-
-    // public function createExpenseModal()
-    // {
-    //     $this->resetValidation();
-    //     $this->resetVars();
-    //     $this->expenseModalFormVisible = true;
-    // }
+    // Expense Methods
 
     public function readExpense()
     {
@@ -193,7 +172,7 @@ class Projects extends Component
     public function loadExpenseModel()
     {
         $expenses = Expense::find($this->expenseModelId);
-        $this->id = $expenses->id;
+        // $this->id = $expenses->id;
         $this->project_id = $expenses->project_id;
         $this->user_id = $expenses->user_id;
         $this->vendor = $expenses->vendor;
@@ -206,7 +185,7 @@ class Projects extends Component
 
     }
 
-    // ------------------------------------------------------------------------
+    // Sorting, Search, Rendering
 
     public function sortBy($field)
     {

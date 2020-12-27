@@ -29,6 +29,9 @@ class Users extends Component
     public $sortDirection = 'asc';
     public $search = '';
 
+
+    // User Methods
+
     public function rules()
     {
         return [
@@ -42,7 +45,6 @@ class Users extends Component
 
     public function mount()
     {
-        // Resets pagination after reloading the page
         $this->resetPage();
     }
 
@@ -81,24 +83,6 @@ class Users extends Component
         ];
     }
 
-    public function assignRoles()
-    {
-        $this->assignRolesVisible = false;
-        session()->flash('successAssignRoles', 'Lomas saglabātas.');
-    }
-
-    public function assignRolesModal($id)
-    {
-        $this->userModelId = $id;
-        $this->assignRolesVisible = true;
-        // $this->loadUserModel();
-    }
-    
-    public function loadUserRoles()
-    {
-        $roles = Role::find($this->userModelId);
-    }
-
     public function deleteUser(){
         User::destroy($this->userModelId);
         $this->confirmDeleteUserVisible = false;
@@ -110,7 +94,7 @@ class Users extends Component
    {
         $this->userModelId = $id;
         $this->confirmDeleteUserVisible = true;
-        $this->loadUserModel();
+        // $this->loadUserModel();
    }
 
     public function loadUserModel()
@@ -135,6 +119,30 @@ class Users extends Component
         $this->roles = null;
         $this->password = null;
     }
+
+
+    // Role Methods
+
+    public function assignRoles()
+    {
+        $this->assignRolesVisible = false;
+        session()->flash('successAssignRoles', 'Lomas saglabātas.');
+    }
+
+    public function assignRolesModal($id)
+    {
+        $this->userModelId = $id;
+        $this->assignRolesVisible = true;
+        // $this->loadUserModel();
+    }
+    
+    public function loadUserRoles()
+    {
+        $roles = Role::find($this->userModelId);
+    }
+
+
+    // Sorting, Search and Rendering
 
     public function sortBy($field)
     {

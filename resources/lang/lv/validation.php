@@ -164,10 +164,11 @@ return [
         'job_title'              => 'Amats',
         'phone'                  => 'Tālrunis',
         'address'                => 'Adrese',
-        // 'user_password'          => 'Parole',
-        'password'               => 'Jaunā parole',
-        'current_password'       => 'Pašreizējā parole'
-
+        // 'new_password'           => 'Jaunā parole',
+        'password'               => 'Parole',
+        'current_password'       => 'Pašreizējā parole',
+        'timesheet_month'        => 'Atskaites mēnesis',
+        'timesheet_year'         => 'Atskaites gads'
     ],
 
 ];
