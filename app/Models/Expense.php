@@ -26,12 +26,13 @@ class Expense extends Model
         return $this->belongsTo(User::class);
     }
 
+
     // Return the sum of all expenses related to one project and specific month (when expense has been made)
-    public function expensesTotal($expensesTotal){
-        $expensesTotal = Expense::with( 'project' )->
-            join( 'projects', 'project.id', '=', 'expenses.projects_id' )->
-            where( 'expenses.expense_month', 'Novembris' )->
-            sum( 'expenses.amount_euros' );
+    public static function expensesTotal($project_id, $expense_month){
+        $expensesTotal = Expense::all()->
+            where('expenses.project_id', $project_id)->
+            Andwhere('expenses.expense_month', $expense_month)->
+            sum('expenses.amount_euros');
 
         return $expensesTotal;
     }

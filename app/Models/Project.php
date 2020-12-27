@@ -21,6 +21,17 @@ class Project extends Model
         return $this->hasMany(ExpenseReport::class);
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function ($project) {
+
+            $project->expenses()->delete();
+
+        });
+    }
+
     public function scopeSearch($query, $value)
     {
         // neļauj meklēt mīkstinājuma/garumzīmes

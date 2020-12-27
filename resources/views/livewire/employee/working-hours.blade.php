@@ -84,7 +84,7 @@
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
-                                                            <option value=" {{ $project->id }}[project]"> {{ $project->title }}</option>
+                                                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>

@@ -17,7 +17,7 @@ class Users extends Component
     public $phone;
     public $address;
     public $password;
-    // public $roles;
+    public $roles;
 
     public $userModelId;
     public $userModalFormVisible = false;
@@ -97,15 +97,17 @@ class Users extends Component
         // $this->loadUserModel();
    }
 
-    public function loadUserModel()
+    public function loadUserModel($id)
     {
-        $users = User::find($this->userModelId);
-        $this->id = $users->id;
+        $users = User::find($id);
         $this->name = $users->name;
         $this->email = $users->email;
         $this->job_title = $users->job_title;
         $this->phone = $users->phone;
         $this->address = $users->address;
+        $roles = $users->roles;
+        $this->roles = compact('roles');
+        // dd($this->roles);
     }
 
     public function resetVars()
@@ -131,15 +133,14 @@ class Users extends Component
 
     public function assignRolesModal($id)
     {
-        $this->userModelId = $id;
         $this->assignRolesVisible = true;
-        // $this->loadUserModel();
+        $this->loadUserModel($id);
     }
     
-    public function loadUserRoles()
-    {
-        $roles = Role::find($this->userModelId);
-    }
+    // public function loadUserRoles()
+    // {
+    //     $roles = Role::find($this->userModelId);
+    // }
 
 
     // Sorting, Search and Rendering
@@ -162,8 +163,10 @@ class Users extends Component
 
     public function render()
     {
+        $roles = Role::all();
         return view('livewire.admin.users', [
-            'users' => $this->readUser()
+            'users' => $this->readUser(),
+            'allRoles' => $roles
         ]);
     }
 }

@@ -149,41 +149,43 @@ class Projects extends Component
 
     // Expense Methods
 
-    public function readExpense()
-    {
-        return Expense::all();
-    }
+    // public function readExpense()
+    // {
+    //     return Expense::all();
+    // }
 
-    public function expenseModelData()
-    {
-        return [
-            'project_id' => $this->project_id,
-            'user_id' => Auth::id(),
-            'vendor' => $this->vendor,
-            'document_number' => $this->document_number,
-            'amount_euros' => $this->amount_euros,
-            'expense_day' => $this->expense_day,
-            'expense_month' => $this->expense_month,
-            'expense_year' => $this->expense_year,
-            'expense_description' => $this->expense_description,
-        ];
-    }
+    // public function expenseModelData()
+    // {
+    //     return [
+    //         'project_id' => $this->project_id,
+    //         'user_id' => Auth::id(),
+    //         'vendor' => $this->vendor,
+    //         'document_number' => $this->document_number,
+    //         'amount_euros' => $this->amount_euros,
+    //         'expense_day' => $this->expense_day,
+    //         'expense_month' => $this->expense_month,
+    //         'expense_year' => $this->expense_year,
+    //         'expense_description' => $this->expense_description,
+    //     ];
+    // }
 
-    public function loadExpenseModel()
-    {
-        $expenses = Expense::find($this->expenseModelId);
-        // $this->id = $expenses->id;
-        $this->project_id = $expenses->project_id;
-        $this->user_id = $expenses->user_id;
-        $this->vendor = $expenses->vendor;
-        $this->document_number = $expenses->document_number;
-        $this->amount_euros = $expenses->amount_euros;
-        $this->expense_day = $expenses->expense_day;
-        $this->expense_month = $expenses->expense_month;
-        $this->expense_year = $expenses->expense_year;
-        $this->expense_description = $expenses->expense_description;
+    // public function loadExpenseModel()
+    // {
+    //     $expenses = Expense::find($this->expenseModelId);
+    //     // $this->id = $expenses->id;
+    //     $this->project_id = $expenses->project_id;
+    //     $this->user_id = $expenses->user_id;
+    //     $this->vendor = $expenses->vendor;
+    //     $this->document_number = $expenses->document_number;
+    //     $this->amount_euros = $expenses->amount_euros;
+    //     $this->expense_day = $expenses->expense_day;
+    //     $this->expense_month = $expenses->expense_month;
+    //     $this->expense_year = $expenses->expense_year;
+    //     $this->expense_description = $expenses->expense_description;
+    //     $expensesTotal = Expense::expensesTotal($this->project_id, $this->expense_month);
+    //     dd($expensesTotal);
 
-    }
+    // }
 
     // Sorting, Search, Rendering
 
@@ -206,9 +208,11 @@ class Projects extends Component
     public function render()
     {
         $users = User::with('roles')->get();
+        $expenses = Expense::all();
         return view('livewire.manager.projects',[
             'projects' => $this->readProject(),
-            'expenses' => $this->readExpense(),
+            // 'expenses' => $this->readExpense(),
+            'expenses' => $expenses,
             'users' => $users
         ]);
     }

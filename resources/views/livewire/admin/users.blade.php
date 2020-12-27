@@ -200,16 +200,13 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Administrators') }}</span>
                 </label>   -->
 
-                @if ($users->count())
-                    @foreach ($users as $user)
-                        @foreach ($user->roles as $role)
+                    @foreach ($allRoles as $role)
                             <div>
-                                <input type="checkbox" value="{{$role->id}}" name="role_title[]" id="role_title{{ $role->id }}">                                
+                                <input type="checkbox" value="{{$role->id}}" name="role_title" id="role_title_{{ $role->id }}">                                
                                 <label for="role_title{{ $role->id }}" class="ml-2 text-sm text-gray-600">{{$role->role_title}}</label>
                             </div>
-                        @endforeach
                     @endforeach
-                @endif
+
             </div>   
         </x-slot>
 
