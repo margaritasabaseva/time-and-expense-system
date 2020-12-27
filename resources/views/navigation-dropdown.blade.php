@@ -19,7 +19,7 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('paid-expenses') }}" :active="request()->routeIs('paid-expenses')">
+                    <x-jet-nav-link href="{{ route('expenses') }}" :active="request()->routeIs('expenses')">
                         {{ __('Reģistrēt izdevumus') }}
                     </x-jet-nav-link>
                 </div>

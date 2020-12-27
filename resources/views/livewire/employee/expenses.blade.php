@@ -25,22 +25,11 @@
         $('.alert').alert()
     </script>
 
+    <!-- Page Toolbar -->
     <div class="flex items-center justify-end">
-        <!-- <div class="flex-1 text-sm">
-            {{ __('Rādīt vienā lapā:') }}
-            <select wire:model="perPage">
-                <option class="text-sm">3</option>
-                <option class="text-sm">5</option>
-                <option class="text-sm">10</option>
-                <option class="text-sm">20</option>
-            </select>
-        </div> -->
-
-        <div class="flex items-center justify-end">
-            <x-jet-button wire:click="createExpenseModal">
-                {{ __('Jauns ieraksts') }}
-            </x-jet-button>
-        </div>
+        <x-jet-button wire:click="createExpenseModal">
+            {{ __('Jauns ieraksts') }}
+        </x-jet-button>
     </div>
 
     <!-- Data table -->
@@ -166,7 +155,6 @@
 
             <div class="mt-4">
                 <x-jet-label value="{{ __('Datums (dokumentā norādītais):') }}"/>
-                
                 <div class="inline-flex flex-row">
                     <div class="mr-2">
                         <x-jet-label for="expense_day" value="{{ __('Diena') }}"/>
@@ -201,18 +189,15 @@
 
                     <div>
                         <x-jet-label for="expense_year" value="{{ __('Gads') }}"/>
-                        <select name="expense_year" id="expense_year" class="w-28 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_year">
+                        <select name="expense_year" id="expense_year" class="w-24 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_year">
                             <option value=""></option>
-                            @for ($i = 2018; $i < 2023; $i++)
+                            @for ($i = 2020; $i < 2028; $i++)
                                     <option value="{{ $i }}"> {{ $i }} </option>
                             @endfor
                         </select>
                         <br>@error('expense_year') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
                     </div>
                 </div>
-
-                <!-- <x-jet-input id="expense_date" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="expense_date"/>
-                @error('expense_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror -->
             </div>
             <div class="mt-4">
                 <x-jet-label for="expense_description" value="{{ __('Izmaksu pamatojums/apraksts') }}"/>

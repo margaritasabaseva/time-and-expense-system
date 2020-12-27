@@ -8,7 +8,7 @@ use App\Models\Expense;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
-class PaidExpenses extends Component
+class Expenses extends Component
 {
     use WithPagination;
 
@@ -26,10 +26,11 @@ class PaidExpenses extends Component
     public $expenseModalFormVisible = false;
     public $confirmDeleteExpenseVisible = false;
 
-    // public $perPage = 10;
     public $sortBy = 'project_id';
     public $sortDirection = 'asc';
 
+
+    // Expense Methods
 
     public function rules()
     {
@@ -46,7 +47,6 @@ class PaidExpenses extends Component
 
     public function mount()
     {
-        // Resets pagination after reloading the page
         $this->resetPage();
     }
 
@@ -69,9 +69,6 @@ class PaidExpenses extends Component
     public function readExpense()
     {
         return Expense::orderBy($this->sortBy, $this->sortDirection)->get();
-        // return Expense::query()
-        //     ->orderBy($this->sortBy, $this->sortDirection)
-        //     ->paginate($this->perPage);
     }
 
     public function expenseModelData()
@@ -105,7 +102,7 @@ class PaidExpenses extends Component
     public function loadExpenseModel()
     {
         $expenses = Expense::find($this->expenseModelId);
-        $this->id = $expenses->id;
+        // $this->id = $expenses->id;
         $this->project_id = $expenses->project_id;
         $this->user_id = $expenses->user_id;
         $this->vendor = $expenses->vendor;
@@ -131,6 +128,9 @@ class PaidExpenses extends Component
         $this->expense_description = null;
     }
 
+
+    // Sorting and Rendering
+
     public function sortBy($field)
     {
         if ($this->sortDirection == 'asc') {
@@ -145,7 +145,7 @@ class PaidExpenses extends Component
     public function render()
     {
         $projects = Project::all();
-        return view('livewire.employee.paid-expenses', [
+        return view('livewire.employee.expenses', [
             'expenses' => $this->readExpense(),
             'projects' => $projects
         ]);

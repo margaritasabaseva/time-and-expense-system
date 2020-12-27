@@ -10,7 +10,7 @@
     <div class="pt-12">
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
-                @livewire('paid-expenses')
+                @livewire('expenses')
             </div>
         </div>
     </div>    
