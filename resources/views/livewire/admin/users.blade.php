@@ -186,27 +186,14 @@
 
         <x-slot name="content">
             <div class="mt-4">
-                <!-- test: ievietot value vietās ciparus -->
-                <!-- <label for="ROLE_EMPLOYEE" class="flex items-center mt-1">
-                    <input id="ROLE_EMPLOYEE" type="checkbox" class="form-checkbox" name="ROLE_EMPLOYEE" value="ROLE_EMPLOYEE">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Pamatlietotājs') }}</span>
-                </label>                
-                <label for="ROLE_MANAGER" class="flex items-center">
-                    <input id="ROLE_MANAGER" type="checkbox" class="form-checkbox" name="ROLE_MANAGER" value="ROLE_MANAGER">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Projektu vadītājs/ Grāmatvedis') }}</span>
-                </label>
-                <label for="ROLE_ADMIN" class="flex items-center mb-3">
-                    <input id="ROLE_ADMIN" type="checkbox" class="form-checkbox" name="ROLE_ADMIN" value="ROLE_ADMIN">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Administrators') }}</span>
-                </label>   -->
-
-                    @foreach ($allRoles as $role)
-                            <div>
-                                <input type="checkbox" value="{{$role->id}}" name="role_title" id="role_title_{{ $role->id }}">                                
-                                <label for="role_title{{ $role->id }}" class="ml-2 text-sm text-gray-600">{{$role->role_title}}</label>
-                            </div>
+                @if (is_array($this->roles))
+                    @foreach ($this->roles as $key => $role)
+                        <div>
+                            <input type="checkbox" value="{{ $role["roleId"] }}" name="role_title" id="role_title_{{ $role["roleId"] }}"  @if ( $role["checked"] ) {{ 'checked' }}@endif wire:model='roles.{{ $key }}.{{ "checked" }}'>
+                            <label for="role_title{{ $role["roleId"] }}" class="ml-2 text-sm text-gray-600">{{ $role["roleTitle"] }}</label>
+                        </div>
                     @endforeach
-
+                @endif
             </div>   
         </x-slot>
 

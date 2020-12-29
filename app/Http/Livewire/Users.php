@@ -3,14 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\User;
 use App\Models\Role;
-use Livewire\WithPagination;
+use App\Services\RolesStateService;
+use App\ValueObjects\RolesWithStatesVo;
 use Illuminate\Support\Facades\Hash;
 
 class Users extends Component
 {
     use WithPagination;
+
     public $name;
     public $email;
     public $job_title;
@@ -18,6 +21,7 @@ class Users extends Component
     public $address;
     public $password;
     public $roles;
+    public $user;
 
     public $userModelId;
     public $userModalFormVisible = false;
@@ -64,7 +68,8 @@ class Users extends Component
         $this->userModalFormVisible = true;
     }
 
-    public function readUser(){
+    public function readUser()
+    {
         return User::query()
             ->search($this->search)
             ->orderBy($this->sortBy, $this->sortDirection)
@@ -83,7 +88,8 @@ class Users extends Component
         ];
     }
 
-    public function deleteUser(){
+    public function deleteUser()
+    {
         User::destroy($this->userModelId);
         $this->confirmDeleteUserVisible = false;
         $this->resetPage();
@@ -94,7 +100,6 @@ class Users extends Component
    {
         $this->userModelId = $id;
         $this->confirmDeleteUserVisible = true;
-        // $this->loadUserModel();
    }
 
     public function loadUserModel($id)
@@ -105,9 +110,11 @@ class Users extends Component
         $this->job_title = $users->job_title;
         $this->phone = $users->phone;
         $this->address = $users->address;
-        $roles = $users->roles;
-        $this->roles = compact('roles');
-        // dd($this->roles);
+
+        $mainRoles = Role::all();
+        $userRoles = $users->roles;
+        $checkedRoles = RolesStateService::changeRolesStateFromUser($mainRoles, $userRoles);
+        $this->roles = $checkedRoles;
     }
 
     public function resetVars()
@@ -127,6 +134,11 @@ class Users extends Component
 
     public function assignRoles()
     {
+        /** From array to object **/
+        $rolesWithStates = RolesWithStatesVo::fromArray($this->roles);
+
+        /** Save to database */
+        $this->user->updateRolesFromStatesVo($rolesWithStates);
         $this->assignRolesVisible = false;
         session()->flash('successAssignRoles', 'Lomas saglabātas.');
     }
@@ -136,11 +148,6 @@ class Users extends Component
         $this->assignRolesVisible = true;
         $this->loadUserModel($id);
     }
-    
-    // public function loadUserRoles()
-    // {
-    //     $roles = Role::find($this->userModelId);
-    // }
 
 
     // Sorting, Search and Rendering
@@ -163,10 +170,8 @@ class Users extends Component
 
     public function render()
     {
-        $roles = Role::all();
         return view('livewire.admin.users', [
-            'users' => $this->readUser(),
-            'allRoles' => $roles
+            'users' => $this->readUser()
         ]);
     }
 }
