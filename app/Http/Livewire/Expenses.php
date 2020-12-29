@@ -102,7 +102,6 @@ class Expenses extends Component
     public function loadExpenseModel()
     {
         $expenses = Expense::find($this->expenseModelId);
-        // $this->id = $expenses->id;
         $this->project_id = $expenses->project_id;
         $this->user_id = $expenses->user_id;
         $this->vendor = $expenses->vendor;

@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class UserInTimeReport extends Component
 {
     use WithPagination;
+    
     public $name;
     public $email;
     public $job_title;
@@ -23,11 +24,11 @@ class UserInTimeReport extends Component
 
     public function mount()
     {
-        // Resets pagination after reloading the page
         $this->resetPage();
     }
 
-    public function readUser(){
+    public function readUser()
+    {
         return User::query()
             ->search($this->search)
             ->orderBy($this->sortBy, $this->sortDirection)
