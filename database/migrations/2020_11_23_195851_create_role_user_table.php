@@ -18,6 +18,7 @@ class CreateRoleUserTable extends Migration
             $table->bigInteger('role_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
+            
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('user_id')->references('id')->on('users');
         });

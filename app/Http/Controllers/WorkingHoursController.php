@@ -7,20 +7,6 @@ use App\Models\WorkingHour;
 
 class WorkingHoursController extends Controller
 {
-    // Eliminate null values from the array
-    // public function setWorkingHoursAttribute($hours)
-    // {
-    //     $working_hours = [];
-
-    //     foreach ($hours as $array_item) {
-    //         if (!is_null($array_item['date'])) {
-    //             $working_hours[] = $array_item;
-    //         }
-    //     }
-
-    //     $this->attributes['working_hours'] = json_encode($working_hours);
-    // }
-
     public function save(Request $request)
     {
         $hours = request('working-hours');

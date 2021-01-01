@@ -28,20 +28,20 @@
                 </div>
 
                 <div class="ml-2">
-                    <select name="timesheet_month" id="timesheet_month" class="w-40 form-select text-sm shadow-sm h-9">
+                    <select name="timesheet_month" id="timesheet_month" class="w-40 form-select text-sm shadow-sm h-9" wire:change="$emit('monthChanged')" wire:model="timesheet_month">
                         <option value=""></option>
-                        <option value="{{ __('Janvāris') }}"> {{ __('Janvāris') }} </option>
-                        <option value="{{ __('Februāris') }}"> {{ __('Februāris') }} </option>
-                        <option value="{{ __('Marts') }}"> {{ __('Marts') }} </option>
-                        <option value="{{ __('Aprīlis') }}"> {{ __('Aprīlis') }} </option>
-                        <option value="{{ __('Maijs') }}"> {{ __('Maijs') }} </option>
-                        <option value="{{ __('Jūnijs') }}"> {{ __('Jūnijs') }} </option>
-                        <option value="{{ __('Jūlijs') }}"> {{ __('Jūlijs') }} </option>
-                        <option value="{{ __('Augusts') }}"> {{ __('Augusts') }} </option>
-                        <option value="{{ __('Septembris') }}"> {{ __('Septembris') }} </option>
-                        <option value="{{ __('Oktobris') }}"> {{ __('Oktobris') }} </option>
-                        <option value="{{ __('Novembris') }}"> {{ __('Novembris') }} </option>
-                        <option value="{{ __('Decembris') }}"> {{ __('Decembris') }} </option>
+                        <option value="1"> {{ __('Janvāris') }} </option>
+                        <option value="2"> {{ __('Februāris') }} </option>
+                        <option value="3"> {{ __('Marts') }} </option>
+                        <option value="4" > {{ __('Aprīlis') }} </option>
+                        <option value="5"> {{ __('Maijs') }} </option>
+                        <option value="6" > {{ __('Jūnijs') }} </option>
+                        <option value="7" > {{ __('Jūlijs') }} </option>
+                        <option value="8" > {{ __('Augusts') }} </option>
+                        <option value="9" > {{ __('Septembris') }} </option>
+                        <option value="10"> {{ __('Oktobris') }} </option>
+                        <option value="11" > {{ __('Novembris') }} </option>
+                        <option value="12" > {{ __('Decembris') }} </option>
                     </select>
                     <br>@error('timesheet_month') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
                 </div>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="ml-2">
-                    <select name="timesheet_year" id="timesheet_year" class="w-24 form-select text-sm shadow-sm">
+                    <select name="timesheet_year" id="timesheet_year" class="w-24 form-select text-sm shadow-sm" wire:change="$emit('yearChanged')" wire:model="timesheet_year">
                         <option value=""></option>
                         @for ($i = 2020; $i < 2028; $i++)
                                 <option value="{{ $i }}"> {{ $i }} </option>
@@ -77,10 +77,10 @@
                                 <thead>
                                     <tr>
                                         <th class="px-3 py-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Datums</th>
-                                        @for ($i = 0; $i < 5; $i++)
+                                        <!----- Projects ----->
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot1">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -90,37 +90,82 @@
                                                 </select>
                                             </div>
                                         </th>
-                                        @endfor
+                                        <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
+                                            <div clas="font-bold">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot2">
+                                                    <option value="empty"></option>
+                                                    @if ($projects->count())
+                                                        @foreach ($projects as $project)
+                                                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </th>
+                                        <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
+                                            <div clas="font-bold">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot3">
+                                                    <option value="empty"></option>
+                                                    @if ($projects->count())
+                                                        @foreach ($projects as $project)
+                                                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </th>
+                                        <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
+                                            <div clas="font-bold">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot4">
+                                                    <option value="empty"></option>
+                                                    @if ($projects->count())
+                                                        @foreach ($projects as $project)
+                                                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </th>
+                                        <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
+                                            <div clas="font-bold">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot5">
+                                                    <option value="empty"></option>
+                                                    @if ($projects->count())
+                                                        @foreach ($projects as $project)
+                                                            <option value="{{ $project->id }}"> {{ $project->title }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </th>
+                                    <!------ End of projects ----->
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @for ($i=0; $i <= 30; $i++)
-                                    <tr>
-                                        <td class="border font-bold text-lg break-words">
-                                            <select name="timesheet_day" id="timesheet_day" class="w-20 form-select text-sm border-none" wire:model.debounce.800ms="timesheet_day">
-                                                <option value=""></option>
-                                                @for ($j = 1; $j < 32; $j++)
-                                                        <option value="{{ $j }}"> {{ $j }} </option>
-                                                @endfor
-                                            </select>
-                                        </td>
-                                        <td class="border text-sm break-words">
-                                            <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none"/>
-                                        </td>
-                                        <td class="border text-sm break-words">
-                                            <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none"/>
-                                        </td>
-                                        <td class="border text-sm break-words">
-                                            <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none"/>
-                                        </td>
-                                        <td class="border text-sm break-words">
-                                            <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none"/>
-                                        </td>
-                                        <td class="border text-sm break-words">
-                                            <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $i }}][hours]" value="{{ old('working-hours['.$i.'][hours]') }}" type="number" min="0" max="24" style="border:none"/>
-                                        </td>
-                                    </tr>
-                                    @endfor
+                                    @if (is_array($this->monthlyWorkingHours))
+                                        @foreach ($this->monthlyWorkingHours as $key => $project)
+                                            <tr>
+                                                <td class="border font-bold text-sm text-center break-words">
+                                                    <div>{{ $key }}</div>
+                                                </td>
+                                                <td class="border text-sm break-words">
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_1'/>
+                                                </td>
+                                                <td class="border text-sm break-words">
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_2'/>
+                                                </td>
+                                                <td class="border text-sm break-words">
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_3'/>
+                                                </td>
+                                                <td class="border text-sm break-words">
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_4'/>
+                                                </td>
+                                                <td class="border text-sm break-words">
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_5'/>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
 

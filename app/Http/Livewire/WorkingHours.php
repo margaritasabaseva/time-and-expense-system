@@ -3,10 +3,9 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\WorkingHour;
 use App\Models\Project;
+use App\Services\DateService;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class WorkingHours extends Component
 {
@@ -14,35 +13,61 @@ class WorkingHours extends Component
     public $timesheet_month;
     public $timesheet_year;
     public $working_hours;
+    public $monthlyWorkingHours;
+    public $projectSlot1;
+    public $projectSlot2;
+    public $projectSlot3;
+    public $projectSlot4;
+    public $projectSlot5;
 
     public $title;
     public $projectModelId;
 
+    protected $listeners = [
+        'yearChanged' => 'dateChanged', 
+        'monthChanged' => 'dateChanged'
+    ];
 
     // Working-hours Timesheet Methods
 
-    public function submitTimesheet()
+    public function submitWorkingHours()
     {
-        WorkingHour::create($this->timesheetModelData());
-        $this->resetVars();
-        $hours = request('working-hours');
-        $hours = WorkingHour::remove_null($hours);
-        session()->flash('successSubmitTimesheet', 'Stundas veiksmīgi iesniegtas.');
+        dd($this->monthlyWorkingHours);
+        /**WorkingHour::create($this->timesheetModelData());
+         * $this->resetVars();
+         * $hours = request('working-hours');
+         * $hours = WorkingHour::remove_null($hours);**/
+        //session()->flash('successSubmitTimesheet', 'Stundas veiksmīgi iesniegtas.');
     }
 
     public function timesheetModelData()
     {
-        // $dt = Carbon::(now);
         return [
             'user_id' => Auth::id(),
             'timesheet_month' => $this->timesheet_month,
             'timesheet_year' => $this->timesheet_year,
             'working_hours' => $this->working_hours,
-
-            // maybe use Carbon for month and year (to register and to show in the blade, so users do not need to choose by themselves)
-            // 'timesheet_month' => $dt->timesheet_month,
-            // 'timesheet_year' => $dt->timesheet_year,
         ];
+    }
+
+    public function dateChanged()
+    {
+        if (is_null($this->timesheet_month) || is_null($this->timesheet_year)) {
+            return;
+        }
+
+        $this->monthlyWorkingHours = [];
+        $amountOfWorkingDays = DateService::daysInMonth($this->timesheet_year, $this->timesheet_month);
+
+        for ($i = 1; $i < $amountOfWorkingDays; $i++) {
+            $this->monthlyWorkingHours[$i] = [
+                "slot_1" => "",
+                "slot_2" => "",
+                "slot_3" => "",
+                "slot_4" => "",
+                "slot_5" => ""
+            ];
+        }
     }
 
 

@@ -16,19 +16,14 @@ class CreateWorkingHoursTable extends Migration
         Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unsigned();
-
-            // iekšā project_id => projekts, iekš tā attiecīgi date => datums, working-hours => stundas
-            // uzņemt info pa kolonnām (pa projektam)
             $table->json('working_hours');
-            // tāpēc neesmu pārliecināta, vai šis drīkst te atrasties
             $table->integer('project_id')->unsigned();
-
-            $table->string('timesheet_month, 20');
+            $table->string('timesheet_month');
             $table->integer('timesheet_year');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onCascade('delete');
-            $table->foreign('project_id')->references('id')->on('projects')->onCascade('delete');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 
