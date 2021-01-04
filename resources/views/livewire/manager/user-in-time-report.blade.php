@@ -11,7 +11,7 @@
         </div>
 
         <div class="flex justify-end">
-            <input wire:model.debounce.300ms="search" class="form-input h-9" type="text" placeholder="Meklēt lietotājus...">
+            <input wire:model.debounce.300ms="search" class="form-input h-9" type="text" placeholder="Meklēt darbiniekus...">
         </div>
     </div>
 
@@ -58,7 +58,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens lietotājs netika atrasts</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens darbinieks netika atrasts.</td>
                                 </tr>
                             @endif
                         </tbody>

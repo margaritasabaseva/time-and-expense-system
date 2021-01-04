@@ -113,7 +113,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens lietotājs netika atrasts</td>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens lietotājs netika atrasts.</td>
                                 </tr>
                             @endif
                         </tbody>

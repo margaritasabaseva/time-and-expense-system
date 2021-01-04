@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'Norādītie autentifikācijas dati neatbilst mūsu ierakstiem.',
-    'password' => 'Norādītā parole nav pareiza.',
+    // 'password' => 'Norādītā parole nav pareiza.',
     'throttle' => 'Pārāk daudz pieslēgšanās mēģinājumu. Lūdzu, mēģiniet vēlreiz pēc :seconds sekundēm.',
 
 ];

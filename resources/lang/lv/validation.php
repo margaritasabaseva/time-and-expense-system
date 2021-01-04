@@ -148,6 +148,7 @@ return [
     */
 
     'attributes' => [
+        'project'                => 'Projekts',
         'title'                  => 'Nosaukums',
         'project_description'    => 'Apraksts',
         'responsible_manager'    => 'Atbildīgais projektu vadītājs',
@@ -168,7 +169,8 @@ return [
         'password'               => 'Parole',
         'current_password'       => 'Pašreizējā parole',
         'timesheet_month'        => 'Atskaites mēnesis',
-        'timesheet_year'         => 'Atskaites gads'
+        'timesheet_year'         => 'Atskaites gads',
+        'Y-m-d'                  => 'gggg-mm-dd'
     ],
 
 ];

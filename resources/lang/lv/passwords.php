@@ -17,6 +17,6 @@ return [
     'sent' => 'Mēs esam nosūtījuši Jūsu paroles atiestatīšanas saiti uz Jūsu e-pasta adresi!',
     'throttled' => 'Lūdzu, uzgaidiet, pirms mēģināt vēlreiz.',
     'token' => 'Šis paroles atiestatīšanas marķieris nav derīgs.',
-    'user' => "Mēs nevaram atrast lietotāju ar šādu e-pasta adresi.",
+    'user' => 'Mēs nevaram atrast lietotāju ar šādu e-pasta adresi.',
 
 ];

@@ -229,7 +229,7 @@
                                             Pakalpojumu sniedzēja nosaukums
                                         </th>
                                         <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Pirkuma dokumenta numurs
+                                            Izdevuma dokumenta numurs
                                         </th>
                                         <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
                                             Summa (EUR)
@@ -241,7 +241,7 @@
                                             Pievienoja
                                         </th>
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Izdevumu pamatojums/ apraksts
+                                            Izdevuma pamatojums/ apraksts
                                         </th>
                                         <!-- <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer sticky top-0"></th> -->
                                     </tr>

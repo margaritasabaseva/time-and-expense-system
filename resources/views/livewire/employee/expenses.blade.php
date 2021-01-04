@@ -48,7 +48,7 @@
                                     Pakalpojumu sniedzēja nosaukums
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('document_number')">
-                                    Pirkuma dokumenta numurs
+                                    Izdevuma dokumenta numurs
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('amount_euros')">
                                     Summa (EUR)
@@ -57,7 +57,7 @@
                                     Datums (dokumentā norādītais)
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Izdevumu pamatojums/ apraksts
+                                    Izdevuma pamatojums/ apraksts
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer"></th>
                             </tr>
@@ -136,6 +136,7 @@
                         @endforeach
                     @endif
                 </select>
+                @error('project_id') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="vendor" value="{{ __('Pakalpojumu sniedzēja nosaukums') }}"/>
