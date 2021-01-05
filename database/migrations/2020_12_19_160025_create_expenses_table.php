@@ -17,19 +17,17 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
-            $table->bigInteger('expense_report_id')->nullable()->unsigned();
-            $table->string('vendor', 255);
-            $table->string('document_number', 120);
+            $table->string('vendor', 255)->nullable();
+            $table->string('document_number', 120)->nullable();
             $table->decimal('amount_euros', 15, 2);
             $table->integer('expense_day')->unsigned();
-            $table->string('expense_month', 20)->unsigned();
+            $table->string('expense_month', 20);
             $table->integer('expense_year')->unsigned();
             $table->longText('expense_description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('expense_report_id')->references('id')->on('expense_report');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

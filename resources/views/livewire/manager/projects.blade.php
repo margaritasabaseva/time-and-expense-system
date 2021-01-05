@@ -289,7 +289,7 @@
                 </div>
                 <div class="font-bold m-3">
                     <!-- ielikt expense-report -->
-                    Kopējās izmaksas par {{ $expense->expense_month }} {{ $expense->expense_year }}:
+                    Kopējās projekta izmaksas: {{ $this->totalExpenses }}
                 </div>
             </div>
 

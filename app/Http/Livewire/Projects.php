@@ -7,7 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Project;
 use App\Models\Expense;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Services\ProjectExpensesService;
 
 class Projects extends Component
 {
@@ -18,6 +18,7 @@ class Projects extends Component
     public $responsible_manager;
     public $start_date;
     public $project_id;
+    public $totalExpenses;
 
     public $projectModelId;
     public $projectModalFormVisible = false;
@@ -63,7 +64,8 @@ class Projects extends Component
         $this->projectModalFormVisible = true;
     }
 
-    public function readProject(){
+    public function readProjects()
+    {
         return Project::query()
             ->search($this->search)
             ->orderBy($this->sortBy, $this->sortDirection)
@@ -97,7 +99,8 @@ class Projects extends Component
         $this->loadProjectModel();
     }
 
-    public function deleteProject(){
+    public function deleteProject()
+    {
         Project::destroy($this->projectModelId);
         $this->confirmDeleteProjectVisible = false;
         $this->resetPage();
@@ -109,16 +112,16 @@ class Projects extends Component
         $this->projectModelId = $id;
         $this->confirmDeleteProjectVisible = true;
         $this->loadProjectModel();
-
     }
 
     public function loadProjectModel()
     {
-        $projects = Project::find($this->projectModelId);
-        $this->title = $projects->title;
-        $this->project_description = $projects->project_description;
-        $this->responsible_manager = $projects->responsible_manager;
-        $this->start_date = $projects->start_date;
+        $project = Project::find($this->projectModelId);
+        $this->totalExpenses = ProjectExpensesService::expensesSumFromProject($project);
+        $this->title = $project->title;
+        $this->project_description = $project->project_description;
+        $this->responsible_manager = $project->responsible_manager;
+        $this->start_date = $project->start_date;
     }
 
     public function resetVars()
@@ -170,9 +173,8 @@ class Projects extends Component
     {
         $users = User::with('roles')->get();
         $expenses = Expense::all();
-        return view('livewire.manager.projects',[
-            'projects' => $this->readProject(),
-            // 'expenses' => $this->readExpense(),
+        return view('livewire.manager.projects', [
+            'projects' => $this->readProjects(),
             'expenses' => $expenses,
             'users' => $users
         ]);
