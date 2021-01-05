@@ -86,18 +86,19 @@ class Expenses extends Component
         ];
     }
     
-    public function deleteExpense(){
+    public function deleteExpense()
+    {
         Expense::destroy($this->expenseModelId);
         $this->confirmDeleteExpenseVisible = false;
         $this->resetPage();
         session()->flash('successDeleteExpense', 'Ieraksts izdzēsts.');
     }
 
-   public function deleteExpenseModal($id)
-   {
+    public function deleteExpenseModal($id)
+    {
         $this->expenseModelId = $id;
         $this->confirmDeleteExpenseVisible = true;
-   }
+    }
 
     public function loadExpenseModel()
     {
@@ -111,7 +112,6 @@ class Expenses extends Component
         $this->expense_month = $expenses->expense_month;
         $this->expense_year = $expenses->expense_year;
         $this->expense_description = $expenses->expense_description;
-
     }
 
     public function resetVars()

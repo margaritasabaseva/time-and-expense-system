@@ -27,15 +27,15 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'photo' => ['nullable', 'image', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
-        if (isset($input['job_title'])){
+        if (isset($input['job_title'])) {
             $user->job_title = $input['job_title'];
         }
         
-        if (isset($input['phone'])){
+        if (isset($input['phone'])) {
             $user->phone = $input['phone'];
         }
 
-        if (isset($input['address'])){
+        if (isset($input['address'])) {
             $user->address = $input['address'];
         }
 

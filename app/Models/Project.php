@@ -11,7 +11,7 @@ class Project extends Model
 
     protected $guarded = [];
 
-     public function expenses()
+    public function expenses()
     {
         return $this->hasMany(Expense::class);
     }
@@ -26,20 +26,15 @@ class Project extends Model
         parent::boot();
 
         self::deleting(function ($project) {
-
             $project->expenses()->delete();
-
         });
     }
 
     public function scopeSearch($query, $value)
     {
-        // neļauj meklēt mīkstinājuma/garumzīmes
         return $query
             ->where('title', 'like', '%'.$value.'%')
             ->Orwhere('project_description', 'like', '%'.$value.'%')
             ->Orwhere('responsible_manager', 'like', '%'.$value.'%');
     }
-
-    
 }

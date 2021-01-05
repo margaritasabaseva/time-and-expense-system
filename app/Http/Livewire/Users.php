@@ -85,6 +85,7 @@ class Users extends Component
             'phone' => $this->phone,
             'address' => $this->address,
             'password' => Hash::make($this->password),
+            // 'roles' => Role::all()->where('role_name', 'ROLE_EMPLOYEE')
         ];
     }
 
@@ -96,15 +97,16 @@ class Users extends Component
         session()->flash('successDeleteUser', 'Lietotājs izdzēsts.');
     }
 
-   public function deleteUserModal($id)
-   {
+    public function deleteUserModal($id)
+    {
         $this->userModelId = $id;
         $this->confirmDeleteUserVisible = true;
-   }
+    }
 
     public function loadUserModel($id)
     {
         $users = User::find($id);
+        $this->user = $users;
         $this->name = $users->name;
         $this->email = $users->email;
         $this->job_title = $users->job_title;

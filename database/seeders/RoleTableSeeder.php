@@ -34,6 +34,6 @@ class RoleTableSeeder extends Seeder
                 'role_title'=> 'Administrators',
                 'role_description' => 'Darbinieks ar administratora tiesībām – iespējams reģistrēt jaunus lietotājus, kā arī apskatīt, bloķēt/atbloķēt un dzēst esošos.'
             ],
-        ]);    
+        ]);
     }
 }

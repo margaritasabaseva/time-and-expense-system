@@ -17,15 +17,14 @@ class WorkingHoursController extends Controller
         $workingHours->month=01;
         $workingHours->working_hours = $hours;
         $workingHours->save();
-
     }
 
     public function remove_null($hours)
     {
-       $working_hours = [];
+        $working_hours = [];
 
         foreach ($hours as $array_item) {
-            if ($array_item['Datums'] != NULL) {
+            if ($array_item['Datums'] != null) {
                 array_push($working_hours, $array_item);
             }
         }
