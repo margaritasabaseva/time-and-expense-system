@@ -18,11 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name', 120);
             $table->string('email', 120)->unique();
             $table->string('password', 120);
-            // $table->rememberToken();
             $table->string('job_title', 255);
             $table->string('phone', 15);
             $table->string('address', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,5 +34,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        // Schema::table('users', function ($table) {
+        //     $table->dropSoftDeletes();
+        // });
     }
 }

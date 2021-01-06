@@ -4,21 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     public function expenses()
     {
         return $this->hasMany(Expense::class);
-    }
-
-    public function expenseReports()
-    {
-        return $this->hasMany(ExpenseReport::class);
     }
 
     public static function boot()
