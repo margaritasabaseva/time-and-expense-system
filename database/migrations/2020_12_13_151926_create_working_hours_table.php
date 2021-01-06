@@ -15,11 +15,11 @@ class CreateWorkingHoursTable extends Migration
     {
         Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
+            $table->string('timesheet_month', 50);
+            $table->integer('timesheet_year')->unsigned();
             $table->json('working_hours');
-            $table->integer('project_id')->unsigned();
-            $table->string('timesheet_month');
-            $table->integer('timesheet_year');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

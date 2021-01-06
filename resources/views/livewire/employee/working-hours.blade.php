@@ -6,7 +6,7 @@
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -15,13 +15,7 @@
     <script>
         $('.alert').alert()
     </script>
-
-    <!-- Timesheet for Employee Working Hours -->
-    <form>
-        <!-- action="{{ ('working-hours.store') }}" method="POST" -->
-        <!-- action('working-hours.store') -->
-
-        <!-- Form toolbar -->
+    <form  wire:submit.prevent="submit">
             <div class="flex mx-3">
                 <div class="ml-2 mt-2">
                     <x-jet-label for="timesheet_month" value="{{ __('Atskaites mēnesis') }}" class="font-bold"/>
@@ -61,7 +55,7 @@
                 </div>
 
                 <div class="ml-auto">
-                    <x-jet-button class="mr-1" wire:click="submitWorkingHours">
+                    <x-jet-button class="mr-1" wire:loading.attr="disabled">
                         {{ __('Iesniegt stundas') }}
                     </x-jet-button>
                 </div>
@@ -72,7 +66,6 @@
                 <div class="mt-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="pb-10 pt-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mx-3">
-                        
                             <table class="table-fixed min-w-full">
                                 <thead>
                                     <tr>
@@ -80,7 +73,7 @@
                                         <!----- Projects ----->
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot1">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_1')" wire:model="projectSlot1">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -92,7 +85,7 @@
                                         </th>
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot2">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_2')" wire:model="projectSlot2">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -104,7 +97,7 @@
                                         </th>
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot3">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_3')" wire:model="projectSlot3">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -116,7 +109,7 @@
                                         </th>
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot4">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_4')" wire:model="projectSlot4">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -128,7 +121,7 @@
                                         </th>
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
-                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('yearChanged')" wire:model="projectSlot5">
+                                                <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_5')" wire:model="projectSlot5">
                                                     <option value="empty"></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
@@ -138,30 +131,30 @@
                                                 </select>
                                             </div>
                                         </th>
-                                    <!------ End of projects ----->
+                                        <!------ End of projects ----->
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @if (is_array($this->monthlyWorkingHours))
                                         @foreach ($this->monthlyWorkingHours as $key => $project)
                                             <tr>
-                                                <td class="border font-bold text-sm text-center break-words">
+                                                <td class="border font-bold text-sm break-words">
                                                     <div>{{ $key }}</div>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_1'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot1_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_2'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot2_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_3'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot3_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_4'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot4_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='monthlyWorkingHours.{{ $key }}.slot_5'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot5_data.{{ $key }}'/>
                                                 </td>
                                             </tr>
                                         @endforeach

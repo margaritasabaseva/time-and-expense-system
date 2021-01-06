@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             RoleUserTableSeeder::class,
             ProjectTableSeeder::class,
-            // WorkingHoursTableSeeder::class,
             ExpenseTableSeeder::class,
+            WorkingHoursTableSeeder::class,
         ]);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Project;
 use App\Services\DateService;
+use Livewire\Component;
+use App\Models\WorkingHour;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
 class WorkingHours extends Component
@@ -14,36 +15,67 @@ class WorkingHours extends Component
     public $timesheet_year;
     public $working_hours;
     public $monthlyWorkingHours;
+
     public $projectSlot1;
     public $projectSlot2;
     public $projectSlot3;
     public $projectSlot4;
     public $projectSlot5;
 
+    public $projectSlot1_data;
+    public $projectSlot2_data;
+    public $projectSlot3_data;
+    public $projectSlot4_data;
+    public $projectSlot5_data;
+
     public $title;
     public $projectModelId;
 
     protected $listeners = [
-        'yearChanged' => 'dateChanged', 
-        'monthChanged' => 'dateChanged'
+        'yearChanged' => 'resetGrid',
+        'monthChanged' => 'resetGrid',
+        'hoursChanged' => 'hoursChanged'
     ];
 
-    // Working-hours Timesheet Methods
-
-    public function submitWorkingHours()
+    public function resetGrid()
     {
-        dd($this->monthlyWorkingHours);
-        /**WorkingHour::create($this->timesheetModelData());
-         * $this->resetVars();
-         * $hours = request('working-hours');
-         * $hours = WorkingHour::remove_null($hours);**/
-        //session()->flash('successSubmitTimesheet', 'Stundas veiksmīgi iesniegtas.');
+        $this->projectSlot1 = null;
+        $this->projectSlot2 = null;
+        $this->projectSlot3 = null;
+        $this->projectSlot4 = null;
+        $this->projectSlot5 = null;
+        $this->projectSlot1_data = null;
+        $this->projectSlot2_data = null;
+        $this->projectSlot3_data = null;
+        $this->projectSlot4_data = null;
+        $this->projectSlot5_data = null;
+
+        $this->dateChanged();
+    }
+    public function submit()
+    {
+        if (!is_null($this->projectSlot1)) {
+            WorkingHour::saveFromArray($this->user_id, $this->projectSlot1, $this->timesheet_month, $this->timesheet_year, $this->projectSlot1_data);
+        }
+        if (!is_null($this->projectSlot2)) {
+            WorkingHour::saveFromArray($this->user_id, $this->projectSlot2, $this->timesheet_month, $this->timesheet_year, $this->projectSlot2_data);
+        }
+        if (!is_null($this->projectSlot3)) {
+            WorkingHour::saveFromArray($this->user_id, $this->projectSlot3, $this->timesheet_month, $this->timesheet_year, $this->projectSlot3_data);
+        }
+        if (!is_null($this->projectSlot4)) {
+            WorkingHour::saveFromArray($this->user_id, $this->projectSlot4, $this->timesheet_month, $this->timesheet_year, $this->projectSlot4_data);
+        }
+        if (!is_null($this->projectSlot5)) {
+            WorkingHour::saveFromArray($this->user_id, $this->projectSlot5, $this->timesheet_month, $this->timesheet_year, $this->projectSlot5_data);
+        }
+        session()->flash('successSubmitTimesheet', 'Stundas saglabātas.');
     }
 
     public function timesheetModelData()
     {
         return [
-            'user_id' => Auth::id(),
+            'user_id' => $this->user_id,
             'timesheet_month' => $this->timesheet_month,
             'timesheet_year' => $this->timesheet_year,
             'working_hours' => $this->working_hours,
@@ -59,21 +91,50 @@ class WorkingHours extends Component
         $this->monthlyWorkingHours = [];
         $amountOfWorkingDays = DateService::daysInMonth($this->timesheet_year, $this->timesheet_month);
 
-        for ($i = 1; $i < $amountOfWorkingDays; $i++) {
-            $this->monthlyWorkingHours[$i] = [
-                "slot_1" => "",
-                "slot_2" => "",
-                "slot_3" => "",
-                "slot_4" => "",
-                "slot_5" => ""
-            ];
+        for ($i = 1; $i <= $amountOfWorkingDays; $i++) {
+            $this->monthlyWorkingHours[$i] = null;
         }
     }
 
+    public function hoursChanged(string $id)
+    {
+        switch ($id) {
+            case 'slot_1':
+                $this->projectSlot1_data = $this->getHoursByProject($this->projectSlot1);
+                break;
+            case 'slot_2':
+                $this->projectSlot2_data = $this->getHoursByProject($this->projectSlot2);
+                break;
+            case 'slot_3':
+                $this->projectSlot3_data = $this->getHoursByProject($this->projectSlot3);
+                break;
+            case 'slot_4':
+                $this->projectSlot4_data = $this->getHoursByProject($this->projectSlot4);
+                break;
+            case 'slot_5':
+                $this->projectSlot5_data = $this->getHoursByProject($this->projectSlot5);
+                break;
 
-    // Project Methods
+        }
 
-    public function readProject(){
+        $this->dateChanged();
+    }
+
+    public function getHoursByProject($projectId)
+    {
+        $workingHoursFromDb = WorkingHour::all()->where('user_id', $this->user_id)
+            ->where('project_id', $projectId)
+            ->where('timesheet_month', $this->timesheet_month)
+            ->where('timesheet_year', $this->timesheet_year)->first();
+
+        if (is_null($workingHoursFromDb)) {
+            return $this->monthlyWorkingHours;
+        }
+        return $workingHoursFromDb->working_hours;
+    }
+
+    public function readProject()
+    {
         return Project::all();
     }
 
@@ -90,12 +151,10 @@ class WorkingHours extends Component
         $this->title = $projects->title;
     }
 
-
-    // Rendering
-
     public function render()
     {
-        return view('livewire.employee.working-hours',[
+        $this->user_id = Auth::id();
+        return view('livewire.employee.working-hours', [
             'projects' => $this->readProject(),
         ]);
     }
