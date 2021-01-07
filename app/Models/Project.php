@@ -18,6 +18,12 @@ class Project extends Model
         return $this->hasMany(Expense::class);
     }
 
+    public function workingHoursReport()
+    {
+        return $this
+            ->hasMany(WorkingHour::class);
+    }
+
     public static function boot()
     {
         parent::boot();

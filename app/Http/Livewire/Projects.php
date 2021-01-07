@@ -149,7 +149,6 @@ class Projects extends Component
         $this->projectExpensesModalVisible = true;
         $this->loadProjectModel();
     }
-    
 
     // Sorting, Search, Rendering
 
@@ -172,7 +171,7 @@ class Projects extends Component
     public function render()
     {
         $users = User::with('roles')->get();
-        $expenses = Expense::all();
+        $expenses = Expense::orderBy('expense_date', 'desc')->get();
         return view('livewire.manager.projects', [
             'projects' => $this->readProjects(),
             'expenses' => $expenses,

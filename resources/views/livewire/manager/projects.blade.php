@@ -5,7 +5,7 @@
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -14,7 +14,7 @@
             <div class="alert alert-primary alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -23,7 +23,7 @@
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -50,7 +50,7 @@
                 {{ __('Jauns projekts') }}
             </x-jet-button>
         </div>
-        
+
         <div class="flex justify-end">
             <input wire:model.debounce.300ms="search" class="form-input h-9" type="text" placeholder="Meklēt projektus...">
         </div>
@@ -84,7 +84,7 @@
                                 @foreach ($projects as $project)
                                 <tr>
                                     <td class="font-bold px-6 py-4 text-md break-words">
-                                        <button class="font-bold text-left hover:text-gray-600 hover:underline" wire:click="showProjectExpensesModal({{ $project->id }})">  
+                                        <button class="font-bold text-left hover:text-gray-600 hover:underline" wire:click="showProjectExpensesModal({{ $project->id }})">
                                             {{ $project->title }}
                                         </button>
                                     </td>
@@ -154,7 +154,7 @@
                         @foreach ($users as $user)
                             @if ($user->hasRole('ROLE_MANAGER'))
                             <option value="{{ $user->name }}"> {{ $user->name }}</option>
-                            @endif                        
+                            @endif
                         @endforeach
                     @else
                         {{ __('Neviens projektu vadītājs netika atrasts.') }}
@@ -262,7 +262,7 @@
                                                         {{ $expense->amount_euros }}
                                                     </td>
                                                     <td class="px-6 text-sm whitespace-no-wrap">
-                                                        {{ $expense->expense_day }}-{{ $expense->expense_month }}-{{ $expense->expense_year }}
+                                                        {{ $expense->expense_date }}
                                                     </td>
                                                     <td class="px-6 text-sm break-all">
                                                         {{ $expense->user->name }}
@@ -289,7 +289,7 @@
                 </div>
                 <div class="font-bold m-3">
                     <!-- ielikt expense-report -->
-                    Kopējās projekta izmaksas: {{ $this->totalExpenses }}
+                    Kopējās projekta izmaksas: EUR {{ $this->totalExpenses }}
                 </div>
             </div>
 
