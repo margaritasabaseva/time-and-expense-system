@@ -3,21 +3,19 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Expense;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
 class Expenses extends Component
 {
-    use WithPagination;
-
     public $vendor;
     public $document_number;
     public $amount_euros;
     public $expense_day;
     public $expense_month;
     public $expense_year;
+    public $expense_date;
     public $expense_description;
     public $project_id;
     public $user_id;
@@ -73,19 +71,21 @@ class Expenses extends Component
 
     public function expenseModelData()
     {
+        $this->expense_date = \DateTime::createFromFormat(
+            'Y-m-d',
+            sprintf('%s-%s-%s', $this->expense_year, $this->expense_month, $this->expense_day)
+        );
         return [
             'project_id' => $this->project_id,
             'user_id' => Auth::id(),
             'vendor' => $this->vendor,
             'document_number' => $this->document_number,
             'amount_euros' => $this->amount_euros,
-            'expense_day' => $this->expense_day,
-            'expense_month' => $this->expense_month,
-            'expense_year' => $this->expense_year,
+            'expense_date' => $this->expense_date,
             'expense_description' => $this->expense_description,
         ];
     }
-    
+
     public function deleteExpense()
     {
         Expense::destroy($this->expenseModelId);

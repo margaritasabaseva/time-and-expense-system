@@ -6,7 +6,7 @@
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -15,7 +15,7 @@
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                </button>    
+                </button>
                 <strong class="text-sm">{{ $message }}</strong>
             </div>
         @endif
@@ -47,13 +47,13 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:15%;" wire:click="sortBy('vendor')">
                                     Pakalpojumu sniedzēja nosaukums
                                 </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('document_number')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Izdevuma dokumenta numurs
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('amount_euros')">
                                     Summa (EUR)
                                 </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('expense_date')">
                                     Datums (dokumentā norādītais)
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -69,7 +69,7 @@
                                         @if ($expense->user_id == Auth::id())
                                         <tr>
                                             <td class="px-6 text-sm break-words">
-                                                {{ $expense->project->title }} 
+                                                {{ $expense->project->title }}
                                             </td>
                                             <td class="px-6 text-sm break-words">
                                                 {{ $expense->vendor }}
@@ -81,9 +81,9 @@
                                                 {{ $expense->amount_euros }}
                                             </td>
                                             <td class="px-6 text-sm whitespace-no-wrap">
-                                                {{ $expense->expense_day }}-{{ $expense->expense_month }}-{{ $expense->expense_year }}
+                                                {{ $expense->expense_date }}
                                             </td>
-                                            <td class="px-6 text-sm break-all">
+                                            <td class="px-6 text-sm break-words">
                                                 {{ $expense->expense_description }}
                                             </td>
                                             <td class="px-3 py-1">
@@ -92,8 +92,8 @@
                                                 </x-jet-danger-button>
                                             </td>
                                         </tr>
-                                        
-                                    <!-- elseif – ja lietotājam nav neviena ieraksta ar savu id 
+
+                                    <!-- elseif – ja lietotājam nav neviena ieraksta ar savu id
                                         <tr>
                                             <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
                                         </tr> -->
@@ -117,7 +117,7 @@
     <x-jet-dialog-modal wire:model="expenseModalFormVisible">
 
         <x-slot name="title">
-            <div class="font-bold">    
+            <div class="font-bold">
                 {{ __('Pievienot jaunu izdevumu ierakstu') }}
             </div>
         </x-slot>
@@ -172,18 +172,18 @@
                         <x-jet-label for="expense_month" value="{{ __('Mēnesis') }}"/>
                         <select name="expense_month" id="expense_month" class="w-40 form-select text-sm shadow-sm" wire:model.debounce.800ms="expense_month">
                             <option value=""></option>
-                            <option value="{{ __('Janvāris') }}"> {{ __('Janvāris') }} </option>
-                            <option value="{{ __('Februāris') }}"> {{ __('Februāris') }} </option>
-                            <option value="{{ __('Marts') }}"> {{ __('Marts') }} </option>
-                            <option value="{{ __('Aprīlis') }}"> {{ __('Aprīlis') }} </option>
-                            <option value="{{ __('Maijs') }}"> {{ __('Maijs') }} </option>
-                            <option value="{{ __('Jūnijs') }}"> {{ __('Jūnijs') }} </option>
-                            <option value="{{ __('Jūlijs') }}"> {{ __('Jūlijs') }} </option>
-                            <option value="{{ __('Augusts') }}"> {{ __('Augusts') }} </option>
-                            <option value="{{ __('Septembris') }}"> {{ __('Septembris') }} </option>
-                            <option value="{{ __('Oktobris') }}"> {{ __('Oktobris') }} </option>
-                            <option value="{{ __('Novembris') }}"> {{ __('Novembris') }} </option>
-                            <option value="{{ __('Decembris') }}"> {{ __('Decembris') }} </option>
+                            <option value="1"> {{ __('Janvāris') }} </option>
+                            <option value="2"> {{ __('Februāris') }} </option>
+                            <option value="3"> {{ __('Marts') }} </option>
+                            <option value="4"> {{ __('Aprīlis') }} </option>
+                            <option value="5"> {{ __('Maijs') }} </option>
+                            <option value="6"> {{ __('Jūnijs') }} </option>
+                            <option value="7"> {{ __('Jūlijs') }} </option>
+                            <option value="8"> {{ __('Augusts') }} </option>
+                            <option value="9"> {{ __('Septembris') }} </option>
+                            <option value="10"> {{ __('Oktobris') }} </option>
+                            <option value="11"> {{ __('Novembris') }} </option>
+                            <option value="12"> {{ __('Decembris') }} </option>
                         </select>
                         <br>@error('expense_month') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
                     </div>
