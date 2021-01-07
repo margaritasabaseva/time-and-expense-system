@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\WorkingHour;
+use App\Services\TimeReportService;
 use Livewire\Component;
 use App\Models\User;
 use Livewire\WithPagination;
@@ -9,7 +11,10 @@ use Livewire\WithPagination;
 class UserInTimeReport extends Component
 {
     use WithPagination;
-    
+
+    const NO_HOURS_RECORDED = 'Darbiniekam šajā mēnesī nav nostrādāto stundu';
+    const CHOOSE_VALID_DATE = 'Lūdzu izvēlēties atskaites datumu';
+
     public $name;
     public $email;
     public $job_title;
@@ -21,6 +26,40 @@ class UserInTimeReport extends Component
     public $sortBy = 'name';
     public $sortDirection = 'asc';
     public $search = '';
+
+    public $reportMonth;
+    public $reportYear;
+    public $user;
+    public $userReportData;
+
+    public $noHoursMessage = self::CHOOSE_VALID_DATE;
+
+    protected $listeners = [
+        'dateChanged' => 'dateChanged'
+    ];
+
+    public function dateChanged()
+    {
+        if (is_null($this->reportMonth) || is_null($this->reportYear)) {
+            $this->noHoursMessage = self::CHOOSE_VALID_DATE;
+            return;
+        }
+
+        $userWorkingHours = WorkingHour::getByUserAndDate($this->user, $this->reportMonth, $this->reportYear);
+        if ($userWorkingHours->count() <= 0) {
+            $this->noHoursMessage = self::NO_HOURS_RECORDED;
+        }
+        $timeReportService = new TimeReportService();
+        $this->userReportData = $timeReportService->hoursPerMonthFromCollection($userWorkingHours);
+    }
+
+    public function clearVars()
+    {
+        $this->noHoursMessage = self::CHOOSE_VALID_DATE;
+        $this->userReportData = [];
+        $this->reportMonth = null;
+        $this->reportYear = null;
+    }
 
     public function mount()
     {
@@ -47,14 +86,15 @@ class UserInTimeReport extends Component
     public function showUserTimeReport()
     {
         $this->validate();
-        // User::find($this->userModelId)->update($this->userModelData());
         $this->userTimeReportModalVisible = false;
     }
 
     public function showUserTimeReportModal($id)
     {
+        $this->clearVars();
         $this->resetValidation();
         $this->userModelId = $id;
+        $this->user = User::find($id);
         $this->userTimeReportModalVisible = true;
         $this->loadUserModel();
     }

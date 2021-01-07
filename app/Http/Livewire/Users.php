@@ -40,7 +40,7 @@ class Users extends Component
     {
         return [
             'name' => 'required|max:120',
-            'email' => 'required|email|max:120',
+            'email' => 'required|email|max:120|unique:users',
             'job_title' => 'required|max:255',
             'phone' => 'required|numeric|digits_between:1,15',
             'password' => 'required|min:8|max:120',
@@ -85,7 +85,6 @@ class Users extends Component
             'phone' => $this->phone,
             'address' => $this->address,
             'password' => Hash::make($this->password),
-            // 'roles' => Role::all()->where('role_name', 'ROLE_EMPLOYEE')
         ];
     }
 

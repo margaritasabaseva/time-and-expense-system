@@ -80,8 +80,56 @@
 
         <x-slot name="content">
             {{ __('Darbinieka iesniegto stundu pārskats') }}
-        </x-slot>
+            <div class="flex mt-3">
+                <div class="mt-2">
+                    <x-jet-label for="timesheet_month" value="{{ __('Atskaites mēnesis') }}" class="font-bold"/>
+                </div>
 
+                <div class="ml-2">
+                    <select name="timesheet_month" id="timesheet_month" class="w-40 form-select text-sm shadow-sm h-9" wire:change="$emit('dateChanged')" wire:model="reportMonth">
+                        <option value=""></option>
+                        <option value="1"> {{ __('Janvāris') }} </option>
+                        <option value="2"> {{ __('Februāris') }} </option>
+                        <option value="3"> {{ __('Marts') }} </option>
+                        <option value="4" > {{ __('Aprīlis') }} </option>
+                        <option value="5"> {{ __('Maijs') }} </option>
+                        <option value="6" > {{ __('Jūnijs') }} </option>
+                        <option value="7" > {{ __('Jūlijs') }} </option>
+                        <option value="8" > {{ __('Augusts') }} </option>
+                        <option value="9" > {{ __('Septembris') }} </option>
+                        <option value="10"> {{ __('Oktobris') }} </option>
+                        <option value="11" > {{ __('Novembris') }} </option>
+                        <option value="12" > {{ __('Decembris') }} </option>
+                    </select>
+                    <br>@error('timesheet_month') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                </div>
+
+                <div class="ml-4 mr mt-2">
+                    <x-jet-label for="timesheet_year" value="{{ __('Atskaites gads') }}" class="font-bold"/>
+                </div>
+                <div class="ml-2">
+                    <select name="timesheet_year" id="timesheet_year" class="w-24 form-select text-sm shadow-sm" wire:change="$emit('dateChanged')" wire:model="reportYear">
+                        <option value=""></option>
+                        @for ($i = 2020; $i < 2028; $i++)
+                            <option value="{{ $i }}"> {{ $i }} </option>
+                        @endfor
+                    </select>
+                    <br>@error('timesheet_year') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                </div>
+            </div>
+            <div class="mt-3">
+                @if ($this->userReportData)
+                    @foreach ($this->userReportData as $project=>$hours)
+                        <div class="flex">
+                            <div><p class="font-bold">{{ $project }}:</p></div>
+                            <div class="ml-2"><p>{{ $hours }}h</p></div>
+                        </div>
+                    @endforeach
+                @else
+                    <span class="text-red-500 text-xs"> {{ $this->noHoursMessage }} </span>
+                @endif
+            </div>
+        </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('userTimeReportModalVisible')" wire:loading.attr="disabled">
                 {{ __('Aizvērt') }}
