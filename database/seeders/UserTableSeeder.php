@@ -38,15 +38,15 @@ class UserTableSeeder extends Seeder
                 'email' => 'admin@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'IT sistēmas administrators',
-                'phone' => '29988776',
-                'address' => NULL
+                'phone' => '29343323',
+                'address' => 'Nākotnes iela 3, Māriņkalns, Ziemera pagasts, Alūksnes novads, LV-4332'
             ],
             [
                 'name' => 'Parasts Darbinieks 2',
                 'email' => 'employee2@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'Parasts Darbinieks 2',
-                'phone' => '29988776',
+                'phone' => '29153477',
                 'address' => NULL
             ],
             [
@@ -54,15 +54,15 @@ class UserTableSeeder extends Seeder
                 'email' => 'employee3@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'Parasts Darbinieks 3',
-                'phone' => '29988776',
-                'address' => 'Nākotnes iela 3, Māriņkalns, Ziemera pagasts, Alūksnes novads, LV-4332'
+                'phone' => '27431222',
+                'address' => NULL
             ],
             [
                 'name' => 'Parasts Darbinieks 4',
                 'email' => 'employee4@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'Parasts Darbinieks 4',
-                'phone' => '29988776',
+                'phone' => '21234098',
                 'address' => NULL
             ],
             [
@@ -70,7 +70,23 @@ class UserTableSeeder extends Seeder
                 'email' => 'manager2@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'Projektu Vadītājs 2',
-                'phone' => '29988776',
+                'phone' => '20977097',
+                'address' => NULL
+            ],
+            [
+                'name' => 'Projektu Vadītājs 3',
+                'email' => 'manager3@email.com',
+                'password' => Hash::make('lotisarezgitaparole'),
+                'job_title' => 'Projektu Vadītājs 3',
+                'phone' => '28483253',
+                'address' => NULL
+            ],
+            [
+                'name' => 'Projektu Vadītājs 3',
+                'email' => 'manager4@email.com',
+                'password' => Hash::make('lotisarezgitaparole'),
+                'job_title' => 'Projektu Vadītājs 4',
+                'phone' => '29987777',
                 'address' => NULL
             ]
         ]);
