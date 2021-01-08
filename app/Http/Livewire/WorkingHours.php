@@ -39,6 +39,12 @@ class WorkingHours extends Component
 
     public function resetGrid()
     {
+        $this->resetVars();
+        $this->dateChanged();
+    }
+
+    public function resetVars() 
+    {
         $this->projectSlot1 = null;
         $this->projectSlot2 = null;
         $this->projectSlot3 = null;
@@ -49,27 +55,54 @@ class WorkingHours extends Component
         $this->projectSlot3_data = null;
         $this->projectSlot4_data = null;
         $this->projectSlot5_data = null;
-
-        $this->dateChanged();
     }
+
     public function submit()
     {
+        $hasChanged = false;
+        $hasHours = false;
+
         if (!is_null($this->projectSlot1)) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot1, $this->timesheet_month, $this->timesheet_year, $this->projectSlot1_data);
+            $hasChanged = true;
+            if ($this->arrayHasHours($this->projectSlot1_data)) {
+                $hasHours = true;
+            }
         }
         if (!is_null($this->projectSlot2)) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot2, $this->timesheet_month, $this->timesheet_year, $this->projectSlot2_data);
+            $hasChanged = true;
+            if ($this->arrayHasHours($this->projectSlot2_data)) {
+                $hasHours = true;
+            }
         }
         if (!is_null($this->projectSlot3)) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot3, $this->timesheet_month, $this->timesheet_year, $this->projectSlot3_data);
+            $hasChanged = true;
+            if ($this->arrayHasHours($this->projectSlot3_data)) {
+                $hasHours = true;
+            }
         }
         if (!is_null($this->projectSlot4)) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot4, $this->timesheet_month, $this->timesheet_year, $this->projectSlot4_data);
+            $hasChanged = true;
+            if ($this->arrayHasHours($this->projectSlot4_data)) {
+                $hasHours = true;
+            }
         }
         if (!is_null($this->projectSlot5)) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot5, $this->timesheet_month, $this->timesheet_year, $this->projectSlot5_data);
+            $hasChanged = true;
+            if ($this->arrayHasHours($this->projectSlot5_data)) {
+                $hasHours = true;
+            }
         }
-        session()->flash('successSubmitTimesheet', 'Stundas saglabātas.');
+        if ($hasChanged && $hasHours) {
+            session()->flash('successSubmitTimesheet', 'Stundas saglabātas.');
+        }
+        else {
+            session()->flash('failedSubmitTimesheet', 'Darba stundas netika ievadītas.');
+        }
     }
 
     public function timesheetModelData()
@@ -84,7 +117,9 @@ class WorkingHours extends Component
 
     public function dateChanged()
     {
-        if (is_null($this->timesheet_month) || is_null($this->timesheet_year)) {
+        if (is_null($this->timesheet_month) || is_null($this->timesheet_year) || $this->timesheet_month=='' || $this->timesheet_year=='') {
+            $this->resetVars();
+            $this->monthlyWorkingHours = [];
             return;
         }
 
@@ -131,6 +166,18 @@ class WorkingHours extends Component
             return $this->monthlyWorkingHours;
         }
         return $workingHoursFromDb->working_hours;
+    }
+
+    public function arrayHasHours(array $hours)
+    {
+        $hasHours = false;
+        foreach ($hours as $key=>$value) {
+            if ((float)$value > 0) {
+                $hasHours = true;
+                break;
+            }
+        }
+        return $hasHours;
     }
 
     public function readProject()

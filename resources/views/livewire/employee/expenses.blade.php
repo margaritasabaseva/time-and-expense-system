@@ -92,17 +92,13 @@
                                                 </x-jet-danger-button>
                                             </td>
                                         </tr>
-
-                                    <!-- elseif – ja lietotājam nav neviena ieraksta ar savu id
+                                    @else
                                         <tr>
                                             <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
-                                        </tr> -->
+                                        </tr>
+                                    @break
                                     @endif
                                 @endforeach
-                            @else
-                                <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
-                                </tr>
                             @endif
                         </tbody>
                     </table>
@@ -221,7 +217,9 @@
     <!-- Delete Expense Confirmation Modal  -->
         <x-jet-dialog-modal wire:model="confirmDeleteExpenseVisible">
             <x-slot name="title">
-                {{ __('Dzēst izvēlēto izdevumu ierakstu') }}
+                <div class="font-bold">
+                    {{ __('Dzēst izvēlēto izdevumu ierakstu') }}
+                </div>
             </x-slot>
 
             <x-slot name="content">
