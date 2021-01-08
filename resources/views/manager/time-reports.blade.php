@@ -8,9 +8,9 @@
     <x-jet-validation-errors class="mb-4" />
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
+        <div class="max-w-5xl mx-auto sm:px-4 lg:px-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg pb-4 px-4">
-                @livewire('user-in-time-report')
+                @livewire('time-reports')
             </div>
         </div>
     </div>     

@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use App\Models\WorkingHour;
 use App\Services\TimeReportService;
 use Livewire\Component;
-use App\Models\User;
 use Livewire\WithPagination;
 
-class UserInTimeReport extends Component
+class TimeReports extends Component
 {
     use WithPagination;
 
-    const NO_HOURS_RECORDED = 'Darbiniekam šajā mēnesī nav nostrādāto stundu';
-    const CHOOSE_VALID_DATE = 'Lūdzu izvēlēties atskaites datumu';
+    const NO_HOURS_RECORDED = 'Darbinieks izvēlētajā mēnesī nav reģistrējis nostrādātās darba stundas.';
+    const CHOOSE_VALID_DATE = 'Lūdzu, izvēlēties darba stundu atskaites datumu.';
 
     public $name;
     public $email;
@@ -120,7 +120,7 @@ class UserInTimeReport extends Component
 
     public function render()
     {
-        return view('livewire.manager.user-in-time-report', [
+        return view('livewire.manager.time-report', [
             'users' => $this->readUser()
         ]);
     }

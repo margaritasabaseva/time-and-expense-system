@@ -32,17 +32,13 @@
                                 <th class="w-80 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('job_title')">
                                     Amats
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    <!-- wire:click="sortBy('submit_date')" -->
-                                    Pēdējā pārskata iesniegšanas datums
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @if ($users->count())
                                 @foreach ($users as $user)
                                 <tr>
-                                    <td class="font-bold px-6 py-4 text-sm break-words">
+                                    <td class="font-bold px-6 py-4 text-md break-words">
                                         <button class="font-bold hover:text-gray-600 hover:underline" wire:click="showUserTimeReportModal({{ $user->id }})">
                                             {{ $user->name }}
                                         </button>
@@ -53,7 +49,6 @@
                                     <td class="px-6 py-4 text-sm break-words">
                                         {{ $user->job_title }}
                                     </td>
-                                    <td class="px-6 py-4 text-right text-sm"></td>
                                 </tr>
                                 @endforeach
                             @else
@@ -79,7 +74,7 @@
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Darbinieka iesniegto stundu pārskats') }}
+            <!-- {{ __('Darbinieka iesniegto stundu pārskats') }} -->
             <div class="flex mt-3">
                 <div class="mt-2">
                     <x-jet-label for="timesheet_month" value="{{ __('Atskaites mēnesis') }}" class="font-bold"/>
