@@ -19,6 +19,15 @@
             </div>
         @endif
 
+        @if ($message = Session::get('successUpdatePassword'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>    
+                <strong class="text-sm">{{ $message }}</strong>
+            </div>
+        @endif
+
         @if ($message = Session::get('successDeleteUser'))
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -64,7 +73,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class=" px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('name')">
+                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('name')">
                                     Vārds, uzvārds
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('email')">
@@ -76,14 +85,13 @@
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Tālrunis
                                 </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:17%" wire:click="sortBy('address')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:22%" wire:click="sortBy('address')">
                                     Adrese
                                 </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    <!-- wire:click="sortBy('role_title')" -->
+                                <!-- <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Lomas
-                                </th>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
+                                </th> -->
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" style="width:13%"></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -95,17 +103,20 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->job_title }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $user->phone }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->address }}</td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
+                                    <!-- <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
                                         @foreach ($user->roles as $role)
                                             {{ $role->role_title }}
                                             <br>
                                         @endforeach 
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <x-jet-button class="w-28 text-center" wire:click="assignRolesModal({{ $user->id }})">
+                                    </td> -->
+                                    <td class="px-6 py-2 text-right">
+                                        <x-jet-button class="w-24" wire:click="assignRolesModal({{ $user->id }})">
                                             {{ __('Lomas') }}
                                         </x-jet-button>
-                                        <x-jet-danger-button class="w-28" wire:click="deleteUserModal({{ $user->id }})">
+                                        <x-jet-button class="w-24" wire:click="updatePasswordModal({{ $user->id }})">
+                                            {{ __('Parole') }}
+                                        </x-jet-button>
+                                        <x-jet-danger-button class="w-24" wire:click="deleteUserModal({{ $user->id }})">
                                             {{ __('Dzēst') }}
                                         </x-jet-danger-button>
                                     </td>
@@ -180,7 +191,7 @@
     <x-jet-dialog-modal wire:model="assignRolesVisible">
         <x-slot name="title">
             <div class="font-bold">    
-                {{ __('Rediģēt lietotāja lomas') }}  "{{ $this->name }}"
+                {{ __('Rediģēt lietotāja') }} "{{ $this->name }}" {{ __('lomas') }}
             </div>
         </x-slot>
 
@@ -203,6 +214,33 @@
             </x-jet-button>
 
             <x-jet-secondary-button wire:click="$toggle('assignRolesVisible')" wire:loading.attr="disabled">
+                {{ __('Atcelt') }}
+            </x-jet-secondary-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+
+    <!-- Update User Password Modal  -->
+    <x-jet-dialog-modal wire:model="updatePasswordVisible">
+        <x-slot name="title">
+            <div class="font-bold">
+                {{ __('Mainīt paroli lietotājam') }} "{{ $this->name }}"
+            </div>
+        </x-slot>
+
+        <x-slot name="content">
+        <div class="mt-4">
+                <x-jet-label for="password" value="{{ __('Jaunā parole') }}"/>
+                <x-jet-input id="password" class="block mt-1 w-full text-sm" type="password" name="password" wire:model.debounce.800ms="password"/>
+                @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-button class="ml-2" wire:click="updatePassword" wire:loading.attr="disabled">
+                {{ __('Mainīt paroli') }}
+            </x-jet-button>
+
+            <x-jet-secondary-button wire:click="$toggle('updatePasswordVisible')" wire:loading.attr="disabled">
                 {{ __('Atcelt') }}
             </x-jet-secondary-button>
         </x-slot>

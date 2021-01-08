@@ -26,6 +26,7 @@ class Users extends Component
     public $userModelId;
     public $userModalFormVisible = false;
     public $assignRolesVisible = false;
+    public $updatePasswordVisible = false;
     public $confirmDeleteUserVisible = false;
 
     public $perPage = 5;
@@ -88,6 +89,13 @@ class Users extends Component
         ];
     }
 
+    public function userModelPassword()
+    {
+        return [
+            'password' => Hash::make($this->password),
+        ];
+    }
+
     public function deleteUser()
     {
         User::destroy($this->userModelId);
@@ -100,6 +108,32 @@ class Users extends Component
     {
         $this->userModelId = $id;
         $this->confirmDeleteUserVisible = true;
+    }
+
+    public function updatePassword()
+    {
+        // $this->validate();
+        User::find($this->userModelId)->update($this->userModelPassword());
+        $this->updatePasswordVisible = false;
+        $this->resetPage();
+        session()->flash('successUpdatePassword', 'Lietotāja parole nomainīta.');
+    }
+
+    // public function updatePassword($password)
+    // {
+    //     $this->validateOnly($password, [
+    //         'password' => 'required|min:8|max:120',
+    //     ]);
+    //     User::find($this->userModelId)->update($this->userModelPassword());
+    //     $this->updatePasswordVisible = false;
+    //     $this->resetPage();
+    //     session()->flash('successDeleteUser', 'Lietotāja parole nomainīta.');
+    // }
+
+    public function updatePasswordModal($id)
+    {
+        $this->userModelId = $id;
+        $this->updatePasswordVisible = true;
     }
 
     public function loadUserModel($id)
