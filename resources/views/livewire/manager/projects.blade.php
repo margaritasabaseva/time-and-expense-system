@@ -243,7 +243,6 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
                                             Izdevuma pamatojums/ apraksts
                                         </th>
-                                        <!-- <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer sticky top-0"></th> -->
                                     </tr>
                                 </thead>
 
@@ -270,15 +269,12 @@
                                                     <td class="px-6 text-sm break-all">
                                                         {{ $expense->expense_description }}
                                                     </td>
-                                                    <!-- <td class="px-3 py-1">
-                                                        <x-jet-button class="flex w-16 h-7" wire:click="editExpenseModal({{ $expense->id }})">
-                                                            {{ __('Rediģēt') }}
-                                                        </x-jet-button>
-                                                        <x-jet-danger-button class="flex w-16 h-7" wire:click="deleteExpenseModal({{ $expense->id }})">
-                                                            {{ __('Dzēst') }}
-                                                        </x-jet-danger-button>
-                                                    </td> -->
                                                 </tr>
+                                            @else
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Projektam nav reģistrētu izdevumu ierakstu</td>
+                                                </tr>
+                                            @break
                                             @endif
                                         @endforeach
                                     @endif

@@ -10,7 +10,7 @@
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Vārds, uzvārds') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
+            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name"/>
             @error('name') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
         </div>
         <div class="col-span-6 sm:col-span-4">
@@ -40,7 +40,7 @@
             {{ __('Saglabāts.') }}
         </x-jet-action-message>
 
-        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
+        <x-jet-button>
             {{ __('Saglabāt') }}
         </x-jet-button>
     </x-slot>

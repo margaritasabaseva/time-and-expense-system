@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\Expense;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class Expenses extends Component
 {
+    use WithPagination;
     public $vendor;
     public $document_number;
     public $amount_euros;

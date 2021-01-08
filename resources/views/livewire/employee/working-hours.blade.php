@@ -138,23 +138,23 @@
                                     @if (is_array($this->monthlyWorkingHours))
                                         @foreach ($this->monthlyWorkingHours as $key => $project)
                                             <tr>
-                                                <td class="border font-bold text-sm break-words">
+                                                <td class="border font-bold text-center">
                                                     <div>{{ $key }}</div>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot1_data.{{ $key }}'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" step="0.01" style="border:none" wire:model='projectSlot1_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot2_data.{{ $key }}'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" step="0.01" style="border:none" wire:model='projectSlot2_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot3_data.{{ $key }}'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" step="0.01" style="border:none" wire:model='projectSlot3_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot4_data.{{ $key }}'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" step="0.01" style="border:none" wire:model='projectSlot4_data.{{ $key }}'/>
                                                 </td>
                                                 <td class="border text-sm break-words">
-                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" style="border:none" wire:model='projectSlot5_data.{{ $key }}'/>
+                                                    <x-jet-input id="hours" class="w-full shadow-none" name="working-hours[{{ $key }}][hours]" value="{{ old('working-hours['.$key.'][hours]') }}" type="number" min="0" max="24" step="0.01" style="border:none" wire:model='projectSlot5_data.{{ $key }}'/>
                                                 </td>
                                             </tr>
                                         @endforeach
