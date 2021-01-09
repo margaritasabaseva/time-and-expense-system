@@ -162,10 +162,56 @@
                 </select>
                 @error('responsible_manager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
-            <div class="mt-4">
+            <!-- <div class="mt-4">
                 <x-jet-label for="start_date" value="{{ __('Sākuma datums') }}" />
                 <x-jet-input id="start_date" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="start_date"/>
                 @error('start_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+            </div> -->
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Sākuma datums:') }}"/>
+                <div class="inline-flex flex-row">
+                    <div class="mr-2">
+                        <x-jet-label for="start_day" value="{{ __('Diena') }}"/>
+                        <select name="start_day" id="start_day" class="w-20 form-select text-sm shadow-sm" wire:model.debounce.800ms="start_day">
+                            <option value=""></option>
+                            @for ($i = 1; $i < 32; $i++)
+                                    <option value="{{ $i }}"> {{ $i }} </option>
+                            @endfor
+                        </select>
+                        <br>@error('start_day') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+
+                    <div class="mr-2">
+                        <x-jet-label for="start_month" value="{{ __('Mēnesis') }}"/>
+                        <select name="start_month" id="start_month" class="w-40 form-select text-sm shadow-sm" wire:model.debounce.800ms="start_month">
+                            <option value=""></option>
+                            <option value="1"> {{ __('Janvāris') }} </option>
+                            <option value="2"> {{ __('Februāris') }} </option>
+                            <option value="3"> {{ __('Marts') }} </option>
+                            <option value="4"> {{ __('Aprīlis') }} </option>
+                            <option value="5"> {{ __('Maijs') }} </option>
+                            <option value="6"> {{ __('Jūnijs') }} </option>
+                            <option value="7"> {{ __('Jūlijs') }} </option>
+                            <option value="8"> {{ __('Augusts') }} </option>
+                            <option value="9"> {{ __('Septembris') }} </option>
+                            <option value="10"> {{ __('Oktobris') }} </option>
+                            <option value="11"> {{ __('Novembris') }} </option>
+                            <option value="12"> {{ __('Decembris') }} </option>
+                        </select>
+                        <br>@error('start_month') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+
+                    <div>
+                        <x-jet-label for="start_year" value="{{ __('Gads') }}"/>
+                        <select name="start_year" id="start_year" class="w-24 form-select text-sm shadow-sm" wire:model.debounce.800ms="start_year">
+                            <option value=""></option>
+                            @for ($i = 2015; $i < 2024; $i++)
+                                    <option value="{{ $i }}"> {{ $i }} </option>
+                            @endfor
+                        </select>
+                        <br>@error('start_year') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
+                    </div>
+                </div>
             </div>
         </x-slot>
 
@@ -270,11 +316,11 @@
                                                         {{ $expense->expense_description }}
                                                     </td>
                                                 </tr>
-                                            @else
+                                            <!-- else
                                                 <tr>
                                                     <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Projektam nav reģistrētu izdevumu ierakstu</td>
                                                 </tr>
-                                            @break
+                                            break -->
                                             @endif
                                         @endforeach
                                     @endif
@@ -283,8 +329,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="font-bold m-3">
-                    <!-- ielikt expense-report -->
+                <div class="font-bold m-3">                   
                     Kopējās projekta izmaksas: EUR {{ $this->totalExpenses }}
                 </div>
             </div>

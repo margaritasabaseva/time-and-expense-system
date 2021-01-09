@@ -17,6 +17,9 @@ class Projects extends Component
     public $project_description;
     public $responsible_manager;
     public $start_date;
+    public $start_day;
+    public $start_month;
+    public $start_year;
     public $project_id;
     public $totalExpenses;
 
@@ -39,7 +42,9 @@ class Projects extends Component
             'title' => 'required|max:120',
             'project_description' => 'required',
             'responsible_manager' => 'required|max:120',
-            'start_date' => 'required|date_format:Y-m-d',
+            'start_day' => 'required|numeric',
+            'start_month' => 'required|max:20',
+            'start_year' => 'required|numeric',
         ];
     }
 
@@ -74,6 +79,10 @@ class Projects extends Component
 
     public function projectModelData()
     {
+        $this->start_date = \DateTime::createFromFormat(
+            'Y-m-d',
+            sprintf('%s-%s-%s', $this->start_year, $this->start_month, $this->start_day)
+        );
         return [
             'title' => $this->title,
             'project_description' => $this->project_description,
@@ -121,7 +130,9 @@ class Projects extends Component
         $this->title = $project->title;
         $this->project_description = $project->project_description;
         $this->responsible_manager = $project->responsible_manager;
-        $this->start_date = $project->start_date;
+        $this->start_day = $project->start_day;
+        $this->start_month = $project->start_month;
+        $this->start_year = $project->start_year;
     }
 
     public function resetVars()
@@ -130,7 +141,9 @@ class Projects extends Component
         $this->title = null;
         $this->project_description = null;
         $this->responsible_manager = null;
-        $this->start_date = null;
+        $this->start_day = null;
+        $this->start_month = null;
+        $this->start_year = null;
     }
 
 

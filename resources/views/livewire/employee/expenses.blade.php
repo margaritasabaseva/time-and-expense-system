@@ -92,11 +92,11 @@
                                                 </x-jet-danger-button>
                                             </td>
                                         </tr>
-                                    @else
+                                    <!-- else
                                         <tr>
                                             <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
                                         </tr>
-                                    @break
+                                    break -->
                                     @endif
                                 @endforeach
                             @endif
