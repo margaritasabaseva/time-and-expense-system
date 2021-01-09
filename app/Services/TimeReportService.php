@@ -13,7 +13,7 @@ class TimeReportService
         $hoursSum = 0;
         $workingHours = $workingHour->working_hours;
         foreach ($workingHours as $key=>$value) {
-            $hoursSum += $value;
+            $hoursSum += (float)$value;
         }
         return $hoursSum;
     }

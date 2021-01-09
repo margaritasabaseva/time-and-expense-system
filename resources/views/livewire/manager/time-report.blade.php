@@ -66,7 +66,7 @@
     {{ $users->links() }}
 
     <!-- Show User Time Report Modal -->
-    <x-jet-dialog-modal wire:model="userTimeReportModalVisible">
+    <x-jet-dialog-modal wire:model="userTimeReportModalVisible" maxWidth="xl">
         <x-slot name="title">
             <div class="font-bold">
                 {{ __('Darbinieka') }} "{{ $this->name }}" {{ __('darba stundu pārskats') }}
@@ -74,7 +74,6 @@
         </x-slot>
 
         <x-slot name="content">
-            <!-- {{ __('Darbinieka iesniegto stundu pārskats') }} -->
             <div class="flex mt-3">
                 <div class="mt-2">
                     <x-jet-label for="timesheet_month" value="{{ __('Atskaites mēnesis') }}" class="font-bold"/>
@@ -112,19 +111,39 @@
                     <br>@error('timesheet_year') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
                 </div>
             </div>
-            <div class="mt-3">
-                @if ($this->userReportData)
-                    @foreach ($this->userReportData as $project=>$hours)
-                        <div class="flex">
-                            <div><p class="font-bold">{{ $project }}:</p></div>
-                            <div class="ml-2"><p>{{ $hours }}h</p></div>
-                        </div>
-                    @endforeach
-                @else
-                    <span class="text-red-500 text-xs"> {{ $this->noHoursMessage }} </span>
-                @endif
+
+            <div class="mt-4">
+                <table class="min-w-full divide-y divide-gray-200">
+                    @if ($this->userReportData)
+                        <thead>
+                            <tr>
+                                <th class="px-3 pt-3 pb-3 bg-gray-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider">
+                                    Projekts
+                                </th>
+                                <th class="px-3 pt-3 pb-3 bg-gray-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider">
+                                    Stundas
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($this->userReportData as $project=>$hours)
+                                <tr class="mx-5">
+                                    <th class="px-3 py-2 text-sm font-normal break-words">
+                                        {{ $project }}
+                                    </th>
+                                    <th class="px-3 py-2 text-sm font-normal break-words">
+                                        {{ $hours }}h
+                                    </th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @else
+                        <span class="text-500 text-sm"> {{ $this->noHoursMessage }} </span>
+                    @endif
+                </table>
             </div>
         </x-slot>
+
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('userTimeReportModalVisible')" wire:loading.attr="disabled">
                 {{ __('Aizvērt') }}

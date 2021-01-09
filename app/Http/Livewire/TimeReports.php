@@ -32,34 +32,12 @@ class TimeReports extends Component
     public $user;
     public $userReportData;
 
-    public $noHoursMessage = self::CHOOSE_VALID_DATE;
+    public $noHoursMessage;
 
     protected $listeners = [
         'dateChanged' => 'dateChanged'
     ];
 
-    public function dateChanged()
-    {
-        if (is_null($this->reportMonth) || is_null($this->reportYear)) {
-            $this->noHoursMessage = self::CHOOSE_VALID_DATE;
-            return;
-        }
-
-        $userWorkingHours = WorkingHour::getByUserAndDate($this->user, $this->reportMonth, $this->reportYear);
-        if ($userWorkingHours->count() <= 0) {
-            $this->noHoursMessage = self::NO_HOURS_RECORDED;
-        }
-        $timeReportService = new TimeReportService();
-        $this->userReportData = $timeReportService->hoursPerMonthFromCollection($userWorkingHours);
-    }
-
-    public function clearVars()
-    {
-        $this->noHoursMessage = self::CHOOSE_VALID_DATE;
-        $this->userReportData = [];
-        $this->reportMonth = null;
-        $this->reportYear = null;
-    }
 
     public function mount()
     {
@@ -91,7 +69,7 @@ class TimeReports extends Component
 
     public function showUserTimeReportModal($id)
     {
-        $this->clearVars();
+        $this->resetVars();
         $this->resetValidation();
         $this->userModelId = $id;
         $this->user = User::find($id);
@@ -105,6 +83,29 @@ class TimeReports extends Component
         $this->name = $users->name;
         $this->email = $users->email;
         $this->job_title = $users->job_title;
+    }
+
+    public function dateChanged()
+    {
+        if (is_null($this->reportMonth) || is_null($this->reportYear) || $this->reportMonth=='' || $this->reportYear=='') {
+            $this->noHoursMessage = self::CHOOSE_VALID_DATE;
+            return;
+        }
+
+        $userWorkingHours = WorkingHour::getByUserAndDate($this->user, $this->reportMonth, $this->reportYear);
+        if ($userWorkingHours->count() <= 0) {
+            $this->noHoursMessage = self::NO_HOURS_RECORDED;
+        }
+        $timeReportService = new TimeReportService();
+        $this->userReportData = $timeReportService->hoursPerMonthFromCollection($userWorkingHours);
+    }
+
+    public function resetVars()
+    {
+        $this->noHoursMessage = self::CHOOSE_VALID_DATE;
+        $this->userReportData = [];
+        $this->reportMonth = null;
+        $this->reportYear = null;
     }
 
     public function sortBy($field)
