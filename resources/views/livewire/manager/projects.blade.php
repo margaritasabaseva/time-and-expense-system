@@ -138,12 +138,12 @@
         <x-slot name="content">
             <div class="mt-4">
                 <x-jet-label for="title" value="{{ __('Nosaukums') }}" />
-                <x-jet-input id="title" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="title"/>
+                <x-jet-input id="title" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="title"/>
                 @error('title') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="project_description" value="{{ __('Apraksts') }}" />
-                <x-jet-input id="project_description" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="project_description"/>
+                <x-jet-input id="project_description" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="project_description"/>
                 @error('project_description') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
@@ -162,11 +162,6 @@
                 </select>
                 @error('responsible_manager') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
-            <!-- <div class="mt-4">
-                <x-jet-label for="start_date" value="{{ __('Sākuma datums') }}" />
-                <x-jet-input id="start_date" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="start_date"/>
-                @error('start_date') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
-            </div> -->
             <div class="mt-4">
                 <x-jet-label value="{{ __('Sākuma datums:') }}"/>
                 <div class="inline-flex flex-row">
@@ -205,7 +200,7 @@
                         <x-jet-label for="start_year" value="{{ __('Gads') }}"/>
                         <select name="start_year" id="start_year" class="w-24 form-select text-sm shadow-sm" wire:model.debounce.800ms="start_year">
                             <option value=""></option>
-                            @for ($i = 2015; $i < 2024; $i++)
+                            @for ($i = 2016; $i < 2027; $i++)
                                     <option value="{{ $i }}"> {{ $i }} </option>
                             @endfor
                         </select>

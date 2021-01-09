@@ -165,12 +165,14 @@ return [
         'job_title'              => 'Amats',
         'phone'                  => 'Tālrunis',
         'address'                => 'Adrese',
-        // 'new_password'           => 'Jaunā parole',
         'password'               => 'Parole',
         'current_password'       => 'Pašreizējā parole',
         'timesheet_month'        => 'Atskaites mēnesis',
         'timesheet_year'         => 'Atskaites gads',
-        'Y-m-d'                  => 'gggg-mm-dd'
+        // 'Y-m-d'                  => 'gggg-mm-dd',
+        'start_day'              => 'Diena',
+        'start_month'            => 'Mēnesis',
+        'start_year'             => 'Gads'
     ],
 
 ];

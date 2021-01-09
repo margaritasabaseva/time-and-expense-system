@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'Parasts Darbinieks',
                 'email' => 'employee@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
-                'job_title' => 'Biroja vadītājs/ administrators',
+                'job_title' => 'Biroja asistents',
                 'phone' => '22334455',
                 'address' => 'Aizupes iela 15 k-1, dz.66, Rīga, LV-1004'
             ],
