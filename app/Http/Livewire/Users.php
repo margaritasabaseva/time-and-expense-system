@@ -96,20 +96,6 @@ class Users extends Component
         ];
     }
 
-    public function deleteUser()
-    {
-        User::destroy($this->userModelId);
-        $this->confirmDeleteUserVisible = false;
-        $this->resetPage();
-        session()->flash('successDeleteUser', 'Lietotājs izdzēsts.');
-    }
-
-    public function deleteUserModal($id)
-    {
-        $this->userModelId = $id;
-        $this->confirmDeleteUserVisible = true;
-    }
-
     public function updatePassword()
     {
         // $this->validate();
@@ -134,6 +120,22 @@ class Users extends Component
     {
         $this->userModelId = $id;
         $this->updatePasswordVisible = true;
+        $this->loadUserModel($id);
+    }
+
+    public function deleteUser()
+    {
+        User::destroy($this->userModelId);
+        $this->confirmDeleteUserVisible = false;
+        $this->resetPage();
+        session()->flash('successDeleteUser', 'Lietotājs izdzēsts.');
+    }
+
+    public function deleteUserModal($id)
+    {
+        $this->userModelId = $id;
+        $this->confirmDeleteUserVisible = true;
+        $this->loadUserModel($id);
     }
 
     public function loadUserModel($id)

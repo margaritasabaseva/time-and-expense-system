@@ -82,7 +82,7 @@ class UserTableSeeder extends Seeder
                 'address' => NULL
             ],
             [
-                'name' => 'Projektu Vadītājs 3',
+                'name' => 'Projektu Vadītājs 4',
                 'email' => 'manager4@email.com',
                 'password' => Hash::make('lotisarezgitaparole'),
                 'job_title' => 'Projektu Vadītājs 4',
