@@ -90,10 +90,6 @@ class Projects extends Component
             'project_description' => $this->project_description,
             'responsible_manager' => $this->responsible_manager,
             'start_date' => $this->start_date,
-            // return for the project update
-            // 'start_day' => $this->start_year,
-            // 'start_month' => $this->start_month,
-            // 'start_year' => $this->start_day,
         ];
     }
 
