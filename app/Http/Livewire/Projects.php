@@ -24,6 +24,8 @@ class Projects extends Component
     public $totalExpenses;
 
     public $projectModelId;
+    public $currentExpenses;
+    public $currentHasExpenses = false;
     public $projectModalFormVisible = false;
     public $confirmDeleteProjectVisible = false;
     public $projectExpensesModalVisible = false;
@@ -89,9 +91,9 @@ class Projects extends Component
             'responsible_manager' => $this->responsible_manager,
             'start_date' => $this->start_date,
             // return for the project update
-            'start_day' => $this->start_year,
-            'start_month' => $this->start_month,
-            'start_year' => $this->start_day,
+            // 'start_day' => $this->start_year,
+            // 'start_month' => $this->start_month,
+            // 'start_year' => $this->start_day,
         ];
     }
 
@@ -130,13 +132,14 @@ class Projects extends Component
     public function loadProjectModel()
     {
         $project = Project::find($this->projectModelId);
+        $date = explode('-', $project->start_date);
         $this->totalExpenses = ProjectExpensesService::expensesSumFromProject($project);
         $this->title = $project->title;
         $this->project_description = $project->project_description;
         $this->responsible_manager = $project->responsible_manager;
-        $this->start_day = $project->start_day;
-        $this->start_month = $project->start_month;
-        $this->start_year = $project->start_year;
+        $this->start_day = (int)$date[2];
+        $this->start_month = (int)$date[1];
+        $this->start_year = (int)$date[0];
     }
 
     public function resetVars()
@@ -163,6 +166,14 @@ class Projects extends Component
     public function showProjectExpensesModal($id)
     {
         $this->projectModelId = $id;
+        $project = Project::find($id);
+        $expenses = $project->expenses;
+        if ($expenses->isEmpty()) {
+            $this->currentHasExpenses = false;
+        } else {
+            $this->currentHasExpenses = true;
+        }
+        $this->currentExpenses = $expenses;
         $this->projectExpensesModalVisible = true;
         $this->loadProjectModel();
     }

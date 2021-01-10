@@ -35,6 +35,7 @@ class Expenses extends Component
     public function rules()
     {
         return [
+            'project_id'=> 'required',
             'vendor' => 'required|max:255',
             'document_number' => 'required|max:120',
             'amount_euros' => 'required|regex:/^\d+(\.\d{1,2})?$/',

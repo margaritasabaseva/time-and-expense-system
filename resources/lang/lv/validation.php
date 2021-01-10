@@ -172,7 +172,8 @@ return [
         // 'Y-m-d'                  => 'gggg-mm-dd',
         'start_day'              => 'Diena',
         'start_month'            => 'Mēnesis',
-        'start_year'             => 'Gads'
+        'start_year'             => 'Gads',
+        'project_id'             => 'Projekts'
     ],
 
 ];

@@ -263,70 +263,71 @@
                 <div class="sm:-mx-6 lg:-mx-8">
                     <div class="pt-2 align-middle sm:px-6 lg:px-8">
                         <div class="border border-gray-200 sm:rounded-lg overflow-x-auto max-h-96">
-                            <table class="divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0" style="width:15%;">
-                                            Pakalpojumu sniedzēja nosaukums
-                                        </th>
-                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Izdevuma dokumenta numurs
-                                        </th>
-                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Summa (EUR)
-                                        </th>
-                                        <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Datums (dokumentā norādītais)
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Pievienoja
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
-                                            Izdevuma pamatojums/ apraksts
-                                        </th>
-                                    </tr>
-                                </thead>
+                            @if ($this->currentHasExpenses)
+                                <table class="divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0" style="width:15%;">
+                                                Pakalpojumu sniedzēja nosaukums
+                                            </th>
+                                            <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                                Izdevuma dokumenta numurs
+                                            </th>
+                                            <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                                Summa (EUR)
+                                            </th>
+                                            <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                                Datums (dokumentā norādītais)
+                                            </th>
+                                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                                Pievienoja
+                                            </th>
+                                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider sticky top-0">
+                                                Izdevuma pamatojums/ apraksts
+                                            </th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @if ($expenses->count())
-                                        @foreach ($expenses as $expense)
-                                            @if ($expense->project_id == $projectModelId)
-                                                <tr>
-                                                    <td class="px-6 text-sm break-words">
-                                                        {{ $expense->vendor }}
-                                                    </td>
-                                                    <td class="px-6 text-sm break-words">
-                                                        {{ $expense->document_number }}
-                                                    </td>
-                                                    <td class="px-6 text-sm break-words">
-                                                        {{ $expense->amount_euros }}
-                                                    </td>
-                                                    <td class="px-6 text-sm whitespace-no-wrap">
-                                                        {{ $expense->expense_date }}
-                                                    </td>
-                                                    <td class="px-6 text-sm break-all">
-                                                        {{ $expense->user->name }}
-                                                    </td>
-                                                    <td class="px-6 text-sm break-all">
-                                                        {{ $expense->expense_description }}
-                                                    </td>
-                                                </tr>
-                                            <!-- else
-                                                <tr>
-                                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Projektam nav reģistrētu izdevumu ierakstu</td>
-                                                </tr>
-                                            break -->
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    @if ($this->currentExpenses)
+                                            @foreach ($this->currentExpenses as $expense)
+                                                    <tr>
+                                                        <td class="px-6 text-sm break-words">
+                                                            {{ $expense->vendor }}
+                                                        </td>
+                                                        <td class="px-6 text-sm break-words">
+                                                            {{ $expense->document_number }}
+                                                        </td>
+                                                        <td class="px-6 text-sm break-words">
+                                                            {{ $expense->amount_euros }}
+                                                        </td>
+                                                        <td class="px-6 text-sm whitespace-no-wrap">
+                                                            {{ $expense->expense_date }}
+                                                        </td>
+                                                        <td class="px-6 text-sm break-all">
+                                                            {{ $expense->user->name }}
+                                                        </td>
+                                                        <td class="px-6 text-sm break-all">
+                                                            {{ $expense->expense_description }}
+                                                        </td>
+                                                    </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
                     </div>
                 </div>
-                <div class="font-bold m-3">                   
-                    Kopējās projekta izmaksas: EUR {{ $this->totalExpenses }}
-                </div>
+                @if ($this->currentHasExpenses)
+                    <div class="font-bold m-3">
+                        Kopējās projekta izmaksas: EUR {{ $this->totalExpenses }}
+                    </div>
+                @else
+                    <div class="font-bold m-3">
+                        Projektam nav reģistrētu izdevumu ierakstu
+                    </div>
+                @endif
             </div>
 
             </x-slot>
