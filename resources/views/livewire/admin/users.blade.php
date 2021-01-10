@@ -73,7 +73,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('name')">
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:17%" wire:click="sortBy('name')">
                                     Vārds, uzvārds
                                 </th>
                                 <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" wire:click="sortBy('email')">
@@ -88,9 +88,6 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer form-select border-none" style="width:22%" wire:click="sortBy('address')">
                                     Adrese
                                 </th>
-                                <!-- <th class="w-10 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Lomas
-                                </th> -->
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" style="width:13%"></th>
                             </tr>
                         </thead>
@@ -103,12 +100,6 @@
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->job_title }}</td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">{{ $user->phone }}</td>
                                     <td class="px-6 py-4 text-sm break-words">{{ $user->address }}</td>
-                                    <!-- <td class="px-6 py-4 text-sm whitespace-no-wrap"> 
-                                        @foreach ($user->roles as $role)
-                                            {{ $role->role_title }}
-                                            <br>
-                                        @endforeach 
-                                    </td> -->
                                     <td class="px-6 py-2 text-right">
                                         <x-jet-button class="w-24" wire:click="assignRolesModal({{ $user->id }})">
                                             {{ __('Lomas') }}

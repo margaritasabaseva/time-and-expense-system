@@ -27,24 +27,6 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     'remember_token',
-    // ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
-
     public function roles()
     {
         return $this
@@ -57,7 +39,6 @@ class User extends Authenticatable
         return $this->hasMany(Expense::class);
     }
 
-    // has a role that gets passed as a name of the role with this method, e.g., hasRole('ROLE_ADMIN')
     public function hasRole($role)
     {
         $roles = $this->roles->where('role_name', $role);

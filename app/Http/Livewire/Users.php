@@ -98,23 +98,12 @@ class Users extends Component
 
     public function updatePassword()
     {
-        // $this->validate();
+        $this->validateOnly('password');
         User::find($this->userModelId)->update($this->userModelPassword());
         $this->updatePasswordVisible = false;
         $this->resetPage();
         session()->flash('successUpdatePassword', 'Lietotāja parole nomainīta.');
     }
-
-    // public function updatePassword($password)
-    // {
-    //     $this->validateOnly($password, [
-    //         'password' => 'required|min:8|max:120',
-    //     ]);
-    //     User::find($this->userModelId)->update($this->userModelPassword());
-    //     $this->updatePasswordVisible = false;
-    //     $this->resetPage();
-    //     session()->flash('successDeleteUser', 'Lietotāja parole nomainīta.');
-    // }
 
     public function updatePasswordModal($id)
     {
