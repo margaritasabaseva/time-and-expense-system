@@ -18,9 +18,4 @@ class WorkingHoursValueObject
     {
         $this->workingHours[] = $workingHour;
     }
-
-    public function toJson()
-    {
-        return json_encode($this->workingHours());
-    }
 }

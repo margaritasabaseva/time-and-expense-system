@@ -113,8 +113,8 @@
             </div>
 
             <div class="mt-4">
+                @if ($this->userReportData)
                 <table class="min-w-full divide-y divide-gray-200">
-                    @if ($this->userReportData)
                         <thead>
                             <tr>
                                 <th class="px-3 pt-3 pb-3 bg-gray-50 text-left text-xs leading-4 font-bold text-gray-500 uppercase tracking-wider">
@@ -137,10 +137,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    @else
-                        <span class="text-500 text-sm"> {{ $this->noHoursMessage }} </span>
-                    @endif
                 </table>
+                    <div class="font-bold m-3">
+                        Kopā nostrādātas stundas izvēlētajā periodā: {{ $this->userHoursSum }}h
+                    </div>
+                  @else
+                    <div class="mt-3">
+                        <span class="text-500 text-sm"> {{ $this->noHoursMessage }} </span>
+                    </div>
+                @endif
             </div>
         </x-slot>
 

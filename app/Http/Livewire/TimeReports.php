@@ -31,6 +31,7 @@ class TimeReports extends Component
     public $reportYear;
     public $user;
     public $userReportData;
+    public $userHoursSum = 0;
 
     public $noHoursMessage;
 
@@ -98,12 +99,14 @@ class TimeReports extends Component
         }
         $timeReportService = new TimeReportService();
         $this->userReportData = $timeReportService->hoursPerMonthFromCollection($userWorkingHours);
+        $this->userHoursSum = $timeReportService->hoursSumByUser($userWorkingHours);
     }
 
     public function resetVars()
     {
         $this->noHoursMessage = self::CHOOSE_VALID_DATE;
         $this->userReportData = [];
+        $this->userHoursSum = 0;
         $this->reportMonth = null;
         $this->reportYear = null;
     }

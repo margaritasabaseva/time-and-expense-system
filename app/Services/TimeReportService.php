@@ -27,4 +27,14 @@ class TimeReportService
 
         return $hours;
     }
+    
+    public function hoursSumByUser(Collection $workingHours)
+    {
+        $hours = 0;
+        foreach ($workingHours as $singleReport) {
+            $hours += $this->hoursSumFromReport($singleReport);
+        }
+
+        return $hours;
+    }
 }
