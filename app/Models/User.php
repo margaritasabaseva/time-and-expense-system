@@ -19,12 +19,6 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-
     protected $guarded = [];
 
     public function roles()
@@ -52,7 +46,7 @@ class User extends Authenticatable
     {
         $role = $this->roles->where('role_name', $newRole->role_name);
 
-        /** Exists, update */
+        // If exists, update
         if (1 >= count($role)) {
             $this->roles()->attach($newRole->id);
             return true;
@@ -73,11 +67,9 @@ class User extends Authenticatable
 
     public function updateRolesFromStatesVo(RolesWithStatesVo $rolesWithStates)
     {
-        /** @var RoleWithStateVo $roleWithState */
         foreach ($rolesWithStates->roles() as $roleWithState) {
             if ($roleWithState->checked) {
 
-                /** @var Role $role */
                 $role = Role::find($roleWithState->roleId);
                 if ($this->hasRole($role->role_name)) {
                     continue;

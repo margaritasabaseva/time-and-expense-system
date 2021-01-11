@@ -5,12 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Expense;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
 class Expenses extends Component
 {
     use WithPagination;
+    
     public $vendor;
     public $document_number;
     public $amount_euros;
@@ -51,27 +53,6 @@ class Expenses extends Component
         $this->resetPage();
     }
 
-    public function createExpense()
-    {
-        $this->validate();
-        Expense::create($this->expenseModelData());
-        $this->expenseModalFormVisible = false;
-        $this->resetVars();
-        session()->flash('successCreateExpense', 'Ieraksts veiksmīgi pievienots.');
-    }
-
-    public function createExpenseModal()
-    {
-        $this->resetValidation();
-        $this->resetVars();
-        $this->expenseModalFormVisible = true;
-    }
-
-    public function readExpense()
-    {
-        return Expense::orderBy($this->sortBy, $this->sortDirection)->get();
-    }
-
     public function expenseModelData()
     {
         $this->expense_date = \DateTime::createFromFormat(
@@ -89,6 +70,35 @@ class Expenses extends Component
         ];
     }
 
+    public function resetVars()
+    {
+        $this->expenseModelId = null;
+        $this->project_id = null;
+        $this->vendor = null;
+        $this->document_number = null;
+        $this->amount_euros = null;
+        $this->expense_day = null;
+        $this->expense_month = null;
+        $this->expense_year = null;
+        $this->expense_description = null;
+    }
+
+    public function createExpense()
+    {
+        $this->validate();
+        Expense::create($this->expenseModelData());
+        $this->expenseModalFormVisible = false;
+        $this->resetVars();
+        session()->flash('successCreateExpense', 'Ieraksts veiksmīgi pievienots.');
+    }
+
+    public function createExpenseModal()
+    {
+        $this->resetValidation();
+        $this->resetVars();
+        $this->expenseModalFormVisible = true;
+    }
+
     public function deleteExpense()
     {
         Expense::destroy($this->expenseModelId);
@@ -103,33 +113,10 @@ class Expenses extends Component
         $this->confirmDeleteExpenseVisible = true;
     }
 
-    public function loadExpenseModel()
+    public function readExpense()
     {
-        $expenses = Expense::find($this->expenseModelId);
-        $this->project_id = $expenses->project_id;
-        $this->user_id = $expenses->user_id;
-        $this->vendor = $expenses->vendor;
-        $this->document_number = $expenses->document_number;
-        $this->amount_euros = $expenses->amount_euros;
-        $this->expense_day = $expenses->expense_day;
-        $this->expense_month = $expenses->expense_month;
-        $this->expense_year = $expenses->expense_year;
-        $this->expense_description = $expenses->expense_description;
+        return Expense::orderBy($this->sortBy, $this->sortDirection)->get();
     }
-
-    public function resetVars()
-    {
-        $this->expenseModelId = null;
-        $this->project_id = null;
-        $this->vendor = null;
-        $this->document_number = null;
-        $this->amount_euros = null;
-        $this->expense_day = null;
-        $this->expense_month = null;
-        $this->expense_year = null;
-        $this->expense_description = null;
-    }
-
 
     // Sorting and Rendering
 
@@ -147,9 +134,11 @@ class Expenses extends Component
     public function render()
     {
         $projects = Project::all();
+        $user_expenses = (User::find(Auth::id()))->expenses();
         return view('livewire.employee.expenses', [
             'expenses' => $this->readExpense(),
-            'projects' => $projects
+            'projects' => $projects,
+            'hasExpenses' => $user_expenses->count() > 0
         ]);
     }
 }

@@ -125,6 +125,17 @@ class Projects extends Component
         $this->loadProjectModel();
     }
 
+    public function resetVars()
+    {
+        $this->projectModelId = null;
+        $this->title = null;
+        $this->project_description = null;
+        $this->responsible_manager = null;
+        $this->start_day = null;
+        $this->start_month = null;
+        $this->start_year = null;
+    }
+
     public function loadProjectModel()
     {
         $project = Project::find($this->projectModelId);
@@ -138,19 +149,8 @@ class Projects extends Component
         $this->start_year = (int)$date[0];
     }
 
-    public function resetVars()
-    {
-        $this->projectModelId = null;
-        $this->title = null;
-        $this->project_description = null;
-        $this->responsible_manager = null;
-        $this->start_day = null;
-        $this->start_month = null;
-        $this->start_year = null;
-    }
 
-
-    // Integrating Expense Data into Project View
+    // Integrating expense data into project view
 
     public function showProjectExpenses($id)
     {

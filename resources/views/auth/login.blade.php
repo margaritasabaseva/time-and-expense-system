@@ -24,13 +24,6 @@
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password"  />
             </div>
 
-            <!-- <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Atcerēties mani') }}</span>
-                </label>
-            </div> -->
-
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button class="ml-4">
                     {{ __('Pieslēgties') }}

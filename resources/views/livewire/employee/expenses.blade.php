@@ -64,9 +64,9 @@
                         </thead>
 
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if ($expenses->count())
+                            @if ($expenses->count() && $hasExpenses)
                                 @foreach ($expenses as $expense)
-                                        @if ($expense->user_id == Auth::id())
+                                    @if ($expense->user_id == Auth::id())
                                         <tr>
                                             <td class="px-6 text-sm break-words">
                                                 {{ $expense->project->title }}
@@ -91,14 +91,13 @@
                                                     {{ __('Dzēst') }}
                                                 </x-jet-danger-button>
                                             </td>
-                                        </tr>
-                                    <!-- else
-                                        <tr>
-                                            <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts</td>
-                                        </tr>
-                                    break -->
+                                        </tr>                                    
                                     @endif
                                 @endforeach
+                            @else
+                                <tr>
+                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">Neviens izdevuma ieraksts netika atrasts.</td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>

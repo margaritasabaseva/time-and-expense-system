@@ -7,6 +7,7 @@ use App\Models\Project;
 
 class ProjectExpensesService
 {
+    // Sum of all project's expenses
     public static function expensesSumFromProject(Project $project)
     {
         $expenses = $project->expenses;

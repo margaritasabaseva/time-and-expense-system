@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TimeReportService
 {
+    // Sum of hours for one working hours report for one project
     private function hoursSumFromReport(WorkingHour $workingHour)
     {
         $hoursSum = 0;
@@ -18,6 +19,7 @@ class TimeReportService
         return $hoursSum;
     }
 
+    // Collection of all the user's projects and respective hour sums for a specific month
     public function hoursPerMonthFromCollection(Collection $workingHours)
     {
         $hours = [];
@@ -28,6 +30,7 @@ class TimeReportService
         return $hours;
     }
     
+    // Sum of all the user's hours for a specific month
     public function hoursSumByUser(Collection $workingHours)
     {
         $hours = 0;

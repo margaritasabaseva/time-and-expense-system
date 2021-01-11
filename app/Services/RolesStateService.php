@@ -11,10 +11,8 @@ class RolesStateService
     {
         $valueObjects = [];
 
-        /** @var Role $baseRole */
         foreach ($allRoles as $baseRole) {
 
-            /** @var Role $userRole */
             $check = false;
             foreach ($userRoles as $userRole) {
                 if ($userRole->id === $baseRole->id) {

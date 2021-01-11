@@ -169,7 +169,6 @@ return [
         'current_password'       => 'Pašreizējā parole',
         'timesheet_month'        => 'Atskaites mēnesis',
         'timesheet_year'         => 'Atskaites gads',
-        // 'Y-m-d'                  => 'gggg-mm-dd',
         'start_day'              => 'Diena',
         'start_month'            => 'Mēnesis',
         'start_year'             => 'Gads',
