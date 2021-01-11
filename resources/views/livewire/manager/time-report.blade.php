@@ -37,19 +37,21 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @if ($users->count())
                                 @foreach ($users as $user)
-                                <tr>
-                                    <td class="font-bold px-6 py-4 text-md break-words">
-                                        <button class="font-bold hover:text-gray-600 hover:underline" wire:click="showUserTimeReportModal({{ $user->id }})">
-                                            {{ $user->name }}
-                                        </button>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm break-words">
-                                        {{ $user->email }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm break-words">
-                                        {{ $user->job_title }}
-                                    </td>
-                                </tr>
+                                    @if ($user->hasRole('ROLE_EMPLOYEE'))
+                                        <tr>
+                                            <td class="font-bold px-6 py-4 text-md break-words">
+                                                <button class="font-bold hover:text-gray-600 hover:underline" wire:click="showUserTimeReportModal({{ $user->id }})">
+                                                    {{ $user->name }}
+                                                </button>
+                                            </td>
+                                            <td class="px-6 py-4 text-sm break-words">
+                                                {{ $user->email }}
+                                            </td>
+                                            <td class="px-6 py-4 text-sm break-words">
+                                                {{ $user->job_title }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             @else
                                 <tr>

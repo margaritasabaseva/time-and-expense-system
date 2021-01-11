@@ -83,7 +83,7 @@
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
                                                 <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_1')" wire:model="projectSlot1">
-                                                    <option value="empty"></option>
+                                                    <option value=""></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
                                                             <option value="{{ $project->id }}"> {{ $project->title }}</option>
@@ -95,7 +95,7 @@
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
                                                 <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_2')" wire:model="projectSlot2">
-                                                    <option value="empty"></option>
+                                                    <option value=""></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
                                                             <option value="{{ $project->id }}"> {{ $project->title }}</option>
@@ -107,7 +107,7 @@
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
                                                 <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_3')" wire:model="projectSlot3">
-                                                    <option value="empty"></option>
+                                                    <option value=""></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
                                                             <option value="{{ $project->id }}"> {{ $project->title }}</option>
@@ -119,7 +119,7 @@
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
                                                 <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_4')" wire:model="projectSlot4">
-                                                    <option value="empty"></option>
+                                                    <option value=""></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
                                                             <option value="{{ $project->id }}"> {{ $project->title }}</option>
@@ -131,7 +131,7 @@
                                         <th class="px-3 py-2 bg-gray-50 text-left leading-4 font-medium text-gray-500">
                                             <div clas="font-bold">
                                                 <select name="project" id="project" class="w-full bg-gray-50 uppercase tracking-wider form-select text-xs border-l-0 border-r-0 border-t-0 rounded-none" wire:change="$emit('hoursChanged', 'slot_5')" wire:model="projectSlot5">
-                                                    <option value="empty"></option>
+                                                    <option value=""></option>
                                                     @if ($projects->count())
                                                         @foreach ($projects as $project)
                                                             <option value="{{ $project->id }}"> {{ $project->title }}</option>

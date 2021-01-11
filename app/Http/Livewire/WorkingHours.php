@@ -62,35 +62,35 @@ class WorkingHours extends Component
         $hasChanged = false;
         $hasHours = false;
 
-        if (!is_null($this->projectSlot1)) {
+        if ((int)$this->projectSlot1 > 0) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot1, $this->timesheet_month, $this->timesheet_year, $this->projectSlot1_data);
             $hasChanged = true;
             if ($this->arrayHasHours($this->projectSlot1_data)) {
                 $hasHours = true;
             }
         }
-        if (!is_null($this->projectSlot2)) {
+        if ((int)$this->projectSlot2 > 0) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot2, $this->timesheet_month, $this->timesheet_year, $this->projectSlot2_data);
             $hasChanged = true;
             if ($this->arrayHasHours($this->projectSlot2_data)) {
                 $hasHours = true;
             }
         }
-        if (!is_null($this->projectSlot3)) {
+        if ((int)$this->projectSlot3 > 0) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot3, $this->timesheet_month, $this->timesheet_year, $this->projectSlot3_data);
             $hasChanged = true;
             if ($this->arrayHasHours($this->projectSlot3_data)) {
                 $hasHours = true;
             }
         }
-        if (!is_null($this->projectSlot4)) {
+        if ((int)$this->projectSlot4 > 0) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot4, $this->timesheet_month, $this->timesheet_year, $this->projectSlot4_data);
             $hasChanged = true;
             if ($this->arrayHasHours($this->projectSlot4_data)) {
                 $hasHours = true;
             }
         }
-        if (!is_null($this->projectSlot5)) {
+        if ((int)$this->projectSlot5 > 0) {
             WorkingHour::saveFromArray($this->user_id, $this->projectSlot5, $this->timesheet_month, $this->timesheet_year, $this->projectSlot5_data);
             $hasChanged = true;
             if ($this->arrayHasHours($this->projectSlot5_data)) {
