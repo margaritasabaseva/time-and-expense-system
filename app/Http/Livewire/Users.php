@@ -45,6 +45,7 @@ class Users extends Component
             'job_title' => 'required|max:255',
             'phone' => 'required|numeric|digits_between:1,15',
             'password' => 'required|min:8|max:120',
+            'address' => 'nullable|max:255',
         ];
     }
 

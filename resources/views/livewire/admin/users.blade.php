@@ -159,6 +159,7 @@
             <div class="mt-4">
                 <x-jet-label for="address" value="{{ __('Adrese') }}"/>
                 <x-jet-input id="address" class="block mt-1 w-full text-sm" type="text" wire:model.debounce.800ms="address"/>
+                @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Parole') }}"/>
@@ -220,7 +221,7 @@
 
         <x-slot name="content">
         <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Jaunā parole') }}"/>
+                <x-jet-label for="password" value="{{ __('Parole') }}"/>
                 <x-jet-input id="password" class="block mt-1 w-full text-sm" type="password" name="password" wire:model.debounce.800ms="password"/>
                 @error('password') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
             </div>

@@ -26,12 +26,12 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="phone" value="{{ __('Tālruņa numurs') }}" />
             <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" />
-            <x-jet-input-error for="phone" class="mt-2" />
             @error('phone') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
         </div>
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="address" value="{{ __('Adrese') }}" />
             <x-jet-input id="address" type="text" class="mt-1 block w-full" wire:model.defer="state.address" />
+            @error('address') <span class="text-red-500 text-xs"> {{ $message }} </span> @enderror
         </div>
     </x-slot>
 
